@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_primary_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_margin="12dp"
+        android:layout_marginBottom="8dp"
+        app:cardBackgroundColor="#e9f0ea"
+        app:cardCornerRadius="8dp"
+        app:contentPadding="@dimen/cardview_compat_inset_shadow">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:layout_marginTop="0dp"
+            android:contentDescription="@string/landing_page_primary_image"
+            android:src="@drawable/luxury_villa_landing_page" />
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_search_properties"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_margin="12dp"
+        app:cardBackgroundColor="#e9f0ea"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:id="@+id/iv_search_properties"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/search_properties_image" />
+
+            <TextView
+                android:id="@+id/tv_search_properties"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/tv_landing_page_description_search_properties" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_register_properties"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_margin="12dp"
+        android:layout_marginBottom="8dp"
+        app:cardBackgroundColor="#e9f0ea"
+        app:cardCornerRadius="8dp"
+        app:contentPadding="@dimen/cardview_compat_inset_shadow">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
+
+            <TextView
+                android:id="@+id/tv_upload_property_description"
+                android:layout_width="216dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:gravity="center"
+                android:text="@string/tv_landing_page_description_publish_property" />
+
+            <ImageView
+                android:id="@+id/iv_upload_property"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/upload_property_image" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_mortgage_checker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_margin="12dp"
+        android:layout_marginBottom="8dp"
+        app:cardBackgroundColor="#e9f0ea"
+        app:cardCornerRadius="8dp"
+        app:contentPadding="@dimen/cardview_compat_inset_shadow">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:id="@+id/iv_mortgage_selector"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/mortgage_selector_image"
+                tools:ignore="VisualLintBounds" />
+
+            <TextView
+                android:id="@+id/tv_mortgage_selector_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/tv_landing_page_description_mortgage_checker" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
