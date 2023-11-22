@@ -74,10 +74,11 @@ public class HomeActivity extends AppCompatActivity {
     /**
      * Naviga a la actividad de Hipoteca Adviser
      */
-    private void goToMortgageAdviserActivity() {
+    public void goToMortgageAdviserActivity() {
         Intent intent = new Intent(this, MortgageCheckerActivity.class);
         startActivity(intent);
     }
+
 
     // TODO: test - remove
     private void testCardViewClickListener() {
