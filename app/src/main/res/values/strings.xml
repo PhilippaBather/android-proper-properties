@@ -1,9 +1,19 @@
 <resources>
     <string name="app_name">ProperProperties</string>
-    <string name="landing_page_primary_image">A luxury, contemporary villa with pool</string>
+    <string name="img_landing_page_primary_image">A luxury, contemporary villa with pool</string>
     <string name="tv_landing_page_description_search_properties"><b>Buscar inmuebles y locales</b> de un amplio abanico en venta y alquiler</string>
     <string name="tv_landing_page_description_publish_property"><b>Publicar tu inmueble</b> sin complicaciones y gratis</string>
     <string name="tv_landing_page_description_mortgage_checker"><b>Comprobar hipotecas</b> con nuestro Mortgage Adviser.</string>
     <string name="menu_item_mortgage_adviser">Hipoteca Adviser</string>
-    <string name="menu_item_home">Home</string>
+    <string name="menu_item_home" translatable="false">Home</string>
+    <string name="tv_mortgage_adviser_title">Hipoteca Checker</string>
+    <string name="txt_fld_mortgage_adviser_house_price">Precio del Inmueble</string>
+    <string name="txt_fld_mortgage_adviser_deposit">Depósito</string>
+    <string name="txt_fld_mortgage_adviser_deposit_percent" translatable="false">%</string>
+    <string name="txt_fld_mortgage_adviser_loan_term">Plazo del Préstamo</string>
+    <string name="txt_fld_mortgage_adviser_interest_rate">Tasa de Interés</string>
+    <string name="txt_fld_mortgage_adviser_postcode">Código Postal</string>
+    <string name="btn_submit" translatable="false">Submit</string>
+    <string name="tv_mortgage_adviser_calculation_guidance">La Hipoteca Checker calcula la hipoteca mensual por tener en consideración el precio del inmueble, el porcentaje del depósito, la duración del préstamo y la tasa de interés. Nota: el código postal en algunos casos puede afectar la tasa ofrecida.</string>
+    <string name="tv_mortgage_adviser_result">cada mes</string>
 </resources>
