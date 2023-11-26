@@ -14,6 +14,7 @@
     <string name="txt_fld_mortgage_adviser_interest_rate">Tasa de Interés</string>
     <string name="txt_fld_mortgage_adviser_postcode">Código Postal</string>
     <string name="btn_submit" translatable="false">Submit</string>
-    <string name="tv_mortgage_adviser_calculation_guidance">La Hipoteca Checker calcula la hipoteca mensual por tener en consideración el precio del inmueble, el porcentaje del depósito, la duración del préstamo y la tasa de interés. Nota: el código postal en algunos casos puede afectar la tasa ofrecida.</string>
+    <string name="tv_mortgage_adviser_calculation_guidance">La Hipoteca Checker calcula la hipoteca mensual por tener en consideración el precio del inmueble, el porcentaje del depósito, la duración del préstamo y la tasa de interés.</string>
     <string name="tv_mortgage_adviser_result">cada mes</string>
+    <string name="btn_calculate">Calcula</string>
 </resources>
