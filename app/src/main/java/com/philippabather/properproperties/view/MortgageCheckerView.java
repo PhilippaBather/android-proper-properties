@@ -1,8 +1,5 @@
 package com.philippabather.properproperties.view;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,25 +7,34 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.textfield.TextInputEditText;
 import com.philippabather.properproperties.R;
 import com.philippabather.properproperties.domain.MortgageChecker;
 
-public class MortgageCheckerActivity extends AppCompatActivity {
+/**
+ * MortgageCheckerView - la actividad que maneja la vista para comprobar el pago mensual de una hipoteca.
+ *
+ * @auther Philippa Bather
+ */
+public class MortgageCheckerView extends AppCompatActivity {
 
     private Button btnCalculate;
     private TextInputEditText txtInputEditTxtDeposit;
     private TextInputEditText txtInputEditTxtInterestRate;
     private TextInputEditText txtInputEditTxtLoanDuration;
-    private TextInputEditText txtInputEditTxtPostcode;
     private TextInputEditText txtInputEditTxtPropertyPrice;
     private TextView txtViewMortgageQuote;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mortgage_advisor);
 
+        setContentView(R.layout.activity_mortgage_advisor);
         findViews();
         btnCalculate.setOnClickListener((v) -> calculateMortgage());
     }
@@ -57,7 +63,7 @@ public class MortgageCheckerActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.mi_action_mortgage_checker) {
             return true;
         } else if (item.getItemId() == R.id.mi_action_home) {
-            goToHomeActivity();
+            goToHomeView();
             return true;
         } else {
             return super.onOptionsItemSelected(item);
@@ -73,36 +79,29 @@ public class MortgageCheckerActivity extends AppCompatActivity {
         txtInputEditTxtDeposit = findViewById(R.id.txt_fld_mortgage_adviser_deposit);
         txtInputEditTxtInterestRate = findViewById(R.id.txt_fld_mortgage_adviser_interest);
         txtInputEditTxtLoanDuration = findViewById(R.id.txt_fld_mortgage_adviser_loan);
-        txtInputEditTxtPostcode = findViewById(R.id.txt_fld_mortgage_adviser_postcode);
         txtInputEditTxtPropertyPrice = findViewById(R.id.txt_fld_mortgage_adviser_price);
 
         txtViewMortgageQuote = findViewById(R.id.tv_mortgage_adviser_quote);
-    }
-
-    private boolean updateDepositPercentage() {
-        return false;
     }
 
     /**
      * Comunica con el Presenter para calcular los pagos mensuales de una hipoteca.
      */
     private void calculateMortgage() {
-
         final int ONE_HUNDRED = 100;
 
         double price = Double.parseDouble(String.valueOf(txtInputEditTxtPropertyPrice.getText()));
         double deposit = Double.parseDouble(String.valueOf(txtInputEditTxtDeposit.getText()));
         double rate = Double.parseDouble(String.valueOf(txtInputEditTxtInterestRate.getText())) / ONE_HUNDRED;
         int duration = Integer.parseInt(String.valueOf(txtInputEditTxtLoanDuration.getText()));
-        String postcode = String.valueOf(txtInputEditTxtPostcode);
 
-        MortgageChecker quoteCalculator = new MortgageChecker(price, deposit, rate, duration, postcode);
-        String quote = quoteCalculator.calculate();
+        String quote = MortgageChecker.calculate(price, deposit, rate, duration);
+
         txtViewMortgageQuote.setText(quote);
     }
 
-    private void goToHomeActivity() {
-        Intent intent = new Intent(this, HomeActivity.class);
+    private void goToHomeView() {
+        Intent intent = new Intent(this, HomeView.class);
         startActivity(intent);
     }
 }
