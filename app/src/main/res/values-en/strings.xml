@@ -15,4 +15,8 @@
     <string name="tv_mortgage_adviser_calculation_guidance">"The Mortgage Checker calculates the monthly mortgage rate by taking into consideration the price of the property, the deposit, the loan duration, and the interest rate."</string>
     <string name="tv_mortgage_adviser_result">per month</string>
     <string name="btn_calculate">Calculate</string>
+    <string name="menu_item_search_properties">Search Properties</string>
+    <string name="tv_search_map_title">Search for Properties</string>
+    <string name="rbtn_search_map_rent">Rent</string>
+    <string name="rbtn_search_map_buy">Buy</string>
 </resources>
