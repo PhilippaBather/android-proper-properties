@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +11,12 @@ import androidx.cardview.widget.CardView;
 
 import com.philippabather.properproperties.R;
 
-public class HomeActivity extends AppCompatActivity {
+/**
+ * HomeView - la actividad que maneja la vista de la página principal de la aplicación.
+ *
+ * @author Philippa Bather
+ */
+public class HomeView extends AppCompatActivity {
 
     private CardView cvAdvertiseProperties;
     private CardView cvMortgageChecker;  // Comprobar hipoteca ('mortgage')
@@ -43,6 +47,7 @@ public class HomeActivity extends AppCompatActivity {
         cvMortgageChecker.setOnClickListener(v -> goToMortgageAdviserActivity());
         cvSearchProperties.setOnClickListener(v -> testCardViewClickListener());
     }
+
 
     /**
      * Infla el menú de ítems en action_bar.xml
@@ -75,16 +80,12 @@ public class HomeActivity extends AppCompatActivity {
      * Naviga a la actividad de Hipoteca Adviser
      */
     public void goToMortgageAdviserActivity() {
-        Intent intent = new Intent(this, MortgageCheckerActivity.class);
+        Intent intent = new Intent(this, MortgageCheckerView.class);
         startActivity(intent);
     }
 
-
-    // TODO: test - remove
     private void testCardViewClickListener() {
-        // TODO: remove test
-        Toast.makeText(this, "Clicked!", Toast.LENGTH_LONG).show();
+        // TODO - remove
     }
-
 
 }

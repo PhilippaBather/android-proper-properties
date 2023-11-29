@@ -11,11 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|center_vertical"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="14dp"
         android:layout_marginStart="4dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="4dp"
-        app:cardBackgroundColor="#e9f0E3ea"
+        android:layout_marginBottom="14dp"
+        app:cardBackgroundColor="@color/muted_pink"
         app:cardCornerRadius="8dp"
         app:contentPadding="@dimen/cardview_compat_inset_shadow">
 
@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="200dp"
             android:layout_marginTop="0dp"
-            android:contentDescription="@string/landing_page_primary_image"
+            android:contentDescription="@string/img_landing_page_primary_image"
             android:src="@drawable/luxury_villa_landing_page" />
 
     </androidx.cardview.widget.CardView>
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|center_vertical"
         android:layout_margin="12dp"
-        app:cardBackgroundColor="#e9f0ea"
+        app:cardBackgroundColor="@color/mint"
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp">
 
@@ -73,7 +73,7 @@
         android:layout_gravity="center_horizontal|center_vertical"
         android:layout_margin="12dp"
         android:layout_marginBottom="8dp"
-        app:cardBackgroundColor="#e9f0ea"
+        app:cardBackgroundColor="@color/mint"
         app:cardCornerRadius="8dp"
         app:contentPadding="@dimen/cardview_compat_inset_shadow">
 
@@ -109,7 +109,7 @@
         android:layout_gravity="center_horizontal|center_vertical"
         android:layout_margin="12dp"
         android:layout_marginBottom="8dp"
-        app:cardBackgroundColor="#e9f0ea"
+        app:cardBackgroundColor="@color/mint"
         app:cardCornerRadius="8dp"
         app:contentPadding="@dimen/cardview_compat_inset_shadow">
 

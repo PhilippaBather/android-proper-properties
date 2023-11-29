@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">ProperProperties</string>
-    <string name="landing_page_primary_image">A luxury, contemporary villa with pool</string>
+    <string name="img_landing_page_primary_image">A luxury, contemporary villa with pool</string>
     <string name="tv_landing_page_description_search_properties"><b>Search for Properties</b> from a wide selection of residential and commercial real estate to rent or buy.</string>
     <string name="tv_landing_page_description_publish_property"><b>Advertise your Property</b> with no hassle and completely free of charge.</string>
     <string name="tv_landing_page_description_mortgage_checker"><b>Check Mortgage Rates</b> using our custom Mortgage Advisor</string>
     <string name="menu_item_mortgage_adviser">Mortgage Adviser</string>
+    <string name="tv_mortgage_adviser_title">Mortgage Adviser</string>
+    <string name="txt_fld_mortgage_adviser_house_price">Property Price</string>
+    <string name="txt_fld_mortgage_adviser_deposit">Deposit</string>
+    <string name="txt_fld_mortgage_adviser_loan_term">Loan Duration</string>
+    <string name="txt_fld_mortgage_adviser_interest_rate">Interest Rate</string>
+    <string name="txt_fld_mortgage_adviser_postcode">Postcode</string>
+    <string name="tv_mortgage_adviser_calculation_guidance">"The Mortgage Checker calculates the monthly mortgage rate by taking into consideration the price of the property, the deposit, the loan duration, and the interest rate."</string>
+    <string name="tv_mortgage_adviser_result">per month</string>
+    <string name="btn_calculate">Calculate</string>
 </resources>
