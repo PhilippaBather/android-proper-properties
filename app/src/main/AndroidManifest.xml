@@ -16,6 +16,9 @@
             android:name=".view.MortgageCheckerView"
             android:exported="false" />
         <activity
+            android:name=".view.SearchMapView"
+            android:exported="false" />
+        <activity
             android:name=".view.HomeView"
             android:exported="true">
             <intent-filter>
