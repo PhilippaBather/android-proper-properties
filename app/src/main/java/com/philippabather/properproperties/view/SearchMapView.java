@@ -21,6 +21,12 @@ import com.mapbox.maps.plugin.gestures.OnMapClickListener;
 import com.philippabather.properproperties.R;
 import com.philippabather.properproperties.map.MapUtils;
 
+/**
+ * SearchMapView - la actividad para buscar inmuebles disponsibles presentados en una mapa y ver
+ * dichos muebles en una lista
+ *
+ * @author Philippa Bather
+ */
 public class SearchMapView extends AppCompatActivity implements Style.OnStyleLoaded, OnMapClickListener {
 
     private RadioButton rbtnBuy;
@@ -100,6 +106,7 @@ public class SearchMapView extends AppCompatActivity implements Style.OnStyleLoa
     }
 
     private void handleSearchType(RadioGroup grp, int id) {
+        // TODO: placeholder
         if(rbtnBuy.isChecked()) {
             Toast.makeText(this, "Buy selected", Toast.LENGTH_LONG).show();
         } else {
