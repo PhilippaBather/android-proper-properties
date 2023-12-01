@@ -1,2 +1,8 @@
-package com.philippabather.properproperties.domain;public class PropertyType {
+package com.philippabather.properproperties.domain;
+
+public enum PropertyType {
+
+    COMMERCIAL,
+    FLAT,
+    HOUSE,
 }
