@@ -19,4 +19,7 @@
     <string name="tv_search_map_title">Search for Properties</string>
     <string name="rbtn_search_map_rent">Rent</string>
     <string name="rbtn_search_map_buy">Buy</string>
+    <string name="img_search_map_item_view">Property Image</string>
+    <string name="img_btn_map_search_item_contact">Contact</string>
+    <string name="img_btn_map_search_view_item_favourite">Favourite</string>
 </resources>
