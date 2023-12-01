@@ -21,4 +21,7 @@
     <string name="tv_search_map_title">Busca Inmuebles</string>
     <string name="rbtn_search_map_rent">Alquiler</string>
     <string name="rbtn_search_map_buy">Comprar</string>
+    <string name="img_search_map_item_view">Imagen del inmueble</string>
+    <string name="img_btn_map_search_item_contact">Contacto</string>
+    <string name="img_btn_map_search_view_item_favourite">Favorito</string>
 </resources>
