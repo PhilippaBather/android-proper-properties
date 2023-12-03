@@ -29,6 +29,9 @@ import com.philippabather.properproperties.map.MapUtils;
  */
 public class SearchMapView extends AppCompatActivity implements Style.OnStyleLoaded, OnMapClickListener {
 
+    // TODO - add RecyclerView
+    // TODO - DB connection, contract, model, and presenter
+
     private RadioButton rbtnBuy;
     private RadioButton rbtnRent;
     private RadioGroup radioGroup;
