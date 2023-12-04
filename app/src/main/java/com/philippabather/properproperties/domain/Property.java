@@ -2,7 +2,7 @@ package com.philippabather.properproperties.domain;
 
 import java.time.LocalDate;
 
-public class PropertyDTOOut {
+public class Property {
 
     private long id;
 
@@ -18,8 +18,8 @@ public class PropertyDTOOut {
 
     private String description;
 
-    private LocalDate availableFrom; // disponibleDesde
-
+    private String availableFrom; // disponibleDesde
+    private LocalDate availableFromLD;
     private int numBedrooms;
 
     private int numBathrooms;
@@ -28,9 +28,9 @@ public class PropertyDTOOut {
 
     private boolean isParking;
 
-    public PropertyDTOOut(long id, PropertyStatus propertyStatus, PropertyType propertyType, double latitude,
-                          double longitude, int metresSqr, String description, LocalDate availableFrom,
-                          int numBedrooms, int numBathrooms, boolean isLift, boolean isParking) {
+    public Property(long id, PropertyStatus propertyStatus, PropertyType propertyType, double latitude,
+                    double longitude, int metresSqr, String description, String availableFrom,
+                    int numBedrooms, int numBathrooms, boolean isLift, boolean isParking) {
         this.id = id;
         this.propertyStatus = propertyStatus;
         this.propertyType = propertyType;
@@ -38,7 +38,7 @@ public class PropertyDTOOut {
         this.longitude = longitude;
         this.metresSqr = metresSqr;
         this.description = description;
-        this.availableFrom = availableFrom;
+        this.availableFromLD = LocalDate.parse(availableFrom);
         this.numBedrooms = numBedrooms;
         this.numBathrooms = numBathrooms;
         this.isLift = isLift;
@@ -71,7 +71,6 @@ public class PropertyDTOOut {
                 ", metresSqr=" + metresSqr +
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
-                ", availableFrom=" + availableFrom +
                 ", numBedrooms=" + numBedrooms +
                 ", numBathrooms=" + numBathrooms +
                 ", isParking=" + isParking +
