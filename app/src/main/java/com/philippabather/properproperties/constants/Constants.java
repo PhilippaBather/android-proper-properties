@@ -1,4 +1,4 @@
-package com.philippabather.properproperties;
+package com.philippabather.properproperties.constants;
 
 public class Constants {
 
