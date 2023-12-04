@@ -71,7 +71,7 @@ public class HomeView extends AppCompatActivity {
         Intent intent = new Intent();
 
         if (item.getItemId() == R.id.mi_action_search_map) {
-            intent = new Intent(this, SearchMapView.class);
+            intent = new Intent(this, PropertyListView.class);
         } else if (item.getItemId() == R.id.mi_action_mortgage_checker) {
             intent = new Intent(this, MortgageCheckerView.class);
         } else {
@@ -86,7 +86,7 @@ public class HomeView extends AppCompatActivity {
      * Naviga a la actividad para buscar inmuebles.
      */
     private void goToSearchPropertiesActivity() {
-        Intent intent = new Intent(this, SearchMapView.class);
+        Intent intent = new Intent(this, PropertyListView.class);
         startActivity(intent);
     }
 
