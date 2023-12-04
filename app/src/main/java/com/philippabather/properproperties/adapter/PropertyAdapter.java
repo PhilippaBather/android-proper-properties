@@ -1,5 +1,9 @@
 package com.philippabather.properproperties.adapter;
 
+import static com.philippabather.properproperties.constants.Constants.cross;
+import static com.philippabather.properproperties.constants.Constants.euro;
+import static com.philippabather.properproperties.constants.Constants.tick;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +16,6 @@ import com.philippabather.properproperties.domain.Property;
 import com.philippabather.properproperties.presenter.PropertyListPresenter;
 
 import java.util.List;
-import java.util.Set;
 
 public class PropertyAdapter extends RecyclerView.Adapter<PropertyHolder> {
 
@@ -34,8 +37,14 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyHolder> {
     @Override
     public void onBindViewHolder(@NonNull PropertyHolder propertyHolder, int position) {
         Property property = properties.get(position);
-        // TODO: update text etc about property
-
+        propertyHolder.ivPropertyImage.setBackgroundResource(R.drawable.house_placeholder_img);
+        propertyHolder.tvPropertyTitle.setText("Placeholder - A Great Property");
+        propertyHolder.tvPropertyPrice.setText(String.format("555.00 %c", euro));
+        int numBedrooms = property.getNumBedrooms();
+        int metresSqr = property.getMetresSqr();
+        boolean isLift = property.isLift();
+        String overview = String.format("Bedrooms: %d\tm2: %d\tlift: %c", numBedrooms, metresSqr, (isLift ?  tick : cross));
+        propertyHolder.tvPropertyOverview.setText(overview);
     }
     @Override
     public int getItemCount() {
