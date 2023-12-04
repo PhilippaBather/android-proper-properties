@@ -69,13 +69,23 @@
         app:layout_constraintTop_toBottomOf="@id/rg_search_map_search_type" />
 
     <com.mapbox.maps.MapView
-        app:layout_constraintTop_toBottomOf="@id/dvd_search_map_bottom"
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="322dp"
+        app:layout_constraintTop_toBottomOf="@id/dvd_search_map_bottom"
         app:mapbox_cameraTargetLat="40.7128"
         app:mapbox_cameraTargetLng="-74.0060"
         app:mapbox_cameraZoom="9.0" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_property_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mapView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
