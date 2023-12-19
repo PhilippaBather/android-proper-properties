@@ -2,19 +2,19 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_property"
+        android:id="@+id/cv_property_item"
         android:layout_width="match_parent"
-        android:layout_height="175dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="12dp"
             android:padding="4dp">
 
@@ -27,11 +27,10 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_property_title"
+                android:id="@+id/tv_property_detail_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
-                android:text="NAME of Property, Address"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@id/iv_property_img"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -41,10 +40,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
-                android:text="Placeholder: Price"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@id/iv_property_img"
-                app:layout_constraintTop_toBottomOf="@id/tv_property_title" />
+                app:layout_constraintTop_toBottomOf="@id/tv_property_detail_title" />
 
             <TextView
                 android:id="@+id/tv_property_key_details"
@@ -52,7 +50,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:gravity="fill"
-                android:text="Placeholder: number of bedrooms, metres squared, lift"
                 app:layout_constraintStart_toEndOf="@id/iv_property_img"
                 app:layout_constraintTop_toBottomOf="@id/tv_property_price" />
 
@@ -62,7 +59,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:gravity="fill"
-                android:text="Placeholder: description"
                 app:layout_constraintStart_toEndOf="@id/iv_property_img"
                 app:layout_constraintTop_toBottomOf="@id/tv_property_key_details" />
 

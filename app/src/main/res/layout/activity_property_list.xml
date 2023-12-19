@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
-        android:id="@+id/dvd_search_map_top"
+        android:id="@+id/dvd_filter_top"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="?android:attr/listDivider"
@@ -37,12 +37,13 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dvd_search_map_top">
+        app:layout_constraintTop_toBottomOf="@id/dvd_filter_top">
 
         <RadioButton
             android:id="@+id/rbtn_search_map_rent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:text="@string/rbtn_search_map_rent"
             android:textColor="@color/barbie_pink"
             android:textSize="12sp" />
@@ -58,7 +59,7 @@
     </RadioGroup>
 
     <View
-        android:id="@+id/dvd_search_map_bottom"
+        android:id="@+id/dvd_filter_bottom"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="?android:attr/listDivider"
@@ -68,24 +69,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rg_search_map_search_type" />
 
-    <com.mapbox.maps.MapView
-        android:id="@+id/mapView"
-        android:layout_width="match_parent"
-        android:layout_height="322dp"
-        app:layout_constraintTop_toBottomOf="@id/dvd_search_map_bottom"
-        app:mapbox_cameraTargetLat="40.7128"
-        app:mapbox_cameraTargetLng="-74.0060"
-        app:mapbox_cameraZoom="9.0" />
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_property_list"
+        android:id="@+id/recyclerview_rental_property_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mapView" />
+        app:layout_constraintTop_toBottomOf="@id/dvd_filter_bottom" />
 
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_sale_property_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dvd_filter_bottom" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
