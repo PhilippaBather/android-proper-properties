@@ -1,7 +1,8 @@
 package com.philippabather.properproperties.presenter;
 
 import com.philippabather.properproperties.contract.PropertyListContract;
-import com.philippabather.properproperties.domain.Property;
+import com.philippabather.properproperties.domain.RentalProperty;
+import com.philippabather.properproperties.domain.SaleProperty;
 import com.philippabather.properproperties.model.PropertyListModel;
 import com.philippabather.properproperties.view.PropertyListView;
 
@@ -18,13 +19,23 @@ public class PropertyListPresenter implements PropertyListContract.Presenter, Pr
     }
 
     @Override
-    public void loadAllProperties() {
-        model.loadAllProperties(this);
+    public void loadRentalProperties() {
+        model.loadRentalProperties(this);
     }
 
     @Override
-    public void onLoadPropertiesSuccess(List<Property> properties) {
-        view.listProperties(properties);
+    public void loadSaleProperties() { model.loadSaleProperties(this);
+
+    }
+
+    @Override
+    public void onLoadRentalPropertiesSuccess(List<RentalProperty> properties) {
+        view.listRentalProperties(properties);
+    }
+
+    @Override
+    public void onLoadSalePropertiesSuccess(List<SaleProperty> properties) {
+        view.listSaleProperties(properties);
     }
 
     @Override
