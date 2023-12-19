@@ -1,8 +1,9 @@
 package com.philippabather.properproperties.domain;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class Property {
+public class RentalProperty {
 
     private long id;
 
@@ -23,14 +24,20 @@ public class Property {
     private int numBedrooms;
 
     private int numBathrooms;
-
-    private boolean isLift;
-
     private boolean isParking;
+    private boolean isLift;
+    private BigDecimal rentPerMonth;
+    private BigDecimal deposit;
+    private int minTenancy;
+    private boolean isFurnished;
+    private boolean isPetFriendly;
 
-    public Property(long id, PropertyStatus propertyStatus, PropertyType propertyType, double latitude,
-                    double longitude, int metresSqr, String description, String availableFrom,
-                    int numBedrooms, int numBathrooms, boolean isLift, boolean isParking) {
+    public RentalProperty(long id, PropertyStatus propertyStatus, PropertyType propertyType,
+                          double latitude, double longitude, int metresSqr, String description,
+                          String availableFrom, LocalDate availableFromLD, int numBedrooms,
+                          int numBathrooms, boolean isParking, boolean isLift,
+                          BigDecimal rentPerMonth, BigDecimal deposit, int minTenancy,
+                          boolean isFurnished, boolean isPetFriendly) {
         this.id = id;
         this.propertyStatus = propertyStatus;
         this.propertyType = propertyType;
@@ -38,15 +45,44 @@ public class Property {
         this.longitude = longitude;
         this.metresSqr = metresSqr;
         this.description = description;
-        this.availableFromLD = LocalDate.parse(availableFrom);
+        this.availableFrom = availableFrom;
+        this.availableFromLD = availableFromLD;
         this.numBedrooms = numBedrooms;
         this.numBathrooms = numBathrooms;
-        this.isLift = isLift;
         this.isParking = isParking;
+        this.isLift = isLift;
+        this.rentPerMonth = rentPerMonth;
+        this.deposit = deposit;
+        this.minTenancy = minTenancy;
+        this.isFurnished = isFurnished;
+        this.isPetFriendly = isPetFriendly;
     }
 
     public long getId() {
         return id;
+    }
+
+    public PropertyStatus getPropertyStatus() {
+        return propertyStatus;
+    }
+
+    public PropertyType getPropertyType() {
+        return propertyType;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+    public BigDecimal getRentPerMonth() {
+        return rentPerMonth;
     }
 
     public int getMetresSqr() {
@@ -61,20 +97,27 @@ public class Property {
         return isLift;
     }
 
+
     @Override
     public String toString() {
-        return "Property{" +
-                "id=" + id +
-                ", propertyStatus=" + propertyStatus +
+        return "RentalProperty{" +
+                "propertyStatus=" + propertyStatus +
                 ", propertyType=" + propertyType +
-                ", description='" + description + '\'' +
-                ", metresSqr=" + metresSqr +
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
+                ", metresSqr=" + metresSqr +
+                ", description='" + description + '\'' +
+                ", availableFrom='" + availableFrom + '\'' +
+                ", availableFromLD=" + availableFromLD +
                 ", numBedrooms=" + numBedrooms +
                 ", numBathrooms=" + numBathrooms +
                 ", isParking=" + isParking +
                 ", isLift=" + isLift +
+                ", rentPerMonth=" + rentPerMonth +
+                ", deposit=" + deposit +
+                ", minTenancy=" + minTenancy +
+                ", isFurnished=" + isFurnished +
+                ", isPetFriendly=" + isPetFriendly +
                 '}';
     }
 }
