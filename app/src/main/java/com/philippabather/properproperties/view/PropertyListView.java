@@ -13,18 +13,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mapbox.geojson.Point;
-import com.mapbox.maps.MapView;
-import com.mapbox.maps.Style;
-import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManager;
-import com.mapbox.maps.plugin.gestures.GesturesPlugin;
-import com.mapbox.maps.plugin.gestures.GesturesUtils;
-import com.mapbox.maps.plugin.gestures.OnMapClickListener;
 import com.philippabather.properproperties.R;
-import com.philippabather.properproperties.adapter.PropertyAdapter;
+import com.philippabather.properproperties.adapter.RentalPropertyAdapter;
+import com.philippabather.properproperties.adapter.SalePropertyAdapter;
 import com.philippabather.properproperties.contract.PropertyListContract;
-import com.philippabather.properproperties.domain.Property;
-import com.philippabather.properproperties.map.MapUtils;
+import com.philippabather.properproperties.domain.RentalProperty;
+import com.philippabather.properproperties.domain.SaleProperty;
 import com.philippabather.properproperties.presenter.PropertyListPresenter;
 
 import java.util.ArrayList;
@@ -36,20 +30,20 @@ import java.util.List;
  *
  * @author Philippa Bather
  */
-public class PropertyListView extends AppCompatActivity implements PropertyListContract.View, Style.OnStyleLoaded, OnMapClickListener {
+public class PropertyListView extends AppCompatActivity implements PropertyListContract.View {
 
     private RadioButton rbtnBuy;
     private RadioButton rbtnRent;
     private RadioGroup radioGroup;
-    private MapView mapView;
 
-    private List<Property> propertyList;
-    private PropertyAdapter propertyAdapter;
+    private List<RentalProperty> rentalPropertyList;
+    private List<SaleProperty> salePropertyList;
+    private RentalPropertyAdapter rentalPropertyAdapter;
+    private SalePropertyAdapter salePropertyAdapter;
     private PropertyListPresenter propertiesListPresenter;
-
-    private PointAnnotationManager pointAnnotationManager; // MapBox libraries - for annotating the map
-    private GesturesPlugin gesturesPlugin; // MapBox libraries - for user interaction with map
-
+    private LinearLayoutManager linearLayoutManager;
+    private RecyclerView recyclerViewRental;
+    private RecyclerView recyclerViewSale;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,45 +53,57 @@ public class PropertyListView extends AppCompatActivity implements PropertyListC
         findViews();
         radioGroup.setOnCheckedChangeListener((grp, id) -> handleSearchType(grp, id));
 
-        propertyList = new ArrayList<>();
+        rentalPropertyList = new ArrayList<>();
+        salePropertyList = new ArrayList<>();
         propertiesListPresenter = new PropertyListPresenter(this);
 
-        setUpRecyclerView();
+//        RecyclerView recyclerViewRental = findViewById(R.id.recyclerview_rental_property_list);
+//        recyclerViewRental.setHasFixedSize(true);
+//        RecyclerView recyclerViewSale = findViewById(R.id.recyclerview_sale_property_list);
+//        recyclerViewSale.setHasFixedSize(true);
 
-        mapView.getMapboxMap().loadStyleUri(Style.MAPBOX_STREETS);
-        pointAnnotationManager = MapUtils.initializePointAnnotationManager(mapView);
-        gesturesPlugin = GesturesUtils.getGestures(mapView);
-        gesturesPlugin.addOnMapClickListener(PropertyListView.this);
+//        LinearLayoutManager linearLayoutManagerRental = new LinearLayoutManager(PropertyListView.this);
+//        LinearLayoutManager linearLayoutManagerSale = new LinearLayoutManager(PropertyListView.this);
+//
+//        recyclerViewRental.setLayoutManager(linearLayoutManagerRental);
+//        recyclerViewSale.setLayoutManager(linearLayoutManagerSale);
+//
+//        rentalPropertyAdapter = new RentalPropertyAdapter(rentalPropertyList, propertiesListPresenter);
+//        salePropertyAdapter = new SalePropertyAdapter(salePropertyList, propertiesListPresenter);
+//
+//        recyclerViewRental.setAdapter(rentalPropertyAdapter);
+//        recyclerViewSale.setAdapter(salePropertyAdapter);
+
+        recyclerViewRental = findViewById(R.id.recyclerview_rental_property_list);
+        recyclerViewRental.setHasFixedSize(true);
+        recyclerViewSale = findViewById(R.id.recyclerview_sale_property_list);
+        recyclerViewSale.setHasFixedSize(true);
+
+        linearLayoutManager = new LinearLayoutManager(PropertyListView.this);
+//        LinearLayoutManager linearLayoutManagerSale = new LinearLayoutManager(PropertyListView.this);
+
+        recyclerViewRental.setLayoutManager(linearLayoutManager);
+//        recyclerViewSale.setLayoutManager(linearLayoutManagerSale);
+
+        rentalPropertyAdapter = new RentalPropertyAdapter(rentalPropertyList, propertiesListPresenter);
+        salePropertyAdapter = new SalePropertyAdapter(salePropertyList, propertiesListPresenter);
+
+        recyclerViewRental.setAdapter(rentalPropertyAdapter);
+        recyclerViewSale.setAdapter(salePropertyAdapter);
 
     }
+
     @Override
     protected void onResume() {
         super.onResume();
         // https://developer.android.com/guide/components/processes-and-threads#java
-        new Thread(() -> loadData()).start();
+        new Thread(() -> propertiesListPresenter.loadRentalProperties()).start();
     }
 
     private void findViews() {
         rbtnBuy = findViewById(R.id.rbtn_search_map_buy);
         rbtnRent = findViewById(R.id.rbtn_search_map_rent);
         radioGroup = findViewById(R.id.rg_search_map_search_type);
-        mapView = findViewById(R.id.mapView);
-    }
-
-    private void setUpRecyclerView() {
-        // https://developer.android.com/guide/components/processes-and-threads#java
-        new Thread(() -> {
-            RecyclerView recyclerView = findViewById(R.id.recyclerview_property_list);
-            recyclerView.setHasFixedSize(true);
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(PropertyListView.this);
-            recyclerView.setLayoutManager(linearLayoutManager);
-            propertyAdapter = new PropertyAdapter(propertyList, propertiesListPresenter);
-            recyclerView.setAdapter(propertyAdapter);
-        }).start();
-    }
-
-    private void loadData() {
-        propertiesListPresenter.loadAllProperties();
     }
 
     /**
@@ -135,33 +141,36 @@ public class PropertyListView extends AppCompatActivity implements PropertyListC
         return true;
     }
 
-    @Override
-    public void onStyleLoaded(@NonNull Style style) {
-        MapUtils.setCameraPositionAndZoom(mapView);
-    }
-
-    @Override
-    public boolean onMapClick(@NonNull Point point) {
-        return false;
-    }
-
     private void handleSearchType(RadioGroup grp, int id) {
         if (rbtnBuy.isChecked()) {
+            rentalPropertyList.clear();
+            recyclerViewRental.setLayoutManager(null);
+            recyclerViewSale.setLayoutManager(linearLayoutManager);
+            new Thread(() -> propertiesListPresenter.loadSaleProperties()).start();
             Toast.makeText(this, "Buy selected", Toast.LENGTH_LONG).show();
-            // TODO
-//            new Thread(() -> propertiesListPresenter.loadAllSaleProperties()).start();
         } else {
-            // TODO
+            salePropertyList.clear();
+            recyclerViewSale.setLayoutManager(null);
+            recyclerViewRental.setLayoutManager(linearLayoutManager);
+            new Thread(() -> propertiesListPresenter.loadRentalProperties()).start();
             Toast.makeText(this, "Rent selected", Toast.LENGTH_LONG).show();
-//            new Thread(() -> propertiesListPresenter.loadAllRentalProperties()).start();
         }
     }
 
     @Override
-    public void listProperties(List<Property> properties) {
-        propertyList.clear();
-        propertyList.addAll(properties);
-        propertyAdapter.notifyDataSetChanged();
+    public void listRentalProperties(List<RentalProperty> properties) {
+        rentalPropertyList.clear();
+        rentalPropertyList.addAll(properties);
+        rentalPropertyAdapter.notifyDataSetChanged();
+        salePropertyAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void listSaleProperties(List<SaleProperty> properties) {
+        salePropertyList.clear();
+        salePropertyList.addAll(properties);
+        salePropertyAdapter.notifyDataSetChanged();
+        rentalPropertyAdapter.notifyDataSetChanged();
     }
 
     @Override
