@@ -5,23 +5,22 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.philippabather.properproperties.domain.PropertyFavourite;
-import com.philippabather.properproperties.domain.RentalProperty;
+import com.philippabather.properproperties.domain.RentalFavourite;
 
 import java.util.List;
 
 @Dao
-public interface PropertyDao {
+public interface RentalPropertyDao {
 
-    @Query("SELECT * FROM propertyfavourite")
-    List<PropertyFavourite> getAll();
+    @Query("SELECT * FROM RentalFavourite")
+    List<RentalFavourite> getAll();
 
-    @Query("SELECT * FROM propertyfavourite WHERE propertyId = :rentalId")
-    PropertyFavourite findByPropertyId(long rentalId);
+    @Query("SELECT * FROM RentalFavourite where rentalPropertyId = :rentalPropertyId")
+    RentalFavourite getFavouriteByRentalPropertyId(long rentalPropertyId);
 
     @Insert
-    void insert(PropertyFavourite favourite);
+    void insert(RentalFavourite favourite);
 
     @Delete
-    void delete(PropertyFavourite favourite);
+    void delete(RentalFavourite favourite);
 }
