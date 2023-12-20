@@ -12,7 +12,7 @@
     <string name="txt_fld_mortgage_adviser_loan_term">Loan Duration</string>
     <string name="txt_fld_mortgage_adviser_interest_rate">Interest Rate</string>
     <string name="txt_fld_mortgage_adviser_postcode">Postcode</string>
-    <string name="tv_mortgage_adviser_calculation_guidance">"The Mortgage Checker calculates the monthly mortgage rate by taking into consideration the price of the property, the deposit, the loan duration, and the interest rate."</string>
+    <string name="tv_mortgage_adviser_calculation_guidance">"The Mortgage Checker calculates the monthly mortgage rate by taking into consideration the price of the rentalProperty, the deposit, the loan duration, and the interest rate."</string>
     <string name="tv_mortgage_adviser_result">per month</string>
     <string name="btn_calculate">Calculate</string>
     <string name="menu_item_search_properties">Search Properties</string>

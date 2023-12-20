@@ -1,6 +1,7 @@
 package com.philippabather.properproperties.contract;
 
-import com.philippabather.properproperties.domain.Property;
+import com.philippabather.properproperties.domain.RentalProperty;
+import com.philippabather.properproperties.domain.SaleProperty;
 
 import java.util.List;
 
@@ -8,26 +9,27 @@ public interface PropertyListContract {
 
     interface Model {
         interface OnLoadPropertiesListener {
-            void onLoadPropertiesSuccess(List<Property> properties);
+            void onLoadRentalPropertiesSuccess(List<RentalProperty> properties);
+            void onLoadSalePropertiesSuccess(List<SaleProperty> properties);
             void onLoadPropertiesError(String msg);
         }
 
-        void loadAllProperties(OnLoadPropertiesListener listener);
+        void loadRentalProperties(OnLoadPropertiesListener listener);
+        void loadSaleProperties(OnLoadPropertiesListener listener);
 
         // TODO - updatePropertyInPropertyHolder() for future functionality
 
     }
 
     interface View {
-        void listProperties(List<Property> properties);
+        void listRentalProperties(List<RentalProperty> properties);
+        void listSaleProperties(List<SaleProperty> properties);
         void showMessage(String msg);
     }
 
     interface Presenter {
-        void loadAllProperties();
-        // TODO
-//        void loadAllRentalProperties();
-//        void loadAllSaleProperties();
+        void loadRentalProperties();
+        void loadSaleProperties();
 
     }
 }

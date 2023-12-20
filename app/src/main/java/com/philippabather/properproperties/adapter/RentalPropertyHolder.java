@@ -1,5 +1,8 @@
 package com.philippabather.properproperties.adapter;
 
+import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_RENTAL_ID;
+
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -7,17 +10,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.philippabather.properproperties.R;
-import com.philippabather.properproperties.domain.Property;
-import com.philippabather.properproperties.presenter.PropertyListPresenter;
+import com.philippabather.properproperties.domain.RentalProperty;
+import com.philippabather.properproperties.view.PropertyDetailView;
 
 import java.util.List;
 
-public class PropertyHolder extends RecyclerView.ViewHolder {
+public class RentalPropertyHolder extends RecyclerView.ViewHolder {
 
-    private View parentView;
+    private final View parentView;
+    protected CardView cvPropertyItem;
     protected ImageButton ibPropertyFavourite;
     protected ImageButton ibPropertyContact;
     protected ImageView ivPropertyImage;
@@ -26,48 +31,46 @@ public class PropertyHolder extends RecyclerView.ViewHolder {
     protected TextView tvPropertyOverview; // detalles principales
     protected TextView tvPropertyDescription;
 
-    private final PropertyListPresenter presenter;
-
-    public PropertyHolder(@NonNull View view, List<Property> properties, PropertyListPresenter presenter) {
+    public RentalPropertyHolder(@NonNull View view, List<RentalProperty> properties) {
         super(view);
         this.parentView = view;
-        this.presenter = presenter;
 
         findViews();
+        cvPropertyItem.setOnClickListener(v -> goToPropertyDetailsActivity(properties));
         ibPropertyContact.setOnClickListener(v -> contactProprietor(view, properties));
         ibPropertyFavourite.setOnClickListener(v -> addToFavourites(view, properties));
     }
 
+
     private void findViews() {
+        cvPropertyItem = parentView.findViewById(R.id.cv_property_item);
         ibPropertyContact = parentView.findViewById(R.id.img_btn_property_contact);
         ibPropertyFavourite = parentView.findViewById(R.id.img_btn_property_favourite);
         ivPropertyImage = parentView.findViewById(R.id.iv_property_img);
-        tvPropertyTitle = parentView.findViewById(R.id.tv_property_title);
+        tvPropertyTitle = parentView.findViewById(R.id.tv_property_detail_title);
         tvPropertyPrice = parentView.findViewById(R.id.tv_property_price);
         tvPropertyOverview = parentView.findViewById(R.id.tv_property_key_details);
         tvPropertyDescription = parentView.findViewById(R.id.tv_property_description);
     }
 
-    // TODO
-    public void goToPropertyDetailsActivity(List<Property> properties) {
-        Property currProperty = getCurrentProperty(properties);
-        // TODO - placeholder
-//        Intent intent = new Intent(parentView.getContext(), PropertyDetailsView.class);
-//        String id = String.valueOf(currProperty.getId());
-//        parentView.getContext().startActivity(intent);
+    public void goToPropertyDetailsActivity(List<RentalProperty> properties) {
+        RentalProperty currRentalProperty = getCurrentProperty(properties);
+        Intent intent = new Intent(parentView.getContext(), PropertyDetailView.class);
+        String id = String.valueOf(currRentalProperty.getId());
+        intent.putExtra(INTENT_EXTRA_RENTAL_ID, id);
+        parentView.getContext().startActivity(intent);
     }
 
-    private Property getCurrentProperty(List<Property> properties) {
+    private RentalProperty getCurrentProperty(List<RentalProperty> properties) {
         int currPosition = getAdapterPosition();
         return properties.get(currPosition);
     }
 
-    private void contactProprietor(View view, List<Property> properties) {
-        // TODO
+    private void contactProprietor(View view, List<RentalProperty> properties) {
         Toast.makeText(parentView.getContext(), "Contacted owner", Toast.LENGTH_LONG).show();
     }
 
-    private void addToFavourites(View view, List<Property> properties) {
+    private void addToFavourites(View view, List<RentalProperty> properties) {
         // TODO
         Toast.makeText(parentView.getContext(), "Added as favourite", Toast.LENGTH_LONG).show();
     }
