@@ -1,12 +1,14 @@
 package com.philippabather.properproperties.view;
 
+import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_RENTAL_ID;
+import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_SALE_ID;
 import static com.philippabather.properproperties.constants.Constants.cross;
 import static com.philippabather.properproperties.constants.Constants.euro;
 import static com.philippabather.properproperties.constants.Constants.tick;
-import static java.lang.Double.parseDouble;
 import static java.lang.Long.parseLong;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -17,16 +19,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.mapbox.geojson.Point;
 import com.mapbox.maps.MapView;
 import com.mapbox.maps.Style;
-
-
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManager;
-import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions;
-import com.mapbox.maps.plugin.gestures.GesturesPlugin;
-import com.mapbox.maps.plugin.gestures.GesturesUtils;
-import com.mapbox.maps.plugin.gestures.OnMapClickListener;
 import com.philippabather.properproperties.R;
 import com.philippabather.properproperties.contract.PropertyDetailContract;
 import com.philippabather.properproperties.domain.RentalProperty;
@@ -34,8 +29,7 @@ import com.philippabather.properproperties.domain.SaleProperty;
 import com.philippabather.properproperties.map.MapUtils;
 import com.philippabather.properproperties.presenter.PropertyDetailPresenter;
 
-//, Style.OnStyleLoaded, OnMapClickListener
-public class RentalDetailView extends AppCompatActivity implements PropertyDetailContract.View, Style.OnStyleLoaded, OnMapClickListener {
+public class PropertyDetailView extends AppCompatActivity implements PropertyDetailContract.View, Style.OnStyleLoaded{
 
     private ImageView ivPropertyImage;
     private TextView tvPropertyTitle;
@@ -46,13 +40,8 @@ public class RentalDetailView extends AppCompatActivity implements PropertyDetai
 
     private MapView mapView;
     private PointAnnotationManager pointAnnotationManager; // MapBox libraries - for annotating the map
-    private GesturesPlugin gesturesPlugin; // MapBox libraries - for user interaction with map
 
     private PropertyDetailPresenter presenter;
-    private RentalProperty rentalProperty;
-    private SaleProperty saleProperty;
-    private double rentalLat;
-    private double rentalLong;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,16 +56,7 @@ public class RentalDetailView extends AppCompatActivity implements PropertyDetai
 
 
         mapView.getMapboxMap().loadStyleUri(Style.MAPBOX_STREETS, this);
-//        pointAnnotationManager = MapUtils.initializePointAnnotationManager(mapView);
-
-        gesturesPlugin = GesturesUtils.getGestures(mapView);
-        gesturesPlugin.addOnMapClickListener(this);
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
+        pointAnnotationManager = MapUtils.initializePointAnnotationManager(mapView);
     }
 
     private void findViews() {
@@ -91,13 +71,8 @@ public class RentalDetailView extends AppCompatActivity implements PropertyDetai
 
     private void getDataFromIntent() {
         Intent intent = getIntent();
-//        String rentalLat = intent.getStringExtra("rental_lat");
-//        String rentalLong = intent.getStringExtra("rental_lon");
-//        this.rentalLat = parseDouble(rentalLat);
-//        this.rentalLong = parseDouble(rentalLong);
-
-        String rentalIdStr = intent.getStringExtra("rental_property_id");
-        String saleIdStr = intent.getStringExtra("sale_property_id");
+        String rentalIdStr = intent.getStringExtra(INTENT_EXTRA_RENTAL_ID);
+        String saleIdStr = intent.getStringExtra(INTENT_EXTRA_SALE_ID);
 
         if (rentalIdStr != null) {
             presenter.loadSelectedRentalProperty(parseLong(rentalIdStr));
@@ -109,35 +84,17 @@ public class RentalDetailView extends AppCompatActivity implements PropertyDetai
 
     @Override
     public void onStyleLoaded(@NonNull Style style) {
-        pointAnnotationManager = MapUtils.initializePointAnnotationManager(mapView);
-//        addMarker(rentalLat, rentalLong);
         MapUtils.setCameraPositionAndZoom(mapView);
-
-    }
-
-    private void addMarker(double rentalLat, double rentalLong) {
-        PointAnnotationOptions pointAnnotationOptions = new PointAnnotationOptions()
-                .withPoint(Point.fromLngLat(rentalLong, rentalLat))
-                .withIconImage(BitmapFactory.decodeResource(getResources(), R.mipmap.blue_marker_view));
-        pointAnnotationManager.create(pointAnnotationOptions);
-
-    }
-
-    @Override
-    public boolean onMapClick(@NonNull Point point) {
-        return false;
     }
 
     @Override
     public void listRentalProperty(RentalProperty loadedRental) {
-        rentalProperty = loadedRental;
-        loadRentalData(rentalProperty);
+        loadRentalData(loadedRental);
     }
 
     @Override
     public void listSaleProperty(SaleProperty loadedSale) {
-        saleProperty = loadedSale;
-        loadSaleData(saleProperty);
+        loadSaleData(loadedSale);
     }
 
     @Override
@@ -146,6 +103,7 @@ public class RentalDetailView extends AppCompatActivity implements PropertyDetai
     }
 
     private void loadRentalData(RentalProperty property) {
+        // añade las detalles del inmueble a los TextViews
         ivPropertyImage.setBackgroundResource(R.drawable.house_placeholder_img);
         tvPropertyTitle.setText(String.format("%s : %s", property.getPropertyStatus(), property.getPropertyType()));
         tvPropertyPrice.setText(String.format("%.2f %c p/m", property.getRentPerMonth(), euro));
@@ -156,10 +114,13 @@ public class RentalDetailView extends AppCompatActivity implements PropertyDetai
         tvPropertyOverview.setText(overview);
         tvPropertyDescription.setText(property.getDescription());
 
-        addMarker(property.getLatitude(), property.getLongitude());
+        // pone el marcador de la ubicación del inmueble en la mapa
+        Bitmap marker = BitmapFactory.decodeResource(getResources(), R.mipmap.blue_marker_view);
+        MapUtils.addMarker(pointAnnotationManager, marker, property.getLatitude(), property.getLongitude());
     }
 
     private void loadSaleData(SaleProperty property) {
+        // añade las detalles del inmueble a los TextViews
         ivPropertyImage.setBackgroundResource(R.drawable.house_placeholder_img);
         tvPropertyTitle.setText(String.format("%s : %s", property.getPropertyStatus(), property.getPropertyType()));
         tvPropertyPrice.setText(String.format("%.2f %c p/m", property.getPrice(), euro));
@@ -170,7 +131,9 @@ public class RentalDetailView extends AppCompatActivity implements PropertyDetai
         tvPropertyOverview.setText(overview);
         tvPropertyDescription.setText(property.getDescription());
 
-        addMarker(property.getLatitude(), property.getLongitude());
+        // pone el marcador de la ubicación del inmueble en la mapa
+        Bitmap marker = BitmapFactory.decodeResource(getResources(), R.mipmap.blue_marker_view);
+        MapUtils.addMarker(pointAnnotationManager, marker, property.getLatitude(), property.getLongitude());
     }
 
 }
