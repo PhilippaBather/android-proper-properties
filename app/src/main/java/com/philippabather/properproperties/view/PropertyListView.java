@@ -17,7 +17,9 @@ import com.philippabather.properproperties.R;
 import com.philippabather.properproperties.adapter.RentalPropertyAdapter;
 import com.philippabather.properproperties.adapter.SalePropertyAdapter;
 import com.philippabather.properproperties.contract.PropertyListContract;
+import com.philippabather.properproperties.domain.RentalFavourite;
 import com.philippabather.properproperties.domain.RentalProperty;
+import com.philippabather.properproperties.domain.SaleFavourite;
 import com.philippabather.properproperties.domain.SaleProperty;
 import com.philippabather.properproperties.presenter.PropertyListPresenter;
 
@@ -33,14 +35,16 @@ import java.util.List;
 public class PropertyListView extends AppCompatActivity implements PropertyListContract.View {
 
     private RadioButton rbtnBuy;
-    private RadioButton rbtnRent;
     private RadioGroup radioGroup;
 
     private List<RentalProperty> rentalPropertyList;
     private List<SaleProperty> salePropertyList;
+    private List<RentalFavourite> rentalFavourites;
+    private List<SaleFavourite> saleFavourites;
     private RentalPropertyAdapter rentalPropertyAdapter;
     private SalePropertyAdapter salePropertyAdapter;
     private PropertyListPresenter propertiesListPresenter;
+
     private LinearLayoutManager linearLayoutManager;
     private RecyclerView recyclerViewRental;
     private RecyclerView recyclerViewSale;
@@ -51,10 +55,12 @@ public class PropertyListView extends AppCompatActivity implements PropertyListC
 
         setContentView(R.layout.activity_property_list);
         findViews();
-        radioGroup.setOnCheckedChangeListener((grp, id) -> handleSearchType(grp, id));
+        radioGroup.setOnCheckedChangeListener(this::handleSearchType);
 
         rentalPropertyList = new ArrayList<>();
         salePropertyList = new ArrayList<>();
+        rentalFavourites = new ArrayList<>();
+        saleFavourites = new ArrayList<>();
         propertiesListPresenter = new PropertyListPresenter(this);
 
         recyclerViewRental = findViewById(R.id.recyclerview_rental_property_list);
@@ -68,10 +74,8 @@ public class PropertyListView extends AppCompatActivity implements PropertyListC
         recyclerViewRental.setLayoutManager(linearLayoutManager);
 
         // create adapters
-//        rentalPropertyAdapter = new RentalPropertyAdapter(rentalPropertyList, propertiesListPresenter);
-//        salePropertyAdapter = new SalePropertyAdapter(salePropertyList, propertiesListPresenter);
-        rentalPropertyAdapter = new RentalPropertyAdapter(rentalPropertyList);
-        salePropertyAdapter = new SalePropertyAdapter(salePropertyList);
+        rentalPropertyAdapter = new RentalPropertyAdapter(rentalPropertyList, rentalFavourites);
+        salePropertyAdapter = new SalePropertyAdapter(salePropertyList, saleFavourites);
         recyclerViewRental.setAdapter(rentalPropertyAdapter);
         recyclerViewSale.setAdapter(salePropertyAdapter);
 
@@ -82,11 +86,12 @@ public class PropertyListView extends AppCompatActivity implements PropertyListC
         super.onResume();
         // https://developer.android.com/guide/components/processes-and-threads#java
         new Thread(() -> propertiesListPresenter.loadRentalProperties()).start();
+        propertiesListPresenter.loadFavouriteRentals();
+        propertiesListPresenter.loadFavouriteSales();
     }
 
     private void findViews() {
         rbtnBuy = findViewById(R.id.rbtn_search_map_buy);
-        rbtnRent = findViewById(R.id.rbtn_search_map_rent);
         radioGroup = findViewById(R.id.rg_search_map_search_type);
     }
 
@@ -156,7 +161,22 @@ public class PropertyListView extends AppCompatActivity implements PropertyListC
     }
 
     @Override
+    public void listFavouriteRentals(List<RentalFavourite> properties) {
+        rentalFavourites.clear();
+        rentalFavourites.addAll(properties);
+        rentalPropertyAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void listFavouriteSales(List<SaleFavourite> properties) {
+        saleFavourites.clear();
+        saleFavourites.addAll(properties);
+        salePropertyAdapter.notifyDataSetChanged();
+    }
+
+    @Override
     public void showMessage(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
+
 }
