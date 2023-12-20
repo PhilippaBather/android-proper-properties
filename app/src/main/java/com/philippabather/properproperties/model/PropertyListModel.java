@@ -1,5 +1,6 @@
 package com.philippabather.properproperties.model;
 
+import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -7,7 +8,11 @@ import androidx.annotation.NonNull;
 import com.philippabather.properproperties.api.PropertyApi;
 import com.philippabather.properproperties.api.PropertyApiInterface;
 import com.philippabather.properproperties.contract.PropertyListContract;
+import com.philippabather.properproperties.db.AppLocalDB;
+import com.philippabather.properproperties.db.DBHelperMethods;
+import com.philippabather.properproperties.domain.RentalFavourite;
 import com.philippabather.properproperties.domain.RentalProperty;
+import com.philippabather.properproperties.domain.SaleFavourite;
 import com.philippabather.properproperties.domain.SaleProperty;
 
 import java.util.ArrayList;
@@ -22,9 +27,11 @@ import retrofit2.Response;
 public class PropertyListModel implements PropertyListContract.Model {
 
     private final PropertyApiInterface api;
+    private final AppLocalDB localDB;
 
-    public PropertyListModel() {
+    public PropertyListModel(Context context) {
         this.api = PropertyApi.buildInstance();
+        this.localDB = DBHelperMethods.getConnection(context);
     }
 
     @Override
@@ -33,8 +40,9 @@ public class PropertyListModel implements PropertyListContract.Model {
 
         callProperties.enqueue(new Callback<Set<RentalProperty>>() {
             @Override
-            public void onResponse(@NonNull Call<Set<RentalProperty>> call, Response<Set<RentalProperty>> response) {
+            public void onResponse(@NonNull Call<Set<RentalProperty>> call, @NonNull Response<Set<RentalProperty>> response) {
                 Set<RentalProperty> properties = response.body();
+                assert properties != null;
                 List<RentalProperty> rentalPropertyList = new ArrayList<>(properties);
                 for (RentalProperty rentalProperty :
                         rentalPropertyList) {
@@ -44,7 +52,7 @@ public class PropertyListModel implements PropertyListContract.Model {
             }
 
             @Override
-            public void onFailure(Call<Set<RentalProperty>> call, Throwable t) {
+            public void onFailure(@NonNull Call<Set<RentalProperty>> call, @NonNull Throwable t) {
                 Log.e("getProperties", Objects.requireNonNull(t.getMessage()));
                 listener.onLoadPropertiesError("Se ha producido un error al connectar con el servidor.");
             }
@@ -57,8 +65,9 @@ public class PropertyListModel implements PropertyListContract.Model {
 
         callProperties.enqueue(new Callback<Set<SaleProperty>>() {
             @Override
-            public void onResponse(Call<Set<SaleProperty>> call, Response<Set<SaleProperty>> response) {
+            public void onResponse(@NonNull Call<Set<SaleProperty>> call, @NonNull Response<Set<SaleProperty>> response) {
                 Set<SaleProperty> properties = response.body();
+                assert properties != null;
                 List<SaleProperty> salePropertyList = new ArrayList<>(properties);
                 for (SaleProperty rentalProperty :
                         salePropertyList) {
@@ -68,9 +77,21 @@ public class PropertyListModel implements PropertyListContract.Model {
             }
 
             @Override
-            public void onFailure(Call<Set<SaleProperty>> call, Throwable t) {
+            public void onFailure(@NonNull Call<Set<SaleProperty>> call, @NonNull Throwable t) {
 
             }
         });
+    }
+
+    @Override
+    public void loadRentalFavourites(OnLoadFavouritesListener listener) {
+        List<RentalFavourite> favourites = localDB.rentalPropertyDao().getAll();
+        listener.onLoadRentalFavouritesSuccess(favourites);
+    }
+
+    @Override
+    public void loadSaleFavourites(OnLoadFavouritesListener listener) {
+        List<SaleFavourite> favourites = localDB.salePropertyDao().getAll();
+        listener.onLoadSaleFavouritesSuccess(favourites);
     }
 }
