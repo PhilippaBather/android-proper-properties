@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_property"
         android:layout_width="match_parent"
@@ -21,10 +20,9 @@
 
             <ImageView
                 android:id="@+id/iv_property_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:contentDescription="@string/img_search_map_item_view"
-                android:src="@tools:sample/avatars"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
