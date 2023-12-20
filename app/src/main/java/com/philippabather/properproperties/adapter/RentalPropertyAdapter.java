@@ -19,8 +19,8 @@ import java.util.List;
 
 public class RentalPropertyAdapter extends RecyclerView.Adapter<RentalPropertyHolder> {
 
-    private List<RentalProperty> properties;
-    private List<RentalFavourite> favourites;
+    private final List<RentalProperty> properties;
+    private final List<RentalFavourite> favourites;
 
     public RentalPropertyAdapter(List<RentalProperty> properties, List<RentalFavourite> favourites) {
         this.properties = properties;

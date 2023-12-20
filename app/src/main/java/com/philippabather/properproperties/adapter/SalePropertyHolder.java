@@ -2,7 +2,6 @@ package com.philippabather.properproperties.adapter;
 
 import static com.philippabather.properproperties.R.color.barbie_pink;
 import static com.philippabather.properproperties.R.color.mint;
-import static com.philippabather.properproperties.R.color.white;
 import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_SALE_ID;
 
 import android.content.Intent;
@@ -46,7 +45,7 @@ public class SalePropertyHolder extends RecyclerView.ViewHolder {
         findViews();
         cvPropertyItem.setOnClickListener(v -> goToPropertyDetailsActivity(properties));
         ibPropertyContact.setOnClickListener(v -> contactProprietor(properties));
-        ibPropertyFavourite.setOnClickListener(v -> addToFavourites(properties, favourites));
+        ibPropertyFavourite.setOnClickListener(v -> addToFavourites(properties));
         localDB = DBHelperMethods.getConnection(view.getContext());
     }
 
@@ -78,11 +77,7 @@ public class SalePropertyHolder extends RecyclerView.ViewHolder {
         Toast.makeText(parentView.getContext(), "Contacted owner", Toast.LENGTH_LONG).show();
     }
 
-    private void addToFavourites(List<SaleProperty> properties, List<SaleFavourite> favourites) {
-        SaleProperty saleProperty = getCurrentProperty(properties);
-        String msg = "Id " + saleProperty.getId() + " type: " + saleProperty.getPropertyStatus();
-        Toast.makeText(parentView.getContext(), msg, Toast.LENGTH_LONG).show();
-
+    private void addToFavourites(List<SaleProperty> properties) {
         SaleProperty sale = getCurrentProperty(properties);
         sale.setFavourite(!sale.isFavourite());
         updateLocalDB(sale);
