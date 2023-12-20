@@ -6,4 +6,7 @@
     <color name="barbie_pink">#bd08a2</color>
     <color name="muted_pink">#e9f0E3ea</color>
     <color name="purple">#7a08d1</color>
+    <color name="dark_purple">#39303d</color>
+    <color name="muted_aqua">#33B6EFEF</color>
+    <color name="teal">#405E5E</color>
 </resources>

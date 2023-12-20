@@ -45,7 +45,7 @@ public class HomeView extends AppCompatActivity {
     private void setOnClickListeners() {
         cvAdvertiseProperties.setOnClickListener(v -> testCardViewClickListener());
         cvMortgageChecker.setOnClickListener(v -> goToMortgageAdviserActivity());
-        cvSearchProperties.setOnClickListener(v -> testCardViewClickListener());
+        cvSearchProperties.setOnClickListener(v -> goToSearchPropertiesActivity());
     }
 
 
@@ -68,18 +68,32 @@ public class HomeView extends AppCompatActivity {
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.mi_action_mortgage_checker) {
-            goToMortgageAdviserActivity();
-            return true;
+        Intent intent = new Intent();
+
+        if (item.getItemId() == R.id.mi_action_search_map) {
+            intent = new Intent(this, SearchMapView.class);
+        } else if (item.getItemId() == R.id.mi_action_mortgage_checker) {
+            intent = new Intent(this, MortgageCheckerView.class);
         } else {
             return super.onOptionsItemSelected(item);
         }
+
+        startActivity(intent);
+        return true;
     }
 
     /**
-     * Naviga a la actividad de Hipoteca Adviser
+     * Naviga a la actividad para buscar inmuebles.
      */
-    public void goToMortgageAdviserActivity() {
+    private void goToSearchPropertiesActivity() {
+        Intent intent = new Intent(this, SearchMapView.class);
+        startActivity(intent);
+    }
+
+    /**
+     * Naviga a la actividad de Hipoteca Adviser/Mortgage Checker
+     */
+    private void goToMortgageAdviserActivity() {
         Intent intent = new Intent(this, MortgageCheckerView.class);
         startActivity(intent);
     }

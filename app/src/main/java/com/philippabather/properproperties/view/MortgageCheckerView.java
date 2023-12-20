@@ -29,7 +29,6 @@ public class MortgageCheckerView extends AppCompatActivity {
     private TextView txtViewMortgageQuote;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,14 +59,18 @@ public class MortgageCheckerView extends AppCompatActivity {
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.mi_action_mortgage_checker) {
-            return true;
-        } else if (item.getItemId() == R.id.mi_action_home) {
-            goToHomeView();
-            return true;
+        Intent intent = new Intent();
+
+        if (item.getItemId() == R.id.mi_action_home) {
+            intent = new Intent(this, HomeView.class);
+        } else if (item.getItemId() == R.id.mi_action_search_map) {
+            intent = new Intent(this, SearchMapView.class);
         } else {
             return super.onOptionsItemSelected(item);
         }
+
+        startActivity(intent);
+        return true;
     }
 
     /**
@@ -98,10 +101,5 @@ public class MortgageCheckerView extends AppCompatActivity {
         String quote = MortgageChecker.calculate(price, deposit, rate, duration);
 
         txtViewMortgageQuote.setText(quote);
-    }
-
-    private void goToHomeView() {
-        Intent intent = new Intent(this, HomeView.class);
-        startActivity(intent);
     }
 }

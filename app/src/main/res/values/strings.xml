@@ -17,4 +17,11 @@
     <string name="tv_mortgage_adviser_calculation_guidance">La Hipoteca Checker calcula la hipoteca mensual por tener en consideración el precio del inmueble, el porcentaje del depósito, la duración del préstamo y la tasa de interés.</string>
     <string name="tv_mortgage_adviser_result">cada mes</string>
     <string name="btn_calculate">Calcula</string>
+    <string name="menu_item_search_properties">Busca Inmuebles</string>
+    <string name="tv_search_map_title">Busca Inmuebles</string>
+    <string name="rbtn_search_map_rent">Alquiler</string>
+    <string name="rbtn_search_map_buy">Comprar</string>
+    <string name="img_search_map_item_view">Imagen del inmueble</string>
+    <string name="img_btn_map_search_item_contact">Contacto</string>
+    <string name="img_btn_map_search_view_item_favourite">Favorito</string>
 </resources>
