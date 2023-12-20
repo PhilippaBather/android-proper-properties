@@ -6,7 +6,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class PropertyFavourite {
+public class RentalFavourite {
 
     @PrimaryKey
     @NonNull
@@ -14,18 +14,13 @@ public class PropertyFavourite {
 
     @NonNull
     @ColumnInfo
-    private Long propertyId;
+    private Long rentalPropertyId;
 
-    @NonNull
-    @ColumnInfo
-    PropertyStatus propertyStatus;
-
-    public PropertyFavourite() {
+    public RentalFavourite() {
     }
 
-    public PropertyFavourite(@NonNull Long propertyId, @NonNull PropertyStatus propertyStatus) {
-        this.propertyId = propertyId;
-        this.propertyStatus = propertyStatus;
+    public RentalFavourite(@NonNull Long rentalPropertyId) {
+        this.rentalPropertyId = rentalPropertyId;
     }
 
     @NonNull
@@ -38,28 +33,19 @@ public class PropertyFavourite {
     }
 
     @NonNull
-    public Long getPropertyId() {
-        return propertyId;
+    public Long getRentalPropertyId() {
+        return rentalPropertyId;
     }
 
-    public void setPropertyId(@NonNull Long propertyId) {
-        this.propertyId = propertyId;
-    }
-
-    @NonNull
-    public PropertyStatus getPropertyStatus() {
-        return propertyStatus;
-    }
-
-    public void setPropertyStatus(@NonNull PropertyStatus propertyStatus) {
-        this.propertyStatus = propertyStatus;
+    public void setRentalPropertyId(@NonNull Long rentalPropertyId) {
+        this.rentalPropertyId = rentalPropertyId;
     }
 
     @Override
     public String toString() {
-        return "PropertyFavourite{" +
-                "propertyId=" + propertyId +
-                ", propertyStatus=" + propertyStatus +
+        return "RentalFavourite{" +
+                "id=" + id +
+                ", rentalPropertyId=" + rentalPropertyId +
                 '}';
     }
 }
