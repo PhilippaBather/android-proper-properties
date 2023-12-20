@@ -1,5 +1,7 @@
 package com.philippabather.properproperties.map;
 
+import android.graphics.Bitmap;
+
 import com.mapbox.geojson.Point;
 import com.mapbox.maps.CameraOptions;
 import com.mapbox.maps.MapView;
@@ -8,6 +10,7 @@ import com.mapbox.maps.plugin.annotation.AnnotationPlugin;
 import com.mapbox.maps.plugin.annotation.AnnotationPluginImplKt;
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManager;
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManagerKt;
+import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions;
 
 public class MapUtils {
     private static final double DEFAULT_PITCH = 45.00;
@@ -30,6 +33,13 @@ public class MapUtils {
                 .bearing(DEFAULT_BEARING)
                 .build();
         mapView.getMapboxMap().setCamera(cameraPosition);
+    }
+
+    public static void addMarker(PointAnnotationManager pointAnnotationManager, Bitmap bitmap, double rentalLat, double rentalLong) {
+        PointAnnotationOptions pointAnnotationOptions = new PointAnnotationOptions()
+                .withPoint(Point.fromLngLat(rentalLong, rentalLat))
+                .withIconImage(bitmap);
+        pointAnnotationManager.create(pointAnnotationOptions);
     }
 
 }
