@@ -13,25 +13,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.philippabather.properproperties.R;
 import com.philippabather.properproperties.domain.SaleProperty;
-import com.philippabather.properproperties.presenter.PropertyListPresenter;
 
 import java.util.List;
 
 public class SalePropertyAdapter extends RecyclerView.Adapter<SalePropertyHolder> {
 
     private List<SaleProperty> properties;
-    private final PropertyListPresenter presenter;
 
-    public SalePropertyAdapter(List<SaleProperty> properties, PropertyListPresenter presenter) {
+    public SalePropertyAdapter(List<SaleProperty> properties) {
         this.properties = properties;
-        this.presenter = presenter;
     }
 
     @NonNull
     @Override
     public SalePropertyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_property_item, parent, false);
-        return new SalePropertyHolder(view, properties, presenter);
+        return new SalePropertyHolder(view, properties);
     }
 
     @Override

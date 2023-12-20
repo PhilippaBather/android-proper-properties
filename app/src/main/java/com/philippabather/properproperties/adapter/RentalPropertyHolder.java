@@ -1,5 +1,7 @@
 package com.philippabather.properproperties.adapter;
 
+import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_RENTAL_ID;
+
 import android.content.Intent;
 import android.view.View;
 import android.widget.ImageButton;
@@ -13,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.philippabather.properproperties.R;
 import com.philippabather.properproperties.domain.RentalProperty;
-import com.philippabather.properproperties.presenter.PropertyListPresenter;
 import com.philippabather.properproperties.view.PropertyDetailView;
 
 import java.util.List;
@@ -30,18 +31,16 @@ public class RentalPropertyHolder extends RecyclerView.ViewHolder {
     protected TextView tvPropertyOverview; // detalles principales
     protected TextView tvPropertyDescription;
 
-    private final PropertyListPresenter presenter;
-
-    public RentalPropertyHolder(@NonNull View view, List<RentalProperty> properties, PropertyListPresenter presenter) {
+    public RentalPropertyHolder(@NonNull View view, List<RentalProperty> properties) {
         super(view);
         this.parentView = view;
-        this.presenter = presenter;
 
         findViews();
         cvPropertyItem.setOnClickListener(v -> goToPropertyDetailsActivity(properties));
         ibPropertyContact.setOnClickListener(v -> contactProprietor(view, properties));
         ibPropertyFavourite.setOnClickListener(v -> addToFavourites(view, properties));
     }
+
 
     private void findViews() {
         cvPropertyItem = parentView.findViewById(R.id.cv_property_item);
@@ -55,11 +54,10 @@ public class RentalPropertyHolder extends RecyclerView.ViewHolder {
     }
 
     public void goToPropertyDetailsActivity(List<RentalProperty> properties) {
-        Toast.makeText(parentView.getContext(), "Card clicked", Toast.LENGTH_LONG).show();
         RentalProperty currRentalProperty = getCurrentProperty(properties);
         Intent intent = new Intent(parentView.getContext(), PropertyDetailView.class);
         String id = String.valueOf(currRentalProperty.getId());
-        intent.putExtra("rental_property_id", id);
+        intent.putExtra(INTENT_EXTRA_RENTAL_ID, id);
         parentView.getContext().startActivity(intent);
     }
 

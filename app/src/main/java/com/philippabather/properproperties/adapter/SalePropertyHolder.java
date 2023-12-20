@@ -1,5 +1,7 @@
 package com.philippabather.properproperties.adapter;
 
+import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_SALE_ID;
+
 import android.content.Intent;
 import android.view.View;
 import android.widget.ImageButton;
@@ -13,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.philippabather.properproperties.R;
 import com.philippabather.properproperties.domain.SaleProperty;
-import com.philippabather.properproperties.presenter.PropertyListPresenter;
 import com.philippabather.properproperties.view.PropertyDetailView;
 
 import java.util.List;
@@ -30,12 +31,9 @@ public class SalePropertyHolder extends RecyclerView.ViewHolder {
     protected TextView tvPropertyOverview; // detalles principales
     protected TextView tvPropertyDescription;
 
-    private final PropertyListPresenter presenter;
-
-    public SalePropertyHolder(@NonNull View view, List<SaleProperty> properties, PropertyListPresenter presenter) {
+    public SalePropertyHolder(@NonNull View view, List<SaleProperty> properties) {
         super(view);
         this.parentView = view;
-        this.presenter = presenter;
 
         findViews();
         cvPropertyItem.setOnClickListener(v -> goToPropertyDetailsActivity(properties));
@@ -58,7 +56,7 @@ public class SalePropertyHolder extends RecyclerView.ViewHolder {
         SaleProperty currSaleProperty = getCurrentProperty(properties);
         Intent intent = new Intent(parentView.getContext(), PropertyDetailView.class);
         String id = String.valueOf(currSaleProperty.getId());
-        intent.putExtra("sale_property_id", id);
+        intent.putExtra(INTENT_EXTRA_SALE_ID, id);
         parentView.getContext().startActivity(intent);
     }
 
