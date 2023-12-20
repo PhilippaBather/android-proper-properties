@@ -83,6 +83,7 @@
                 android:background="@color/white"
                 android:contentDescription="@string/img_btn_map_search_view_item_favourite"
                 android:src="@android:drawable/btn_star_big_off"
+                app:tint="@color/mint"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/img_btn_property_contact"
