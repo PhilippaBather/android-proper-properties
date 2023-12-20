@@ -1,5 +1,8 @@
 package com.philippabather.properproperties.adapter;
 
+import static com.philippabather.properproperties.R.color.barbie_pink;
+import static com.philippabather.properproperties.R.color.mint;
+import static com.philippabather.properproperties.R.color.white;
 import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_SALE_ID;
 
 import android.content.Intent;
@@ -14,6 +17,9 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.philippabather.properproperties.R;
+import com.philippabather.properproperties.db.AppLocalDB;
+import com.philippabather.properproperties.db.DBHelperMethods;
+import com.philippabather.properproperties.domain.SaleFavourite;
 import com.philippabather.properproperties.domain.SaleProperty;
 import com.philippabather.properproperties.view.PropertyDetailView;
 
@@ -31,14 +37,17 @@ public class SalePropertyHolder extends RecyclerView.ViewHolder {
     protected TextView tvPropertyOverview; // detalles principales
     protected TextView tvPropertyDescription;
 
-    public SalePropertyHolder(@NonNull View view, List<SaleProperty> properties) {
+    private final AppLocalDB localDB;
+
+    public SalePropertyHolder(@NonNull View view, List<SaleProperty> properties, List<SaleFavourite> favourites) {
         super(view);
         this.parentView = view;
 
         findViews();
         cvPropertyItem.setOnClickListener(v -> goToPropertyDetailsActivity(properties));
-        ibPropertyContact.setOnClickListener(v -> contactProprietor(view, properties));
-        ibPropertyFavourite.setOnClickListener(v -> addToFavourites(view, properties));
+        ibPropertyContact.setOnClickListener(v -> contactProprietor(properties));
+        ibPropertyFavourite.setOnClickListener(v -> addToFavourites(properties, favourites));
+        localDB = DBHelperMethods.getConnection(view.getContext());
     }
 
     private void findViews() {
@@ -65,14 +74,37 @@ public class SalePropertyHolder extends RecyclerView.ViewHolder {
         return properties.get(currPosition);
     }
 
-    private void contactProprietor(View view, List<SaleProperty> properties) {
-        // TODO
+    private void contactProprietor(List<SaleProperty> properties) {
         Toast.makeText(parentView.getContext(), "Contacted owner", Toast.LENGTH_LONG).show();
     }
 
-    private void addToFavourites(View view, List<SaleProperty> properties) {
-        // TODO
-        Toast.makeText(parentView.getContext(), "Added as favourite", Toast.LENGTH_LONG).show();
+    private void addToFavourites(List<SaleProperty> properties, List<SaleFavourite> favourites) {
+        SaleProperty saleProperty = getCurrentProperty(properties);
+        String msg = "Id " + saleProperty.getId() + " type: " + saleProperty.getPropertyStatus();
+        Toast.makeText(parentView.getContext(), msg, Toast.LENGTH_LONG).show();
+
+        SaleProperty sale = getCurrentProperty(properties);
+        sale.setFavourite(!sale.isFavourite());
+        updateLocalDB(sale);
+        updateItemBackgroundOnClick(sale);
+    }
+
+    private void updateLocalDB(SaleProperty sale) {
+        if (!sale.isFavourite()) {
+            SaleFavourite favourite = localDB.salePropertyDao().getFavouriteBySalePropertyId(sale.getId());
+            localDB.salePropertyDao().delete(favourite);
+        } else {
+            SaleFavourite favourite = new SaleFavourite(sale.getId());
+            localDB.salePropertyDao().insert(favourite);
+        }
+    }
+
+    protected void updateItemBackgroundOnClick(SaleProperty saleProperty) {
+        if(saleProperty.isFavourite()){
+            ibPropertyFavourite.setColorFilter(parentView.getContext().getColor(barbie_pink));
+        } else {
+            ibPropertyFavourite.setColorFilter(parentView.getContext().getColor(mint));
+        }
     }
 
 }
