@@ -57,37 +57,21 @@ public class PropertyListView extends AppCompatActivity implements PropertyListC
         salePropertyList = new ArrayList<>();
         propertiesListPresenter = new PropertyListPresenter(this);
 
-//        RecyclerView recyclerViewRental = findViewById(R.id.recyclerview_rental_property_list);
-//        recyclerViewRental.setHasFixedSize(true);
-//        RecyclerView recyclerViewSale = findViewById(R.id.recyclerview_sale_property_list);
-//        recyclerViewSale.setHasFixedSize(true);
-
-//        LinearLayoutManager linearLayoutManagerRental = new LinearLayoutManager(PropertyListView.this);
-//        LinearLayoutManager linearLayoutManagerSale = new LinearLayoutManager(PropertyListView.this);
-//
-//        recyclerViewRental.setLayoutManager(linearLayoutManagerRental);
-//        recyclerViewSale.setLayoutManager(linearLayoutManagerSale);
-//
-//        rentalPropertyAdapter = new RentalPropertyAdapter(rentalPropertyList, propertiesListPresenter);
-//        salePropertyAdapter = new SalePropertyAdapter(salePropertyList, propertiesListPresenter);
-//
-//        recyclerViewRental.setAdapter(rentalPropertyAdapter);
-//        recyclerViewSale.setAdapter(salePropertyAdapter);
-
         recyclerViewRental = findViewById(R.id.recyclerview_rental_property_list);
         recyclerViewRental.setHasFixedSize(true);
         recyclerViewSale = findViewById(R.id.recyclerview_sale_property_list);
         recyclerViewSale.setHasFixedSize(true);
 
         linearLayoutManager = new LinearLayoutManager(PropertyListView.this);
-//        LinearLayoutManager linearLayoutManagerSale = new LinearLayoutManager(PropertyListView.this);
 
+        // attach layout manager to rental recycler view as default view
         recyclerViewRental.setLayoutManager(linearLayoutManager);
-//        recyclerViewSale.setLayoutManager(linearLayoutManagerSale);
 
-        rentalPropertyAdapter = new RentalPropertyAdapter(rentalPropertyList, propertiesListPresenter);
-        salePropertyAdapter = new SalePropertyAdapter(salePropertyList, propertiesListPresenter);
-
+        // create adapters
+//        rentalPropertyAdapter = new RentalPropertyAdapter(rentalPropertyList, propertiesListPresenter);
+//        salePropertyAdapter = new SalePropertyAdapter(salePropertyList, propertiesListPresenter);
+        rentalPropertyAdapter = new RentalPropertyAdapter(rentalPropertyList);
+        salePropertyAdapter = new SalePropertyAdapter(salePropertyList);
         recyclerViewRental.setAdapter(rentalPropertyAdapter);
         recyclerViewSale.setAdapter(salePropertyAdapter);
 
@@ -147,13 +131,11 @@ public class PropertyListView extends AppCompatActivity implements PropertyListC
             recyclerViewRental.setLayoutManager(null);
             recyclerViewSale.setLayoutManager(linearLayoutManager);
             new Thread(() -> propertiesListPresenter.loadSaleProperties()).start();
-            Toast.makeText(this, "Buy selected", Toast.LENGTH_LONG).show();
         } else {
             salePropertyList.clear();
             recyclerViewSale.setLayoutManager(null);
             recyclerViewRental.setLayoutManager(linearLayoutManager);
             new Thread(() -> propertiesListPresenter.loadRentalProperties()).start();
-            Toast.makeText(this, "Rent selected", Toast.LENGTH_LONG).show();
         }
     }
 
