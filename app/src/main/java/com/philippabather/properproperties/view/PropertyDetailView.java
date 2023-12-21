@@ -11,6 +11,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -79,7 +81,30 @@ public class PropertyDetailView extends AppCompatActivity implements PropertyDet
         } else if (saleIdStr != null) {
             presenter.loadSelectedSaleProperty(parseLong(saleIdStr));
         }
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.action_bar, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent intent = new Intent();
+
+        if (item.getItemId() == R.id.mi_action_home) {
+            intent = new Intent(this, HomeView.class);
+        } else if (item.getItemId() == R.id.mi_action_mortgage_checker) {
+            intent = new Intent(this, MortgageCheckerView.class);
+        } else if (item.getItemId() == R.id.mi_action_search_map) {
+            intent = new Intent(this, PropertyListView.class);
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+
+        startActivity(intent);
+        return true;
     }
 
     @Override

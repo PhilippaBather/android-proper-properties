@@ -31,6 +31,7 @@ public class RentalProperty {
     private int minTenancy;
     private boolean isFurnished;
     private boolean isPetFriendly;
+    private boolean isFavourite;
 
     public RentalProperty(long id, PropertyStatus propertyStatus, PropertyType propertyType,
                           double latitude, double longitude, int metresSqr, String description,
@@ -56,6 +57,7 @@ public class RentalProperty {
         this.minTenancy = minTenancy;
         this.isFurnished = isFurnished;
         this.isPetFriendly = isPetFriendly;
+        this.isFavourite = false;
     }
 
     public long getId() {
@@ -97,6 +99,13 @@ public class RentalProperty {
         return isLift;
     }
 
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        isFavourite = favourite;
+    }
 
     @Override
     public String toString() {

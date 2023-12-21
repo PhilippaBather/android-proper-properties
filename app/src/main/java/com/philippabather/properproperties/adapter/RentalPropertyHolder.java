@@ -1,5 +1,9 @@
 package com.philippabather.properproperties.adapter;
 
+import static com.philippabather.properproperties.R.color.barbie_pink;
+import static com.philippabather.properproperties.R.color.mint;
+import static com.philippabather.properproperties.R.color.white;
+import static com.philippabather.properproperties.R.color.yellow_gold;
 import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_RENTAL_ID;
 
 import android.content.Intent;
@@ -14,6 +18,9 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.philippabather.properproperties.R;
+import com.philippabather.properproperties.db.AppLocalDB;
+import com.philippabather.properproperties.db.DBHelperMethods;
+import com.philippabather.properproperties.domain.RentalFavourite;
 import com.philippabather.properproperties.domain.RentalProperty;
 import com.philippabather.properproperties.view.PropertyDetailView;
 
@@ -30,17 +37,18 @@ public class RentalPropertyHolder extends RecyclerView.ViewHolder {
     protected TextView tvPropertyPrice;
     protected TextView tvPropertyOverview; // detalles principales
     protected TextView tvPropertyDescription;
+    private final AppLocalDB localDB;
 
-    public RentalPropertyHolder(@NonNull View view, List<RentalProperty> properties) {
+    public RentalPropertyHolder(@NonNull View view, List<RentalProperty> properties, List<RentalFavourite> favourites) {
         super(view);
         this.parentView = view;
 
         findViews();
         cvPropertyItem.setOnClickListener(v -> goToPropertyDetailsActivity(properties));
-        ibPropertyContact.setOnClickListener(v -> contactProprietor(view, properties));
-        ibPropertyFavourite.setOnClickListener(v -> addToFavourites(view, properties));
+        ibPropertyContact.setOnClickListener(v -> contactProprietor(properties));
+        ibPropertyFavourite.setOnClickListener(v -> addToFavourites(properties));
+        localDB = DBHelperMethods.getConnection(view.getContext());
     }
-
 
     private void findViews() {
         cvPropertyItem = parentView.findViewById(R.id.cv_property_item);
@@ -66,13 +74,32 @@ public class RentalPropertyHolder extends RecyclerView.ViewHolder {
         return properties.get(currPosition);
     }
 
-    private void contactProprietor(View view, List<RentalProperty> properties) {
+    private void contactProprietor(List<RentalProperty> properties) {
         Toast.makeText(parentView.getContext(), "Contacted owner", Toast.LENGTH_LONG).show();
     }
 
-    private void addToFavourites(View view, List<RentalProperty> properties) {
-        // TODO
-        Toast.makeText(parentView.getContext(), "Added as favourite", Toast.LENGTH_LONG).show();
+    private void addToFavourites(List<RentalProperty> properties) {
+        RentalProperty rental = getCurrentProperty(properties);
+        rental.setFavourite(!rental.isFavourite());
+        updateLocalDB(rental);
+        updateImageButtonTint(rental);
     }
 
+    private void updateLocalDB(RentalProperty rental) {
+        if (!rental.isFavourite()) {
+            RentalFavourite favourite = localDB.rentalPropertyDao().getFavouriteByRentalPropertyId(rental.getId());
+            localDB.rentalPropertyDao().delete(favourite);
+        } else {
+            RentalFavourite favourite = new RentalFavourite(rental.getId());
+            localDB.rentalPropertyDao().insert(favourite);
+        }
+    }
+
+    protected void updateImageButtonTint(RentalProperty rentalProperty) {
+        if(rentalProperty.isFavourite()){
+            ibPropertyFavourite.setColorFilter(parentView.getContext().getColor(barbie_pink));
+        } else {
+            ibPropertyFavourite.setColorFilter(parentView.getContext().getColor(mint));
+        }
+    }
 }

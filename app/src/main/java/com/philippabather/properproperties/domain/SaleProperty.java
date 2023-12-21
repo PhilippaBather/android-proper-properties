@@ -1,5 +1,7 @@
 package com.philippabather.properproperties.domain;
 
+import androidx.annotation.NonNull;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -30,6 +32,7 @@ public class SaleProperty {
     private boolean isLeasehold;
     private String constructionDate;
     private LocalDate constructionDateLD;
+    private boolean isFavourite;
 
     public SaleProperty(long id, PropertyStatus propertyStatus, PropertyType propertyType,
                         double latitude, double longitude, int metresSqr, String description,
@@ -53,6 +56,7 @@ public class SaleProperty {
         this.isLeasehold = isLeasehold;
         this.constructionDate = constructionDate;
         this.constructionDateLD = constructionDateLD;
+        this.isFavourite = false;
     }
 
     public long getId() {
@@ -95,25 +99,11 @@ public class SaleProperty {
         return isLift;
     }
 
-    @Override
-    public String toString() {
-        return "SaleProperty{" +
-                "propertyStatus=" + propertyStatus +
-                ", propertyType=" + propertyType +
-                ", latitude=" + latitude +
-                ", longitude=" + longitude +
-                ", metresSqr=" + metresSqr +
-                ", description='" + description + '\'' +
-                ", availableFrom='" + availableFrom + '\'' +
-                ", availableFromLD=" + availableFromLD +
-                ", numBedrooms=" + numBedrooms +
-                ", numBathrooms=" + numBathrooms +
-                ", isParking=" + isParking +
-                ", isLift=" + isLift +
-                ", price=" + price +
-                ", isLeasehold=" + isLeasehold +
-                ", constructionDate='" + constructionDate + '\'' +
-                ", constructionDateLD=" + constructionDateLD +
-                '}';
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        isFavourite = favourite;
     }
 }

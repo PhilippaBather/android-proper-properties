@@ -12,23 +12,26 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.philippabather.properproperties.R;
+import com.philippabather.properproperties.domain.RentalFavourite;
 import com.philippabather.properproperties.domain.RentalProperty;
 
 import java.util.List;
 
 public class RentalPropertyAdapter extends RecyclerView.Adapter<RentalPropertyHolder> {
 
-    private List<RentalProperty> properties;
+    private final List<RentalProperty> properties;
+    private final List<RentalFavourite> favourites;
 
-    public RentalPropertyAdapter(List<RentalProperty> properties) {
+    public RentalPropertyAdapter(List<RentalProperty> properties, List<RentalFavourite> favourites) {
         this.properties = properties;
+        this.favourites = favourites;
     }
 
     @NonNull
     @Override
     public RentalPropertyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_property_item, parent, false);
-        return new RentalPropertyHolder(view, properties);
+        return new RentalPropertyHolder(view, properties, favourites);
     }
 
     @Override
@@ -43,7 +46,21 @@ public class RentalPropertyAdapter extends RecyclerView.Adapter<RentalPropertyHo
         rentalPropertyHolder.tvPropertyDescription.setText(rentalProperty.getDescription());
         String overview = String.format("Bedrooms: %d\tm2: %d\tlift: %c", numBedrooms, metresSqr, (isLift ?  tick : cross));
         rentalPropertyHolder.tvPropertyOverview.setText(overview);
+
+        setCardBackgroundAsFavourite(rentalPropertyHolder, rentalProperty);
+
     }
+
+    private void setCardBackgroundAsFavourite(RentalPropertyHolder rentalPropertyHolder, RentalProperty rental) {
+        long rentalId = rental.getId();
+        for (RentalFavourite favourite:
+             favourites) {
+            boolean isFavourite = rentalId == favourite.getRentalPropertyId();
+            rental.setFavourite(isFavourite);
+            rentalPropertyHolder.updateImageButtonTint(rental);
+        }
+    }
+
     @Override
     public int getItemCount() {
         return properties.size();
