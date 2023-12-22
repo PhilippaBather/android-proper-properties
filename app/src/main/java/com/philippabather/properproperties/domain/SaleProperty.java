@@ -1,11 +1,14 @@
 package com.philippabather.properproperties.domain;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class SaleProperty {
+public class SaleProperty implements Parcelable {
 
     private long id;
 
@@ -57,6 +60,56 @@ public class SaleProperty {
         this.constructionDate = constructionDate;
         this.constructionDateLD = constructionDateLD;
         this.isFavourite = false;
+    }
+
+    protected SaleProperty(Parcel in) {
+        id = in.readLong();
+        latitude = in.readDouble();
+        longitude = in.readDouble();
+        metresSqr = in.readInt();
+        description = in.readString();
+        availableFrom = in.readString();
+        numBedrooms = in.readInt();
+        numBathrooms = in.readInt();
+        isParking = in.readByte() != 0;
+        isLift = in.readByte() != 0;
+        isLeasehold = in.readByte() != 0;
+        constructionDate = in.readString();
+        isFavourite = in.readByte() != 0;
+    }
+
+    public static final Creator<SaleProperty> CREATOR = new Creator<SaleProperty>() {
+        @Override
+        public SaleProperty createFromParcel(Parcel in) {
+            return new SaleProperty(in);
+        }
+
+        @Override
+        public SaleProperty[] newArray(int size) {
+            return new SaleProperty[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeLong(id);
+        parcel.writeDouble(latitude);
+        parcel.writeDouble(longitude);
+        parcel.writeInt(metresSqr);
+        parcel.writeString(description);
+        parcel.writeString(availableFrom);
+        parcel.writeInt(numBedrooms);
+        parcel.writeInt(numBathrooms);
+        parcel.writeByte((byte) (isParking ? 1 : 0));
+        parcel.writeByte((byte) (isLift ? 1 : 0));
+        parcel.writeByte((byte) (isLeasehold ? 1 : 0));
+        parcel.writeString(constructionDate);
+        parcel.writeByte((byte) (isFavourite ? 1 : 0));
     }
 
     public long getId() {
