@@ -24,4 +24,8 @@
     <string name="img_search_map_item_view">Imagen del inmueble</string>
     <string name="img_btn_map_search_item_contact">Contacto</string>
     <string name="img_btn_map_search_view_item_favourite">Favorito</string>
+    <string name="tv_management_title">Panel de Administración de Propietarios</string>
+    <string name="tv_management_description">Aquí se puede mirar una lista de tus inmuebles anunciados y manejar actualizaciónes y eliminar inmuebles.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="fa_btn_add_property">Añade un inmueble</string>
 </resources>
