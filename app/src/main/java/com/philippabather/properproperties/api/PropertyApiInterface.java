@@ -1,5 +1,6 @@
 package com.philippabather.properproperties.api;
 
+import com.philippabather.properproperties.domain.Proprietor;
 import com.philippabather.properproperties.domain.RentalProperty;
 import com.philippabather.properproperties.domain.SaleProperty;
 
@@ -26,5 +27,9 @@ public interface PropertyApiInterface {
     @Headers({"Accept: application/json"})
     @GET("/properties/sale/{saleId}")
     Call<SaleProperty> getSalePropertyById(@Path(value = "saleId") long saleId);
+
+    @Headers({"Accept: application/json"})
+    @GET("/users/proprietors/{proprietorId}")
+    Call<Proprietor> getProprietorById(@Path(value = "proprietorId") long proprietorId);
 
 }
