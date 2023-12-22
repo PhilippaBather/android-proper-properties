@@ -2,8 +2,6 @@ package com.philippabather.properproperties.adapter;
 
 import static com.philippabather.properproperties.R.color.barbie_pink;
 import static com.philippabather.properproperties.R.color.mint;
-import static com.philippabather.properproperties.R.color.white;
-import static com.philippabather.properproperties.R.color.yellow_gold;
 import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_RENTAL_ID;
 
 import android.content.Intent;

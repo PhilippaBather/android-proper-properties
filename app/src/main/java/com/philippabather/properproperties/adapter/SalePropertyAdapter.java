@@ -47,10 +47,12 @@ public class SalePropertyAdapter extends RecyclerView.Adapter<SalePropertyHolder
         String overview = String.format("Bedrooms: %d\tm2: %d\tlift: %c", numBedrooms, metresSqr, (isLift ?  tick : cross));
         salePropertyHolder.tvPropertyOverview.setText(overview);
 
-        setCardBackgroundAsFavourite(salePropertyHolder, saleProperty);
+        if (favourites != null) {
+            setFavourites(salePropertyHolder, saleProperty);
+        }
     }
 
-    private void setCardBackgroundAsFavourite(SalePropertyHolder rentalPropertyHolder, SaleProperty sale) {
+    private void setFavourites(SalePropertyHolder rentalPropertyHolder, SaleProperty sale) {
         long rentalId = sale.getId();
         for (SaleFavourite favourite:
                 favourites) {
