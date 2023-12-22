@@ -1,19 +1,19 @@
 package com.philippabather.properproperties.presenter;
 
-import com.philippabather.properproperties.contract.ManagementContract;
+import com.philippabather.properproperties.contract.OwnerContract;
 import com.philippabather.properproperties.domain.Proprietor;
-import com.philippabather.properproperties.model.ManagementModel;
-import com.philippabather.properproperties.view.ManagePropertyView;
+import com.philippabather.properproperties.model.OwnerModel;
+import com.philippabather.properproperties.view.OwnerPropertyView;
 
-public class ManagementPresenter implements ManagementContract.Presenter, ManagementContract.Model.OnLoadPropertiesListener {
+public class OwnerPresenter implements OwnerContract.Presenter, OwnerContract.Model.OnLoadPropertiesListener {
 
-    private final ManagementModel model;
+    private final OwnerModel model;
 
-    private final ManagePropertyView view;
+    private final OwnerPropertyView view;
 
-    public ManagementPresenter(ManagePropertyView view) {
+    public OwnerPresenter(OwnerPropertyView view) {
         this.view = view;
-        this.model = new ManagementModel(view);
+        this.model = new OwnerModel(view);
     }
 
     @Override
