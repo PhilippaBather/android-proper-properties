@@ -13,16 +13,16 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.philippabather.properproperties.R;
-import com.philippabather.properproperties.contract.ManagementContract;
+import com.philippabather.properproperties.contract.OwnerContract;
 import com.philippabather.properproperties.domain.Proprietor;
 import com.philippabather.properproperties.domain.RentalProperty;
 import com.philippabather.properproperties.domain.SaleProperty;
-import com.philippabather.properproperties.presenter.ManagementPresenter;
+import com.philippabather.properproperties.presenter.OwnerPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManagePropertyView extends AppCompatActivity implements ManagementContract.View {
+public class OwnerPropertyView extends AppCompatActivity implements OwnerContract.View {
     private RadioButton rbtnBuy;
     private RadioButton rbtnRent;
     private RadioGroup radioGroup;
@@ -34,7 +34,7 @@ public class ManagePropertyView extends AppCompatActivity implements ManagementC
     private RentalFragment rentalFragment;
     private SaleFragment saleFragment;
 
-    private ManagementPresenter presenter;
+    private OwnerPresenter presenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,8 +51,11 @@ public class ManagePropertyView extends AppCompatActivity implements ManagementC
         rentalFragment = new RentalFragment();
         saleFragment = new SaleFragment();
 
-        presenter = new ManagementPresenter(this);
+        presenter = new OwnerPresenter(this);
 
+        // TODO - quita hardcoding en la segunda entrega (por la implementación de login)
+        long userId = 1;
+        presenter.loadProprietor(userId);
     }
 
     private void findViews() {
@@ -62,30 +65,25 @@ public class ManagePropertyView extends AppCompatActivity implements ManagementC
     }
 
     private void handleSearchType(RadioGroup grp, int id) {
-        // TODO - quita hardcoding en la segunda entrega (por la implementación de login)
-        long userId = 1;
-
-        if (rbtnBuy.isChecked()) {
+        if (rbtnRent.isChecked()) {
             rentalPropertyList.clear();
-            presenter.loadProprietor(userId);
 
             // crea un bundle para enviar datos al Fragment
             rentalPropertyList = proprietor.getRentalPropertyList();
             ArrayList<RentalProperty> rentals = new ArrayList<RentalProperty>(rentalPropertyList);
             Bundle bundle = new Bundle();
             bundle.putParcelableArrayList("rentals", rentals);
-
+            rentalFragment.setArguments(bundle);
             // infla el Fragment, remplazando el otro fragment si existe
-            getSupportFragmentManager().beginTransaction().replace(R.id.fl_frag_management, saleFragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fl_frag_management, rentalFragment).commit();
         } else {
             salePropertyList.clear();
-            presenter.loadProprietor(userId);
-
             // crea un bundle para enviar datos al Fragment
             salePropertyList = proprietor.getSalePropertyList();
             ArrayList<SaleProperty> sales = new ArrayList<>(salePropertyList);
             Bundle bundle = new Bundle();
             bundle.putParcelableArrayList("sales", sales);
+            saleFragment.setArguments(bundle);
 
             // infla el Fragment, remplazando el otro fragment si existe
             getSupportFragmentManager().beginTransaction().replace(R.id.fl_frag_management, saleFragment).commit();
@@ -114,6 +112,7 @@ public class ManagePropertyView extends AppCompatActivity implements ManagementC
         startActivity(intent);
         return true;
     }
+
     @Override
     public void getProprietor(Proprietor proprietor) {
         this.proprietor = proprietor;
