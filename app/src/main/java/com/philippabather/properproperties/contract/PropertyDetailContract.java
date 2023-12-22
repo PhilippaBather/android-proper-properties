@@ -3,7 +3,7 @@ package com.philippabather.properproperties.contract;
 import com.philippabather.properproperties.domain.RentalProperty;
 import com.philippabather.properproperties.domain.SaleProperty;
 
-public class PropertyDetailContract {
+public interface PropertyDetailContract {
 
     public interface Model {
 
