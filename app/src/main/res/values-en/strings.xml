@@ -22,4 +22,7 @@
     <string name="img_search_map_item_view">Property Image</string>
     <string name="img_btn_map_search_item_contact">Contact</string>
     <string name="img_btn_map_search_view_item_favourite">Favourite</string>
+    <string name="tv_management_title">Property Owner Management Panel</string>
+    <string name="tv_management_description">View a list of your properties and manage listed proeprty updates and deletions</string>
+    <string name="fa_btn_add_property">Add a property</string>
 </resources>
