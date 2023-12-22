@@ -32,6 +32,7 @@
         android:id="@+id/dvd_filter_top"
         android:layout_width="match_parent"
         android:layout_height="2dp"
+        android:layout_margin="8dp"
         android:background="?android:attr/listDivider"
         android:backgroundTint="@color/teal"
         android:backgroundTintMode="src_atop"
@@ -53,7 +54,6 @@
             android:id="@+id/rbtn_search_map_rent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
             android:text="@string/rbtn_search_map_rent"
             android:textColor="@color/barbie_pink"
             android:textSize="12sp" />
@@ -68,14 +68,25 @@
 
     </RadioGroup>
 
-    <fragment
-        android:name="com.philippabather.properproperties.view.RentalFragment"
-        android:id="@+id/frag_management"
+    <FrameLayout
+        android:id="@+id/fl_frag_management"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rg_search_map_search_type"
-        tools:layout_editor_absoluteX="-24dp" />
+        tools:layout_editor_absoluteX="-24dp"></FrameLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton4"
+        android:layout_width="wrap_content"
+        android:layout_height="416dp"
+        android:layout_margin="20dp"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:contentDescription="@string/fa_btn_add_property"
+        android:src="@android:drawable/ic_input_add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
