@@ -43,7 +43,7 @@ public class HomeView extends AppCompatActivity {
      * Establece los 'click listeners'
      */
     private void setOnClickListeners() {
-        cvAdvertiseProperties.setOnClickListener(v -> testCardViewClickListener());
+        cvAdvertiseProperties.setOnClickListener(v -> goToPropertyManagement());
         cvMortgageChecker.setOnClickListener(v -> goToMortgageAdviserActivity());
         cvSearchProperties.setOnClickListener(v -> goToSearchPropertiesActivity());
     }
@@ -98,8 +98,9 @@ public class HomeView extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void testCardViewClickListener() {
-        // TODO - remove
+    private void goToPropertyManagement() {
+        Intent intent = new Intent(this, OwnerPropertyView.class);
+        startActivity(intent);
     }
 
 }
