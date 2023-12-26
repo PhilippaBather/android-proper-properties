@@ -1,17 +1,18 @@
 package com.philippabather.properproperties.presenter;
 
+import com.philippabather.properproperties.contract.PropertyRegistrationContract;
 import com.philippabather.properproperties.domain.RentalProperty;
 import com.philippabather.properproperties.domain.SaleProperty;
 import com.philippabather.properproperties.model.PropertyRegistrationModel;
 import com.philippabather.properproperties.view.PropertyRegistrationView;
 
-public class PropertyRegistrationContract implements com.philippabather.properproperties.contract.PropertyRegistrationContract.Presenter,
-        com.philippabather.properproperties.contract.PropertyRegistrationContract.Model.OnRegisterPropertyListener {
+public class PropertyRegistrationPresenter implements PropertyRegistrationContract.Presenter,
+        PropertyRegistrationContract.Model.OnRegisterPropertyListener {
 
     private final PropertyRegistrationModel model;
     private final PropertyRegistrationView view;
 
-    public PropertyRegistrationContract(PropertyRegistrationView view) {
+    public PropertyRegistrationPresenter(PropertyRegistrationView view) {
         this.view = view;
         this.model = new PropertyRegistrationModel();
     }
@@ -28,12 +29,12 @@ public class PropertyRegistrationContract implements com.philippabather.properpr
 
     @Override
     public void onRegisterRentalPropertySuccess(RentalProperty rental) {
-
+        view.showMessage(rental.toString());
     }
 
     @Override
     public void onRegisterSalePropertySuccess(SaleProperty sale) {
-        view.showMessage(sale);
+        view.showMessage("here");
     }
 
     @Override
