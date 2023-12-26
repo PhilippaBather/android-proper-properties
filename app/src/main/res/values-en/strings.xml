@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="tv_add_property_type">Type</string>
+    <string name="tv_add_property_price_pm">Rent p/m</string>
+    <string name="tv_add_property_deposit">Deposit</string>
+    <string name="tv_add_property_min_tenancy">Min. tenancy</string>
+    <string name="tv_add_property_size">Size (m2)</string>
+    <string name="tv_add_property_num_bedrooms">Num. bedrooms</string>
+    <string name="tv_add_property_num_bathrooms">Num. bathrooms</string>
+    <string name="cb_add_property_pets">Pets</string>
+    <string name="cb_add_property_furniture">Furnished</string>
+    <string name="cb_add_property_lift">Lift</string>
+    <string name="cb_add_property_parking">Parking</string>
+    <string name="et_add_property_hint_price">Price</string>
+    <string name="et_add_property_hint_deposit">Deposit</string>
+    <string name="et_add_property_hint_min_ten">Minimum tenancy duration</string>
+    <string name="et_add_property_hint_size">Size in metres squared</string>
+    <string name="et_add_property_hint_bedrooms">Number of bedrooms</string>
+    <string name="et_add_property_hint_bathrooms">Number of bathrooms</string>
+    <string name="tv_add_property_description">Description</string>
+    <string name="et_add_property_hint_description">Property description</string>
     <string name="app_name">ProperProperties</string>
+    <string name="btn_back">Back</string>
+    <string name="btn_add">Add</string>
     <string name="img_landing_page_primary_image">A luxury, contemporary villa with pool</string>
     <string name="tv_landing_page_description_search_properties"><b>Search for Properties</b> from a wide selection of residential and commercial real estate to rent or buy.</string>
     <string name="tv_landing_page_description_publish_property"><b>Advertise your Property</b> with no hassle and completely free of charge.</string>
@@ -24,5 +45,9 @@
     <string name="img_btn_map_search_view_item_favourite">Favourite</string>
     <string name="tv_management_title">Property Owner Management Panel</string>
     <string name="tv_management_description">View a list of your properties and manage listed proeprty updates and deletions</string>
-    <string name="fa_btn_add_property">Add a property</string>
+    <string name="btn_add_property">Add a property</string>
+    <string name="tv_add_property_title">Add a Property</string>
+    <string name="api_msg_post">Property Added</string>
+    <string name="tv_add_property_sale_price">Price</string>
+    <string name="cb_add_property_leasehold">Leasehold</string>
 </resources>
