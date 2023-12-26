@@ -3,12 +3,14 @@ package com.philippabather.properproperties.view;
 import android.os.Bundle;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.philippabather.properproperties.R;
+import com.philippabather.properproperties.contract.PropertyRegistrationContract;
 
-public class OwnerAddPropertyView extends AppCompatActivity  {
+public class PropertyRegistrationView extends AppCompatActivity implements PropertyRegistrationContract.View{
 
     private RadioButton rbtnBuy;
     private RadioButton rbtnRent;
@@ -43,6 +45,11 @@ public class OwnerAddPropertyView extends AppCompatActivity  {
             // infla el Fragment, remplazando el otro fragment si existe
             getSupportFragmentManager().beginTransaction().replace(R.id.fl_frag_management, saleFragment).commit();
         }
+    }
+
+    @Override
+    public void showMessage(String msg) {
+        Toast.makeText(this, R.string.api_msg_post, Toast.LENGTH_LONG).show();
     }
 
 }
