@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 public class RentalProperty implements Parcelable {
 
