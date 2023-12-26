@@ -11,23 +11,13 @@ import java.time.LocalDate;
 public class RentalProperty implements Parcelable {
 
     private long id;
-
     private PropertyStatus propertyStatus;
-
     private PropertyType propertyType;
-
     private double latitude;
-
     private double longitude;
-
     private int metresSqr;
-
     private String description;
-
-    private String availableFrom; // disponibleDesde
-    private LocalDate availableFromLD;
     private int numBedrooms;
-
     private int numBathrooms;
     private boolean isParking;
     private boolean isLift;
@@ -38,21 +28,17 @@ public class RentalProperty implements Parcelable {
     private boolean isPetFriendly;
     private boolean isFavourite;
 
-    public RentalProperty(long id, PropertyStatus propertyStatus, PropertyType propertyType,
+    public RentalProperty(PropertyStatus propertyStatus, PropertyType propertyType,
                           double latitude, double longitude, int metresSqr, String description,
-                          String availableFrom, LocalDate availableFromLD, int numBedrooms,
-                          int numBathrooms, boolean isParking, boolean isLift,
+                          int numBedrooms, int numBathrooms, boolean isParking, boolean isLift,
                           BigDecimal rentPerMonth, BigDecimal deposit, int minTenancy,
                           boolean isFurnished, boolean isPetFriendly) {
-        this.id = id;
         this.propertyStatus = propertyStatus;
         this.propertyType = propertyType;
         this.latitude = latitude;
         this.longitude = longitude;
         this.metresSqr = metresSqr;
         this.description = description;
-        this.availableFrom = availableFrom;
-        this.availableFromLD = availableFromLD;
         this.numBedrooms = numBedrooms;
         this.numBathrooms = numBathrooms;
         this.isParking = isParking;
@@ -65,13 +51,17 @@ public class RentalProperty implements Parcelable {
         this.isFavourite = false;
     }
 
+    public RentalProperty(long id, PropertyStatus propertyStatus, PropertyType propertyType, double latitude, double longitude, int metresSqr, String description, int numBedrooms, int numBathrooms, boolean isParking, boolean isLift, BigDecimal rentPerMonth, BigDecimal deposit, int minTenancy, boolean isFurnished, boolean isPetFriendly, boolean isFavourite) {
+        this(propertyStatus, propertyType, latitude, longitude, metresSqr, description, numBedrooms, numBathrooms, isParking, isLift, rentPerMonth, deposit, minTenancy, isFurnished, isPetFriendly);
+        this.id = id;
+    }
+
     protected RentalProperty(Parcel in) {
         id = in.readLong();
         latitude = in.readDouble();
         longitude = in.readDouble();
         metresSqr = in.readInt();
         description = in.readString();
-        availableFrom = in.readString();
         numBedrooms = in.readInt();
         numBathrooms = in.readInt();
         isParking = in.readByte() != 0;
@@ -148,13 +138,11 @@ public class RentalProperty implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel parcel, int i) {
-
         parcel.writeLong(id);
         parcel.writeDouble(latitude);
         parcel.writeDouble(longitude);
         parcel.writeInt(metresSqr);
         parcel.writeString(description);
-        parcel.writeString(availableFrom);
         parcel.writeInt(numBedrooms);
         parcel.writeInt(numBathrooms);
         parcel.writeByte((byte) (isParking ? 1 : 0));
@@ -174,8 +162,6 @@ public class RentalProperty implements Parcelable {
                 ", longitude=" + longitude +
                 ", metresSqr=" + metresSqr +
                 ", description='" + description + '\'' +
-                ", availableFrom='" + availableFrom + '\'' +
-                ", availableFromLD=" + availableFromLD +
                 ", numBedrooms=" + numBedrooms +
                 ", numBathrooms=" + numBathrooms +
                 ", isParking=" + isParking +
