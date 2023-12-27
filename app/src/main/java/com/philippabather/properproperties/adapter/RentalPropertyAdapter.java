@@ -23,18 +23,20 @@ public class RentalPropertyAdapter extends RecyclerView.Adapter<RentalPropertyHo
     private final List<RentalProperty> properties;
     private final List<RentalFavourite> favourites;
     private final Role role;
+    private final long proprietorId;
 
-    public RentalPropertyAdapter(List<RentalProperty> properties, List<RentalFavourite> favourites, Role role) {
+    public RentalPropertyAdapter(List<RentalProperty> properties, List<RentalFavourite> favourites, Role role, long proprietorId) {
         this.properties = properties;
         this.favourites = favourites;
         this.role = role;
+        this.proprietorId = proprietorId;
     }
 
     @NonNull
     @Override
     public RentalPropertyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_property_item, parent, false);
-        return new RentalPropertyHolder(view, properties, favourites, role);
+        return new RentalPropertyHolder(view, properties, favourites, role, proprietorId);
     }
 
     @Override

@@ -2,6 +2,9 @@ package com.philippabather.properproperties.adapter;
 
 import static com.philippabather.properproperties.R.color.barbie_pink;
 import static com.philippabather.properproperties.R.color.mint;
+import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_PROPERTY;
+import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_PROPERTY_STATUS;
+import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_PROPRIETOR_ID;
 import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_SALE_ID;
 
 import android.content.Intent;
@@ -39,11 +42,13 @@ public class SalePropertyHolder extends RecyclerView.ViewHolder {
     protected TextView tvPropertyDescription;
 
     private final AppLocalDB localDB;
+    private long proprietorId;
 
     public SalePropertyHolder(@NonNull View view, List<SaleProperty> properties,
-                              List<SaleFavourite> favourites, Role role) {
+                              List<SaleFavourite> favourites, Role role, long proprietorId) {
         super(view);
         this.parentView = view;
+        this.proprietorId = proprietorId;
 
         findViews();
         cvPropertyItem.setOnClickListener(v -> goToPropertyDetailsActivity(properties, role));
@@ -72,8 +77,9 @@ public class SalePropertyHolder extends RecyclerView.ViewHolder {
             parentView.getContext().startActivity(intent);
         } else if (role.equals(Role.PROPRIETOR)) {
             Intent intent = new Intent(parentView.getContext(), PropertyUpdateView.class);
-            intent.putExtra("propertyStatus", currSaleProperty.getPropertyStatus().toString());
-            intent.putExtra("property", currSaleProperty);
+            intent.putExtra(INTENT_EXTRA_PROPERTY_STATUS, currSaleProperty.getPropertyStatus().toString());
+            intent.putExtra(INTENT_EXTRA_PROPERTY, currSaleProperty);
+            intent.putExtra(INTENT_EXTRA_PROPRIETOR_ID, String.valueOf(proprietorId));
             parentView.getContext().startActivity(intent);
         }
     }

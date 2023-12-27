@@ -22,20 +22,21 @@ public class SalePropertyAdapter extends RecyclerView.Adapter<SalePropertyHolder
 
     private final List<SaleProperty> properties;
     private final List<SaleFavourite> favourites;
-
     private final Role role;
+    private long proprietorId;
 
-    public SalePropertyAdapter(List<SaleProperty> properties, List<SaleFavourite> favourites, Role role) {
+    public SalePropertyAdapter(List<SaleProperty> properties, List<SaleFavourite> favourites, Role role, long proprietorId) {
         this.properties = properties;
         this.favourites = favourites;
         this.role = role;
+        this.proprietorId = proprietorId;
     }
 
     @NonNull
     @Override
     public SalePropertyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_property_item, parent, false);
-        return new SalePropertyHolder(view, properties, favourites, role);
+        return new SalePropertyHolder(view, properties, favourites, role, proprietorId);
     }
 
     @Override
