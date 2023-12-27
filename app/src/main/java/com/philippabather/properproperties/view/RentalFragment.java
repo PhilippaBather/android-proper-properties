@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.philippabather.properproperties.R;
 import com.philippabather.properproperties.adapter.RentalPropertyAdapter;
 import com.philippabather.properproperties.domain.RentalProperty;
+import com.philippabather.properproperties.domain.Role;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,7 @@ public class RentalFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         // establece el Adapter y bindea al RecyclerView
-        adapter = new RentalPropertyAdapter(rentalPropertyList, null);
+        adapter = new RentalPropertyAdapter(rentalPropertyList, null, Role.PROPRIETOR);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 

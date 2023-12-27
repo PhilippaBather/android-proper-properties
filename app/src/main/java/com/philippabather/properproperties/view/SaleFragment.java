@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.philippabather.properproperties.R;
 import com.philippabather.properproperties.adapter.SalePropertyAdapter;
+import com.philippabather.properproperties.domain.Role;
 import com.philippabather.properproperties.domain.SaleProperty;
 
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ public class SaleFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         // establece el Adapter y bindea al RecyclerView
-        adapter = new SalePropertyAdapter(salePropertyList, null);
+        adapter = new SalePropertyAdapter(salePropertyList, null, Role.PROPRIETOR);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
