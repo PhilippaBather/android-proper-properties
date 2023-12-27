@@ -34,7 +34,7 @@ public class PropertyRegistrationPresenter implements PropertyRegistrationContra
 
     @Override
     public void onRegisterSalePropertySuccess(SaleProperty sale) {
-        view.showMessage("here");
+        view.showMessage(sale.toString());
     }
 
     @Override
