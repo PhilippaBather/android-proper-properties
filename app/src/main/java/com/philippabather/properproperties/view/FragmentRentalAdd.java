@@ -1,5 +1,6 @@
 package com.philippabather.properproperties.view;
 
+import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_PROPRIETOR_ID;
 import static com.philippabather.properproperties.map.MapUtils.initializePointAnnotationManager;
 import static com.philippabather.properproperties.map.MapUtils.setCameraPositionAndZoom;
 
@@ -38,7 +39,7 @@ import com.philippabather.properproperties.utils.SpinnerUtils;
 import java.math.BigDecimal;
 
 public class FragmentRentalAdd extends Fragment implements AdapterView.OnItemSelectedListener,
-        Style.OnStyleLoaded, OnMapClickListener  {
+        Style.OnStyleLoaded, OnMapClickListener {
 
     private Button btnAdd;
     private Button btnBack;
@@ -57,7 +58,7 @@ public class FragmentRentalAdd extends Fragment implements AdapterView.OnItemSel
     private PropertyType propertyType;
     private double latitude;
     private double longitude;
-
+    private long proprietorId;
     private PropertyRegistrationPresenter presenter;
 
     private MapView mapView;
@@ -71,8 +72,10 @@ public class FragmentRentalAdd extends Fragment implements AdapterView.OnItemSel
 
 
         View view = inflater.inflate(R.layout.fragment_rental_add, container, false);
-        findViews(view);
 
+        proprietorId = getArguments().getLong(INTENT_EXTRA_PROPRIETOR_ID);
+
+        findViews(view);
         bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.blue_marker_view);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(view.getContext(),
                 R.array.property_type, android.R.layout.simple_spinner_item);
@@ -85,7 +88,7 @@ public class FragmentRentalAdd extends Fragment implements AdapterView.OnItemSel
         return view;
     }
 
-     private void findViews(View view) {
+    private void findViews(View view) {
         btnAdd = view.findViewById(R.id.btn_add);
         btnBack = view.findViewById(R.id.btn_cancel);
         cbFurniture = view.findViewById(R.id.cb_property_leasehold);
@@ -110,6 +113,7 @@ public class FragmentRentalAdd extends Fragment implements AdapterView.OnItemSel
 
     private void cancel(View view) {
         Intent intent = new Intent(view.getContext(), OwnerPropertyView.class);
+        intent.putExtra(INTENT_EXTRA_PROPRIETOR_ID, String.valueOf(proprietorId));
         startActivity(intent);
     }
 
@@ -130,8 +134,6 @@ public class FragmentRentalAdd extends Fragment implements AdapterView.OnItemSel
                 size, description, numBedrooms, numBathrooms, isParking, isLift,
                 price, deposit, minTen, hasFurniture, isPets);
 
-        // TODO - quita hardcoding en la segunda entrega (por la implementación de login)
-        long proprietorId = 1;
         presenter.createNewRentalProperty(proprietorId, rental);
         resetViews();
     }
@@ -174,6 +176,7 @@ public class FragmentRentalAdd extends Fragment implements AdapterView.OnItemSel
     public void onStyleLoaded(@NonNull Style style) {
         setCameraPositionAndZoom(mapView);
     }
+
     @Override
     public boolean onMapClick(@NonNull Point point) {
         pointAnnotationManager.deleteAll();

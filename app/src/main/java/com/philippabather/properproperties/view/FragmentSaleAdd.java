@@ -1,5 +1,6 @@
 package com.philippabather.properproperties.view;
 
+import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_PROPRIETOR_ID;
 import static com.philippabather.properproperties.map.MapUtils.initializePointAnnotationManager;
 import static com.philippabather.properproperties.map.MapUtils.setCameraPositionAndZoom;
 
@@ -55,6 +56,7 @@ public class FragmentSaleAdd extends Fragment implements AdapterView.OnItemSelec
     private PropertyType propertyType;
     private double latitude;
     private double longitude;
+    private long proprietorId;
 
     private PropertyRegistrationPresenter presenter;
 
@@ -67,25 +69,17 @@ public class FragmentSaleAdd extends Fragment implements AdapterView.OnItemSelec
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sale_add, container, false);
+
+        assert getArguments() != null;
+        proprietorId = getArguments().getLong(INTENT_EXTRA_PROPRIETOR_ID);
+
         findViews(view);
-
         bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.blue_marker_view);
-
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(view.getContext(),
                 R.array.property_type, android.R.layout.simple_spinner_item);
         SpinnerUtils.setUpSpinner(adapter, spPropertyType, this);
         setUpMap();
         addOnClickListeners();
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spPropertyType.setAdapter(adapter);
-//        spPropertyType.setOnItemSelectedListener(this);
-//
-//        mapView.getMapboxMap().loadStyleUri(Style.MAPBOX_STREETS, this);
-//        pointAnnotationManager = initializePointAnnotationManager(mapView);
-//
-//        gesturesPlugin = GesturesUtils.getGestures(mapView);
-//        gesturesPlugin.addOnMapClickListener(this);
-
         presenter = new PropertyRegistrationPresenter((PropertyRegistrationView) view.getContext());
 
         return view;
@@ -125,13 +119,12 @@ public class FragmentSaleAdd extends Fragment implements AdapterView.OnItemSelec
         SaleProperty sale = new SaleProperty(PropertyStatus.SALE, propertyType, latitude, longitude,
                 size, description, numBedrooms, numBathrooms, hasParking, hasLift, price, leasehold);
 
-//        // TODO - quita hardcoding en la segunda entrega (por la implementación de login)
-        long proprietorId = 1;
         presenter.createNewSaleProperty(proprietorId, sale);
         resetViews();
     }
     private void cancel(View view) {
         Intent intent = new Intent(view.getContext(), OwnerPropertyView.class);
+        intent.putExtra(INTENT_EXTRA_PROPRIETOR_ID, String.valueOf(proprietorId));
         startActivity(intent);
     }
 
@@ -141,15 +134,6 @@ public class FragmentSaleAdd extends Fragment implements AdapterView.OnItemSelec
         String type = (String) itemAtPosition;
         propertyType = SpinnerUtils.setPropertyType(type);
     }
-
-//    private PropertyType setPropertyType(String type) {
-//        return switch(type.toUpperCase()) {
-//            case PROPERTY_TYPE_COMMERICAL_EN, PROPERTY_TYPE_COMMERICAL_ES -> PropertyType.COMMERCIAL;
-//            case PROPERTY_TYPE_FLAT_EN, PROPERTY_TYPE_FLAT_ES -> PropertyType.FLAT;
-//            case PROPERTY_TYPE_HOUSE_EN, PROPERTY_TYPE_HOUSE_ES -> PropertyType.HOUSE;
-//            default -> null;
-//        };
-//    }
 
     public void onNothingSelected(AdapterView<?> parent) {
         propertyType = PropertyType.HOUSE;
@@ -187,12 +171,4 @@ public class FragmentSaleAdd extends Fragment implements AdapterView.OnItemSelec
         MapUtils.addMarker(pointAnnotationManager, bitmap, latitude, longitude);
         return false;
     }
-
-//    private void addMarker(double latitude, double longitude) {
-//        PointAnnotationOptions pointAnnotationOptions = new PointAnnotationOptions()
-//                .withPoint(Point.fromLngLat(longitude, latitude))
-//                .withIconImage(BitmapFactory.decodeResource(getResources(), R.mipmap.blue_marker_view));
-//        pointAnnotationManager.create(pointAnnotationOptions);
-//    }
-
 }

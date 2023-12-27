@@ -1,5 +1,8 @@
 package com.philippabather.properproperties.view;
 
+import static com.philippabather.properproperties.constants.Constants.BUNDLE_ARGUMENT_PARCELABLE_LIST_SALES;
+import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_PROPRIETOR_ID;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -24,6 +27,7 @@ public class SaleFragment extends Fragment {
     private SalePropertyAdapter adapter;
     private LinearLayoutManager linearLayoutManager;
     private RecyclerView recyclerView;
+    private long proprietorId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,10 +36,11 @@ public class SaleFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_sale, container, false);
 
         // recibe datos desde los argumentos pasados
-        Bundle bundle = getArguments();
+//        Bundle bundle = getArguments();
         assert getArguments() != null;
         salePropertyList = new ArrayList<>();
-        salePropertyList = getArguments().getParcelableArrayList("sales");
+        salePropertyList = getArguments().getParcelableArrayList(BUNDLE_ARGUMENT_PARCELABLE_LIST_SALES);
+        proprietorId = getArguments().getLong(INTENT_EXTRA_PROPRIETOR_ID);
 
         // crea el RecyclerView
         recyclerView = view.findViewById(R.id.recyclerview_sale_property_list);
@@ -46,7 +51,7 @@ public class SaleFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         // establece el Adapter y bindea al RecyclerView
-        adapter = new SalePropertyAdapter(salePropertyList, null, Role.PROPRIETOR);
+        adapter = new SalePropertyAdapter(salePropertyList, null, Role.PROPRIETOR, proprietorId);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 

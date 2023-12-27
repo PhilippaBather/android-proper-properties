@@ -1,5 +1,11 @@
 package com.philippabather.properproperties.view;
 
+import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_PROPERTY;
+import static com.philippabather.properproperties.constants.Constants.BUNDLE_ARGUMENT_RENTAL;
+import static com.philippabather.properproperties.constants.Constants.BUNDLE_ARGUMENT_SALE;
+import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_PROPERTY_STATUS;
+import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_PROPRIETOR_ID;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +20,8 @@ import com.philippabather.properproperties.domain.PropertyStatus;
 import com.philippabather.properproperties.domain.RentalProperty;
 import com.philippabather.properproperties.domain.SaleProperty;
 
+import java.util.Objects;
+
 public class PropertyUpdateView extends AppCompatActivity implements PropertyUpdateContract.View {
     private FragmentRentalUpdate rentalUpdateFragment;
 
@@ -21,6 +29,7 @@ public class PropertyUpdateView extends AppCompatActivity implements PropertyUpd
     private RentalProperty rental;
     private SaleProperty sale;
     private PropertyStatus propertyStatus;
+    private long proprietorId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,23 +38,26 @@ public class PropertyUpdateView extends AppCompatActivity implements PropertyUpd
         setContentView(R.layout.activity_update_property);
 
         Intent intent = getIntent();
-        propertyStatus = PropertyStatus.valueOf(intent.getStringExtra("propertyStatus"));
+        proprietorId = Long.parseLong(Objects.requireNonNull(intent.getStringExtra(INTENT_EXTRA_PROPRIETOR_ID)));
+        propertyStatus = PropertyStatus.valueOf(intent.getStringExtra(INTENT_EXTRA_PROPERTY_STATUS));
 
         goToFragment(intent, propertyStatus);
     }
     private void goToFragment(Intent intent, PropertyStatus status) {
         if(PropertyStatus.RENTAL.equals(status)) {
-            rental = intent.getParcelableExtra("property");
+            rental = intent.getParcelableExtra(INTENT_EXTRA_PROPERTY);
             rentalUpdateFragment = new FragmentRentalUpdate();
             Bundle bundle = new Bundle();
-            bundle.putParcelable("rental", rental);
+            bundle.putLong(INTENT_EXTRA_PROPRIETOR_ID, proprietorId);
+            bundle.putParcelable(BUNDLE_ARGUMENT_RENTAL, rental);
             rentalUpdateFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.fl_frag_management, rentalUpdateFragment).commit();
         } else if (PropertyStatus.SALE.equals(status)) {
-            sale = intent.getParcelableExtra("property");
+            sale = intent.getParcelableExtra(INTENT_EXTRA_PROPERTY);
             saleUpdateFragment = new FragmentSaleUpdate();
             Bundle bundle = new Bundle();
-            bundle.putParcelable("sale", sale);
+            bundle.putLong(INTENT_EXTRA_PROPRIETOR_ID, proprietorId);
+            bundle.putParcelable(BUNDLE_ARGUMENT_SALE, sale);
             saleUpdateFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.fl_frag_management, saleUpdateFragment).commit();
         } else {

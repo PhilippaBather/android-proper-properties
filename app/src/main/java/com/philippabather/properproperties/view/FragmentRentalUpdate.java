@@ -1,5 +1,7 @@
 package com.philippabather.properproperties.view;
 
+import static com.philippabather.properproperties.constants.Constants.BUNDLE_ARGUMENT_RENTAL;
+import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_PROPRIETOR_ID;
 import static com.philippabather.properproperties.map.MapUtils.initializePointAnnotationManager;
 import static com.philippabather.properproperties.map.MapUtils.setCameraPositionAndZoom;
 
@@ -67,6 +69,7 @@ public class FragmentRentalUpdate extends Fragment implements AdapterView.OnItem
 
     private PropertyUpdatePresenter presenter;
     private RentalProperty rentalProperty;
+    private long proprietorId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -75,7 +78,8 @@ public class FragmentRentalUpdate extends Fragment implements AdapterView.OnItem
         findViews(view);
 
         assert getArguments() != null;
-        rentalProperty = getArguments().getParcelable("rental");
+        rentalProperty = getArguments().getParcelable(BUNDLE_ARGUMENT_RENTAL);
+        proprietorId = getArguments().getLong(INTENT_EXTRA_PROPRIETOR_ID);
 
         bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.blue_marker_view);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(view.getContext(),
@@ -168,6 +172,7 @@ public class FragmentRentalUpdate extends Fragment implements AdapterView.OnItem
 
     private void goToOwnerPropertyView(View view) {
         Intent intent = new Intent(view.getContext(), OwnerPropertyView.class);
+        intent.putExtra(INTENT_EXTRA_PROPRIETOR_ID, String.valueOf(proprietorId));
         startActivity(intent);
     }
 

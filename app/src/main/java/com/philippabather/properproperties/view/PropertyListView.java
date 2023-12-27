@@ -75,8 +75,8 @@ public class PropertyListView extends AppCompatActivity implements PropertyListC
         recyclerViewRental.setLayoutManager(linearLayoutManager);
 
         // create adapters
-        rentalPropertyAdapter = new RentalPropertyAdapter(rentalPropertyList, rentalFavourites, Role.CLIENT);
-        salePropertyAdapter = new SalePropertyAdapter(salePropertyList, saleFavourites, Role.CLIENT);
+        rentalPropertyAdapter = new RentalPropertyAdapter(rentalPropertyList, rentalFavourites, Role.CLIENT, 0);
+        salePropertyAdapter = new SalePropertyAdapter(salePropertyList, saleFavourites, Role.CLIENT, 0);
         recyclerViewRental.setAdapter(rentalPropertyAdapter);
         recyclerViewSale.setAdapter(salePropertyAdapter);
 

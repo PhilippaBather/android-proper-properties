@@ -99,7 +99,7 @@ public class HomeView extends AppCompatActivity {
     }
 
     private void goToPropertyManagement() {
-        Intent intent = new Intent(this, OwnerPropertyView.class);
+        Intent intent = new Intent(this, LoginView.class);
         startActivity(intent);
     }
 
