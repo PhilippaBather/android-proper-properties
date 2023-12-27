@@ -65,6 +65,8 @@ public class RentalProperty implements Parcelable {
         numBathrooms = in.readInt();
         isParking = in.readByte() != 0;
         isLift = in.readByte() != 0;
+        rentPerMonth = new BigDecimal(in.readString());
+        deposit = new BigDecimal(in.readString());
         minTenancy = in.readInt();
         isFurnished = in.readByte() != 0;
         isPetFriendly = in.readByte() != 0;
@@ -83,6 +85,7 @@ public class RentalProperty implements Parcelable {
         }
     };
 
+
     public long getId() {
         return id;
     }
@@ -91,35 +94,120 @@ public class RentalProperty implements Parcelable {
         return propertyStatus;
     }
 
+    public void setPropertyStatus(PropertyStatus propertyStatus) {
+        this.propertyStatus = propertyStatus;
+    }
+
     public PropertyType getPropertyType() {
         return propertyType;
+    }
+
+    public void setPropertyType(PropertyType propertyType) {
+        this.propertyType = propertyType;
     }
 
     public double getLatitude() {
         return latitude;
     }
 
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
     public double getLongitude() {
         return longitude;
     }
 
-    public String getDescription() {
-        return description;
-    }
-    public BigDecimal getRentPerMonth() {
-        return rentPerMonth;
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
     public int getMetresSqr() {
         return metresSqr;
     }
 
+    public void setMetresSqr(int metresSqr) {
+        this.metresSqr = metresSqr;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public int getNumBedrooms() {
         return numBedrooms;
     }
 
+    public void setNumBedrooms(int numBedrooms) {
+        this.numBedrooms = numBedrooms;
+    }
+
+    public int getNumBathrooms() {
+        return numBathrooms;
+    }
+
+    public void setNumBathrooms(int numBathrooms) {
+        this.numBathrooms = numBathrooms;
+    }
+
+    public boolean isParking() {
+        return isParking;
+    }
+
+    public void setParking(boolean parking) {
+        isParking = parking;
+    }
+
     public boolean isLift() {
         return isLift;
+    }
+
+    public void setLift(boolean lift) {
+        isLift = lift;
+    }
+
+    public BigDecimal getRentPerMonth() {
+        return rentPerMonth;
+    }
+
+    public void setRentPerMonth(BigDecimal rentPerMonth) {
+        this.rentPerMonth = rentPerMonth;
+    }
+
+    public BigDecimal getDeposit() {
+        return deposit;
+    }
+
+    public void setDeposit(BigDecimal deposit) {
+        this.deposit = deposit;
+    }
+
+    public int getMinTenancy() {
+        return minTenancy;
+    }
+
+    public void setMinTenancy(int minTenancy) {
+        this.minTenancy = minTenancy;
+    }
+
+    public boolean isFurnished() {
+        return isFurnished;
+    }
+
+    public void setFurnished(boolean furnished) {
+        isFurnished = furnished;
+    }
+
+    public boolean isPetFriendly() {
+        return isPetFriendly;
+    }
+
+    public void setPetFriendly(boolean petFriendly) {
+        isPetFriendly = petFriendly;
     }
 
     public boolean isFavourite() {
@@ -146,6 +234,8 @@ public class RentalProperty implements Parcelable {
         parcel.writeInt(numBathrooms);
         parcel.writeByte((byte) (isParking ? 1 : 0));
         parcel.writeByte((byte) (isLift ? 1 : 0));
+        parcel.writeString(rentPerMonth.toString());
+        parcel.writeString(deposit.toString());
         parcel.writeInt(minTenancy);
         parcel.writeByte((byte) (isFurnished ? 1 : 0));
         parcel.writeByte((byte) (isPetFriendly ? 1 : 0));
