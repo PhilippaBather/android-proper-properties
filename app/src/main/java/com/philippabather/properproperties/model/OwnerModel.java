@@ -24,7 +24,7 @@ public class OwnerModel implements OwnerContract.Model {
     }
 
     @Override
-    public void loadProprietor(OnLoadPropertiesListener listener, long proprietorId) {
+    public void loadProprietor(OnLoadProprietorListener listener, long proprietorId) {
         Call<Proprietor> callProprietor = api.getProprietorById(proprietorId);
 
         callProprietor.enqueue(new Callback<Proprietor>() {
