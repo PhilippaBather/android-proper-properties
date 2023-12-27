@@ -5,7 +5,9 @@
     <string name="btn_add_property">Añade un inmueble</string>
     <string name="btn_back">Volver</string>
     <string name="btn_calculate">Calcula</string>
+    <string name="btn_delete">Eliminar</string>
     <string name="btn_submit" translatable="false">Submit</string>
+    <string name="btn_update">Actualizar</string>
     <string name="cb_add_property_furniture">Muebles</string>
     <string name="cb_add_property_leasehold">Arrendado</string>
     <string name="cb_add_property_lift">Acensor</string>
