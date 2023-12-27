@@ -64,6 +64,7 @@ public class SaleProperty implements Parcelable {
         numBathrooms = in.readInt();
         isParking = in.readByte() != 0;
         isLift = in.readByte() != 0;
+        price = new BigDecimal(in.readString());
         isLeasehold = in.readByte() != 0;
         isFavourite = in.readByte() != 0;
     }
@@ -79,6 +80,114 @@ public class SaleProperty implements Parcelable {
             return new SaleProperty[size];
         }
     };
+
+    public long getId() {
+        return id;
+    }
+
+    public PropertyStatus getPropertyStatus() {
+        return propertyStatus;
+    }
+
+    public void setPropertyStatus(PropertyStatus propertyStatus) {
+        this.propertyStatus = propertyStatus;
+    }
+
+    public PropertyType getPropertyType() {
+        return propertyType;
+    }
+
+    public void setPropertyType(PropertyType propertyType) {
+        this.propertyType = propertyType;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public int getMetresSqr() {
+        return metresSqr;
+    }
+
+    public void setMetresSqr(int metresSqr) {
+        this.metresSqr = metresSqr;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getNumBedrooms() {
+        return numBedrooms;
+    }
+
+    public void setNumBedrooms(int numBedrooms) {
+        this.numBedrooms = numBedrooms;
+    }
+
+    public int getNumBathrooms() {
+        return numBathrooms;
+    }
+
+    public void setNumBathrooms(int numBathrooms) {
+        this.numBathrooms = numBathrooms;
+    }
+
+    public boolean isParking() {
+        return isParking;
+    }
+
+    public void setParking(boolean parking) {
+        isParking = parking;
+    }
+
+    public boolean isLift() {
+        return isLift;
+    }
+
+    public void setLift(boolean lift) {
+        isLift = lift;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public boolean isLeasehold() {
+        return isLeasehold;
+    }
+
+    public void setLeasehold(boolean leasehold) {
+        isLeasehold = leasehold;
+    }
+
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        isFavourite = favourite;
+    }
 
     @Override
     public int describeContents() {
@@ -96,55 +205,28 @@ public class SaleProperty implements Parcelable {
         parcel.writeInt(numBathrooms);
         parcel.writeByte((byte) (isParking ? 1 : 0));
         parcel.writeByte((byte) (isLift ? 1 : 0));
+        parcel.writeString(price.toString());
         parcel.writeByte((byte) (isLeasehold ? 1 : 0));
         parcel.writeByte((byte) (isFavourite ? 1 : 0));
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public PropertyStatus getPropertyStatus() {
-        return propertyStatus;
-    }
-
-    public PropertyType getPropertyType() {
-        return propertyType;
-    }
-
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public int getMetresSqr() {
-        return metresSqr;
-    }
-
-    public int getNumBedrooms() {
-        return numBedrooms;
-    }
-
-    public boolean isLift() {
-        return isLift;
-    }
-
-    public boolean isFavourite() {
-        return isFavourite;
-    }
-
-    public void setFavourite(boolean favourite) {
-        isFavourite = favourite;
+    @Override
+    public String toString() {
+        return "SaleProperty{" +
+                "id=" + id +
+                ", propertyStatus=" + propertyStatus +
+                ", propertyType=" + propertyType +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", metresSqr=" + metresSqr +
+                ", description='" + description + '\'' +
+                ", numBedrooms=" + numBedrooms +
+                ", numBathrooms=" + numBathrooms +
+                ", isParking=" + isParking +
+                ", isLift=" + isLift +
+                ", price=" + price +
+                ", isLeasehold=" + isLeasehold +
+                ", isFavourite=" + isFavourite +
+                '}';
     }
 }
