@@ -1,14 +1,255 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RentalClientDetailFragment">
+    tools:context=".view.RentalClientDetailFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.mapbox.maps.MapView
+        android:id="@+id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="150dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:mapbox_cameraTargetLat="40.4168"
+        app:mapbox_cameraTargetLng="-3.7038"
+        app:mapbox_cameraZoom="9.0" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/tv_property_type"
+        android:layout_width="152dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="15dp"
+        android:text="@string/tv_add_property_type"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@id/tv_property_price"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mapView"
+        app:layout_constraintVertical_chainStyle="spread" />
+
+    <TextView
+        android:id="@+id/tv_property_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="15dp"
+        android:text="@string/tv_add_property_price_pm"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@id/tv_property_deposit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_property_type" />
+
+    <TextView
+        android:id="@+id/tv_property_deposit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="15dp"
+        android:text="@string/tv_add_property_deposit"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@id/tv_property_min_tenancy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_property_price" />
+
+    <TextView
+        android:id="@+id/tv_property_min_tenancy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="15dp"
+        android:text="@string/tv_add_property_min_tenancy"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@id/tv_property_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_property_deposit" />
+
+    <TextView
+        android:id="@+id/tv_property_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="15dp"
+        android:text="@string/tv_add_property_size"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@id/tv_property_num_bedrooms"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_property_min_tenancy" />
+
+    <TextView
+        android:id="@+id/tv_property_num_bedrooms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="15dp"
+        android:text="@string/tv_add_property_num_bedrooms"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@id/tv_property_num_bathrooms"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_property_size" />
+
+    <TextView
+        android:id="@+id/tv_property_num_bathrooms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="15dp"
+        android:text="@string/tv_add_property_num_bathrooms"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@id/cb_property_parking"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_property_num_bedrooms" />
+
+    <TextView
+        android:id="@+id/tv_property_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/tv_add_property_description"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cb_property_parking" />
+
+    <TextView
+        android:id="@+id/tv_property_info_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toRightOf="@id/tv_property_type"
+        app:layout_constraintTop_toBottomOf="@id/mapView" />
+
+    <TextView
+        android:id="@+id/tv_property_info_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_property_info_deposit"
+        app:layout_constraintStart_toStartOf="@+id/tv_property_info_type"
+        app:layout_constraintTop_toBottomOf="@+id/tv_property_info_type" />
+
+    <TextView
+        android:id="@+id/tv_property_info_deposit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@id/tv_property_info_min_tenancy"
+        app:layout_constraintStart_toStartOf="@+id/tv_property_info_price"
+        app:layout_constraintTop_toBottomOf="@+id/tv_property_info_price" />
+
+    <TextView
+        android:id="@+id/tv_property_info_min_tenancy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_property_info_size"
+        app:layout_constraintStart_toStartOf="@id/tv_property_info_deposit"
+        app:layout_constraintTop_toBottomOf="@id/tv_property_info_deposit" />
+
+    <TextView
+        android:id="@+id/tv_property_info_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_property_info_bedrooms"
+        app:layout_constraintStart_toStartOf="@+id/tv_property_info_min_tenancy"
+        app:layout_constraintTop_toBottomOf="@+id/tv_property_info_min_tenancy" />
+
+    <TextView
+        android:id="@+id/tv_property_info_bedrooms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_property_info_bathrooms"
+        app:layout_constraintStart_toStartOf="@+id/tv_property_info_size"
+        app:layout_constraintTop_toBottomOf="@+id/tv_property_info_size" />
+
+    <TextView
+        android:id="@+id/tv_property_info_bathrooms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/cb_property_leasehold"
+        app:layout_constraintStart_toStartOf="@+id/tv_property_info_bedrooms"
+        app:layout_constraintTop_toBottomOf="@+id/tv_property_info_bedrooms" />
+
+    <TextView
+        android:id="@+id/tv_property_info_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="32dp"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toRightOf="@id/tv_property_description"
+        app:layout_constraintTop_toBottomOf="@id/cb_property_parking" />
+
+    <CheckBox
+        android:id="@+id/cb_property_parking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="@string/cb_add_property_parking"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/cb_property_lift"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_property_num_bathrooms" />
+
+    <CheckBox
+        android:id="@+id/cb_property_lift"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="@string/cb_add_property_lift"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/cb_property_leasehold"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/cb_property_parking"
+        app:layout_constraintTop_toBottomOf="@id/tv_property_num_bathrooms" />
+
+    <CheckBox
+        android:id="@+id/cb_property_leasehold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="@string/cb_add_property_furniture"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/cb_property_pets"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/cb_property_lift"
+        app:layout_constraintTop_toBottomOf="@id/tv_property_num_bathrooms" />
+
+    <CheckBox
+        android:id="@+id/cb_property_pets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="@string/cb_add_property_pets"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/cb_property_leasehold"
+        app:layout_constraintTop_toBottomOf="@id/tv_property_num_bathrooms" />
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:text="@string/btn_back"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_property_info_description"
+        app:layout_constraintVertical_bias="0.116" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
