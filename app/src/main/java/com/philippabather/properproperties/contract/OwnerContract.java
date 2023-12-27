@@ -5,12 +5,12 @@ import com.philippabather.properproperties.domain.Proprietor;
 public interface OwnerContract {
 
     public interface Model {
-        interface OnLoadPropertiesListener {
+        interface OnLoadProprietorListener {
             void onLoadProprietorSuccess(Proprietor proprietor);
             void onLoadProprietorError(String msg);
         }
 
-        void loadProprietor(OwnerContract.Model.OnLoadPropertiesListener listener, long userId);
+        void loadProprietor(OnLoadProprietorListener listener, long userId);
     }
 
     public interface View {
@@ -19,7 +19,7 @@ public interface OwnerContract {
     }
 
     public interface Presenter {
-        void loadProprietor(long proprietorId);
+        void loadProprietorById(long proprietorId);
 
     }
 }
