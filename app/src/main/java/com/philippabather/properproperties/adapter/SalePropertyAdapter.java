@@ -36,7 +36,7 @@ public class SalePropertyAdapter extends RecyclerView.Adapter<SalePropertyHolder
     @Override
     public SalePropertyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_property_item, parent, false);
-        return new SalePropertyHolder(view, properties, favourites, role, proprietorId);
+        return new SalePropertyHolder(view, properties, role, proprietorId);
     }
 
     @Override

@@ -36,7 +36,7 @@ public class RentalPropertyAdapter extends RecyclerView.Adapter<RentalPropertyHo
     @Override
     public RentalPropertyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_property_item, parent, false);
-        return new RentalPropertyHolder(view, properties, favourites, role, proprietorId);
+        return new RentalPropertyHolder(view, properties, role, proprietorId);
     }
 
     @Override
