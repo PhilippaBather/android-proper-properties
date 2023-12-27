@@ -7,7 +7,6 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class SaleFavourite {
-
     @PrimaryKey
     @NonNull
     private Long id;

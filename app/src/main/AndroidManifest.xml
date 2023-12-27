@@ -23,6 +23,8 @@
             android:exported="false" />
         <activity android:name=".view.PropertyDetailView"
             android:exported="false" />
+        <activity android:name=".view.OwnerPropertyView"
+            android:exported="false" />
         <activity
             android:name=".view.HomeView"
             android:exported="true">

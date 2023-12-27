@@ -41,6 +41,5 @@ public interface PropertyListContract {
         void loadSaleProperties();
         void loadFavouriteRentals();
         void loadFavouriteSales();
-
     }
 }

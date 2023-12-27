@@ -1,9 +1,14 @@
 package com.philippabather.properproperties.domain;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class RentalProperty {
+public class RentalProperty implements Parcelable {
 
     private long id;
 
@@ -60,6 +65,35 @@ public class RentalProperty {
         this.isFavourite = false;
     }
 
+    protected RentalProperty(Parcel in) {
+        id = in.readLong();
+        latitude = in.readDouble();
+        longitude = in.readDouble();
+        metresSqr = in.readInt();
+        description = in.readString();
+        availableFrom = in.readString();
+        numBedrooms = in.readInt();
+        numBathrooms = in.readInt();
+        isParking = in.readByte() != 0;
+        isLift = in.readByte() != 0;
+        minTenancy = in.readInt();
+        isFurnished = in.readByte() != 0;
+        isPetFriendly = in.readByte() != 0;
+        isFavourite = in.readByte() != 0;
+    }
+
+    public static final Creator<RentalProperty> CREATOR = new Creator<RentalProperty>() {
+        @Override
+        public RentalProperty createFromParcel(Parcel in) {
+            return new RentalProperty(in);
+        }
+
+        @Override
+        public RentalProperty[] newArray(int size) {
+            return new RentalProperty[size];
+        }
+    };
+
     public long getId() {
         return id;
     }
@@ -105,6 +139,30 @@ public class RentalProperty {
 
     public void setFavourite(boolean favourite) {
         isFavourite = favourite;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+
+        parcel.writeLong(id);
+        parcel.writeDouble(latitude);
+        parcel.writeDouble(longitude);
+        parcel.writeInt(metresSqr);
+        parcel.writeString(description);
+        parcel.writeString(availableFrom);
+        parcel.writeInt(numBedrooms);
+        parcel.writeInt(numBathrooms);
+        parcel.writeByte((byte) (isParking ? 1 : 0));
+        parcel.writeByte((byte) (isLift ? 1 : 0));
+        parcel.writeInt(minTenancy);
+        parcel.writeByte((byte) (isFurnished ? 1 : 0));
+        parcel.writeByte((byte) (isPetFriendly ? 1 : 0));
+        parcel.writeByte((byte) (isFavourite ? 1 : 0));
     }
 
     @Override
