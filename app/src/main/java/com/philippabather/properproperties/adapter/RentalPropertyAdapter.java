@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.philippabather.properproperties.R;
 import com.philippabather.properproperties.domain.RentalFavourite;
 import com.philippabather.properproperties.domain.RentalProperty;
+import com.philippabather.properproperties.domain.Role;
 
 import java.util.List;
 
@@ -21,17 +22,19 @@ public class RentalPropertyAdapter extends RecyclerView.Adapter<RentalPropertyHo
 
     private final List<RentalProperty> properties;
     private final List<RentalFavourite> favourites;
+    private final Role role;
 
-    public RentalPropertyAdapter(List<RentalProperty> properties, List<RentalFavourite> favourites) {
+    public RentalPropertyAdapter(List<RentalProperty> properties, List<RentalFavourite> favourites, Role role) {
         this.properties = properties;
         this.favourites = favourites;
+        this.role = role;
     }
 
     @NonNull
     @Override
     public RentalPropertyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_property_item, parent, false);
-        return new RentalPropertyHolder(view, properties, favourites);
+        return new RentalPropertyHolder(view, properties, favourites, role);
     }
 
     @Override

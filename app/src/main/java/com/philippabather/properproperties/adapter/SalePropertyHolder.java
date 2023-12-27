@@ -18,9 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.philippabather.properproperties.R;
 import com.philippabather.properproperties.db.AppLocalDB;
 import com.philippabather.properproperties.db.DBHelperMethods;
+import com.philippabather.properproperties.domain.Role;
 import com.philippabather.properproperties.domain.SaleFavourite;
 import com.philippabather.properproperties.domain.SaleProperty;
 import com.philippabather.properproperties.view.PropertyDetailView;
+import com.philippabather.properproperties.view.PropertyUpdateView;
 
 import java.util.List;
 
@@ -38,12 +40,13 @@ public class SalePropertyHolder extends RecyclerView.ViewHolder {
 
     private final AppLocalDB localDB;
 
-    public SalePropertyHolder(@NonNull View view, List<SaleProperty> properties, List<SaleFavourite> favourites) {
+    public SalePropertyHolder(@NonNull View view, List<SaleProperty> properties,
+                              List<SaleFavourite> favourites, Role role) {
         super(view);
         this.parentView = view;
 
         findViews();
-        cvPropertyItem.setOnClickListener(v -> goToPropertyDetailsActivity(properties));
+        cvPropertyItem.setOnClickListener(v -> goToPropertyDetailsActivity(properties, role));
         ibPropertyContact.setOnClickListener(v -> contactProprietor(properties));
         ibPropertyFavourite.setOnClickListener(v -> addToFavourites(properties));
         localDB = DBHelperMethods.getConnection(view.getContext());
@@ -60,12 +63,19 @@ public class SalePropertyHolder extends RecyclerView.ViewHolder {
         tvPropertyDescription = parentView.findViewById(R.id.tv_property_description);
     }
 
-    public void goToPropertyDetailsActivity(List<SaleProperty> properties) {
+    public void goToPropertyDetailsActivity(List<SaleProperty> properties, Role role) {
         SaleProperty currSaleProperty = getCurrentProperty(properties);
-        Intent intent = new Intent(parentView.getContext(), PropertyDetailView.class);
-        String id = String.valueOf(currSaleProperty.getId());
-        intent.putExtra(INTENT_EXTRA_SALE_ID, id);
-        parentView.getContext().startActivity(intent);
+        if (role.equals(Role.CLIENT)) {
+            Intent intent = new Intent(parentView.getContext(), PropertyDetailView.class);
+            String id = String.valueOf(currSaleProperty.getId());
+            intent.putExtra(INTENT_EXTRA_SALE_ID, id);
+            parentView.getContext().startActivity(intent);
+        } else if (role.equals(Role.PROPRIETOR)) {
+            Intent intent = new Intent(parentView.getContext(), PropertyUpdateView.class);
+            intent.putExtra("propertyStatus", currSaleProperty.getPropertyStatus().toString());
+            intent.putExtra("property", currSaleProperty);
+            parentView.getContext().startActivity(intent);
+        }
     }
 
     private SaleProperty getCurrentProperty(List<SaleProperty> properties) {
