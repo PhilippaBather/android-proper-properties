@@ -8,6 +8,8 @@
     <string name="tv_add_property_num_bedrooms">Num. bedrooms</string>
     <string name="tv_add_property_num_bathrooms">Num. bathrooms</string>
     <string name="cb_add_property_pets">Pets</string>
+    <string name="btn_delete">Delete</string>
+    <string name="btn_update">Update</string>
     <string name="cb_add_property_furniture">Furnished</string>
     <string name="cb_add_property_lift">Lift</string>
     <string name="cb_add_property_parking">Parking</string>
