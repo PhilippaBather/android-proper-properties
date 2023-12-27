@@ -1,6 +1,7 @@
 package com.philippabather.properproperties.map;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import com.mapbox.geojson.Point;
 import com.mapbox.maps.CameraOptions;
@@ -11,6 +12,7 @@ import com.mapbox.maps.plugin.annotation.AnnotationPluginImplKt;
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManager;
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManagerKt;
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions;
+import com.philippabather.properproperties.R;
 
 public class MapUtils {
     private static final double DEFAULT_PITCH = 45.00;
