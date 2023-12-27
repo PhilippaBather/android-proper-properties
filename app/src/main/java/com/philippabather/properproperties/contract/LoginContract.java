@@ -2,24 +2,25 @@ package com.philippabather.properproperties.contract;
 
 import com.philippabather.properproperties.domain.Proprietor;
 
-public interface OwnerContract {
+public interface LoginContract {
 
-    public interface Model {
+    interface Model {
         interface OnLoadProprietorListener {
+
             void onLoadProprietorSuccess(Proprietor proprietor);
             void onLoadProprietorError(String msg);
+
         }
 
-        void loadProprietor(OnLoadProprietorListener listener, long userId);
+        void loadProprietorByUsernameAndPassword(OnLoadProprietorListener listener, String username, String password);
     }
 
-    public interface View {
+    interface View {
         void getProprietor(Proprietor proprietor);
         void showMessage(String msg);
     }
 
-    public interface Presenter {
-        void loadProprietorById(long proprietorId);
-
+    interface Presenter {
+        void loadProprietorByUsernameAndPassword(String username, String password);
     }
 }

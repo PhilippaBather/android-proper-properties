@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.FragmentSaleAdd">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.FragmentRentalUpdate">
 
     <com.mapbox.maps.MapView
         android:id="@+id/mapView"
@@ -33,11 +33,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:text="@string/tv_add_property_sale_price"
+        android:text="@string/tv_add_property_price_pm"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@id/tv_property_deposit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_property_type" />
+
+    <TextView
+        android:id="@+id/tv_property_deposit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="@string/tv_add_property_deposit"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@id/tv_property_min_tenancy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_property_price" />
+
+    <TextView
+        android:id="@+id/tv_property_min_tenancy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="@string/tv_add_property_min_tenancy"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@id/tv_property_size"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_property_type" />
+        app:layout_constraintTop_toBottomOf="@id/tv_property_deposit" />
 
     <TextView
         android:id="@+id/tv_property_size"
@@ -48,7 +70,7 @@
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@id/tv_property_num_bedrooms"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_property_price" />
+        app:layout_constraintTop_toBottomOf="@id/tv_property_min_tenancy" />
 
     <TextView
         android:id="@+id/tv_property_num_bedrooms"
@@ -83,6 +105,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cb_property_parking" />
 
+
     <Spinner
         android:id="@+id/sp_property_type"
         android:layout_width="155dp"
@@ -100,10 +123,38 @@
         android:minWidth="48dp"
         android:minHeight="48dp"
         android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/et_property_size"
+        app:layout_constraintBottom_toTopOf="@+id/et_property_deposit"
         app:layout_constraintStart_toStartOf="@+id/sp_property_type"
-        app:layout_constraintTop_toBottomOf="@+id/sp_property_type"
+        app:layout_constraintTop_toBottomOf="@+id/sp_property_type" />
+
+    <EditText
+        android:id="@+id/et_property_deposit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autofillHints="Depósito"
+        android:hint="@string/et_add_property_hint_deposit"
+        android:inputType="numberDecimal"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@id/et_property_min_tenancy"
+        app:layout_constraintStart_toStartOf="@+id/et_property_price"
+        app:layout_constraintTop_toBottomOf="@+id/et_property_price"
         tools:ignore="DuplicateSpeakableTextCheck" />
+
+    <EditText
+        android:id="@+id/et_property_min_tenancy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autofillHints="En meses"
+        android:hint="@string/et_add_property_hint_min_ten"
+        android:inputType="number"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/et_property_size"
+        app:layout_constraintStart_toStartOf="@id/et_property_deposit"
+        app:layout_constraintTop_toBottomOf="@id/et_property_deposit" />
 
     <EditText
         android:id="@+id/et_property_size"
@@ -116,8 +167,8 @@
         android:minHeight="48dp"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/et_property_num_bedrooms"
-        app:layout_constraintStart_toStartOf="@+id/et_property_price"
-        app:layout_constraintTop_toBottomOf="@+id/et_property_price" />
+        app:layout_constraintStart_toStartOf="@+id/et_property_min_tenancy"
+        app:layout_constraintTop_toBottomOf="@+id/et_property_min_tenancy" />
 
     <EditText
         android:id="@+id/et_property_num_bedrooms"
@@ -143,7 +194,7 @@
         android:minWidth="48dp"
         android:minHeight="48dp"
         android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/cb_property_parking"
+        app:layout_constraintBottom_toTopOf="@+id/cb_property_leasehold"
         app:layout_constraintStart_toStartOf="@+id/et_property_num_bedrooms"
         app:layout_constraintTop_toBottomOf="@+id/et_property_num_bedrooms" />
 
@@ -192,11 +243,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:text="@string/cb_add_property_leasehold"
+        android:text="@string/cb_add_property_furniture"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/cb_property_pets"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/cb_property_lift"
+        app:layout_constraintTop_toBottomOf="@id/tv_property_num_bathrooms" />
+
+    <CheckBox
+        android:id="@+id/cb_property_pets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="@string/cb_add_property_pets"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/cb_property_lift"
+        app:layout_constraintStart_toEndOf="@+id/cb_property_leasehold"
         app:layout_constraintTop_toBottomOf="@id/tv_property_num_bathrooms" />
 
     <Button
@@ -207,22 +270,36 @@
         android:layout_marginBottom="12dp"
         android:text="@string/btn_back"
         android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/btn_add"
+        app:layout_constraintEnd_toStartOf="@+id/btn_delete"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_ml_property_description" />
 
     <Button
-        android:id="@+id/btn_add"
+        android:id="@+id/btn_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="12dp"
-        android:text="@string/btn_add"
+        android:text="@string/btn_delete"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_update"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btn_cancel"
         app:layout_constraintTop_toBottomOf="@id/et_ml_property_description" />
+
+    <Button
+        android:id="@+id/btn_update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/btn_update"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_delete"
+        app:layout_constraintTop_toBottomOf="@id/et_ml_property_description" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

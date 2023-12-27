@@ -2,6 +2,9 @@ package com.philippabather.properproperties.adapter;
 
 import static com.philippabather.properproperties.R.color.barbie_pink;
 import static com.philippabather.properproperties.R.color.mint;
+import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_PROPERTY;
+import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_PROPERTY_STATUS;
+import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_PROPRIETOR_ID;
 import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_RENTAL_ID;
 
 import android.content.Intent;
@@ -20,7 +23,9 @@ import com.philippabather.properproperties.db.AppLocalDB;
 import com.philippabather.properproperties.db.DBHelperMethods;
 import com.philippabather.properproperties.domain.RentalFavourite;
 import com.philippabather.properproperties.domain.RentalProperty;
+import com.philippabather.properproperties.domain.Role;
 import com.philippabather.properproperties.view.PropertyDetailView;
+import com.philippabather.properproperties.view.PropertyUpdateView;
 
 import java.util.List;
 
@@ -36,13 +41,16 @@ public class RentalPropertyHolder extends RecyclerView.ViewHolder {
     protected TextView tvPropertyOverview; // detalles principales
     protected TextView tvPropertyDescription;
     private final AppLocalDB localDB;
+    private final long proprietorId;
 
-    public RentalPropertyHolder(@NonNull View view, List<RentalProperty> properties, List<RentalFavourite> favourites) {
+    public RentalPropertyHolder(@NonNull View view, List<RentalProperty> properties,
+                                List<RentalFavourite> favourites, Role role, long proprietorId) {
         super(view);
         this.parentView = view;
+        this.proprietorId = proprietorId;
 
         findViews();
-        cvPropertyItem.setOnClickListener(v -> goToPropertyDetailsActivity(properties));
+        cvPropertyItem.setOnClickListener(v -> goToPropertyDetailsActivity(properties, role));
         ibPropertyContact.setOnClickListener(v -> contactProprietor(properties));
         ibPropertyFavourite.setOnClickListener(v -> addToFavourites(properties));
         localDB = DBHelperMethods.getConnection(view.getContext());
@@ -59,12 +67,20 @@ public class RentalPropertyHolder extends RecyclerView.ViewHolder {
         tvPropertyDescription = parentView.findViewById(R.id.tv_property_description);
     }
 
-    public void goToPropertyDetailsActivity(List<RentalProperty> properties) {
+    public void goToPropertyDetailsActivity(List<RentalProperty> properties, Role role) {
         RentalProperty currRentalProperty = getCurrentProperty(properties);
-        Intent intent = new Intent(parentView.getContext(), PropertyDetailView.class);
-        String id = String.valueOf(currRentalProperty.getId());
-        intent.putExtra(INTENT_EXTRA_RENTAL_ID, id);
-        parentView.getContext().startActivity(intent);
+        if (role.equals(Role.CLIENT)) {
+            Intent intent = new Intent(parentView.getContext(), PropertyDetailView.class);
+            String id = String.valueOf(currRentalProperty.getId());
+            intent.putExtra(INTENT_EXTRA_RENTAL_ID, id);
+            parentView.getContext().startActivity(intent);
+        } else if (role.equals(Role.PROPRIETOR)) {
+            Intent intent = new Intent(parentView.getContext(), PropertyUpdateView.class);
+            intent.putExtra(INTENT_EXTRA_PROPRIETOR_ID, String.valueOf(proprietorId));
+            intent.putExtra(INTENT_EXTRA_PROPERTY_STATUS, currRentalProperty.getPropertyStatus().toString());
+            intent.putExtra(INTENT_EXTRA_PROPERTY, currRentalProperty);
+            parentView.getContext().startActivity(intent);
+        }
     }
 
     private RentalProperty getCurrentProperty(List<RentalProperty> properties) {

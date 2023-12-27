@@ -5,7 +5,10 @@
     <string name="btn_add_property">Añade un inmueble</string>
     <string name="btn_back">Volver</string>
     <string name="btn_calculate">Calcula</string>
+    <string name="btn_delete">Eliminar</string>
+    <string name="btn_login" translatable="false">Login</string>
     <string name="btn_submit" translatable="false">Submit</string>
+    <string name="btn_update">Actualizar</string>
     <string name="cb_add_property_furniture">Muebles</string>
     <string name="cb_add_property_leasehold">Arrendado</string>
     <string name="cb_add_property_lift">Acensor</string>
@@ -40,6 +43,9 @@
     <string name="tv_landing_page_description_mortgage_checker"><b>Comprobar hipotecas</b> con nuestro Mortgage Adviser.</string>
     <string name="tv_landing_page_description_publish_property"><b>Publicar tu inmueble</b> sin complicaciones y gratis</string>
     <string name="tv_landing_page_description_search_properties"><b>Buscar inmuebles y locales</b> de un amplio abanico en venta y alquiler</string>
+    <string name="tv_login_password">Contraseña</string>
+    <string name="tv_login_title">Proprietario Login</string>
+    <string name="tv_login_username">Usuario</string>
     <string name="tv_management_description">Aquí se puede mirar una lista de tus inmuebles anunciados y manejar actualizaciónes y eliminar inmuebles.</string>
     <string name="tv_management_title">Panel de Administración de Propietarios</string>
     <string name="tv_mortgage_adviser_calculation_guidance">La Hipoteca Checker calcula la hipoteca mensual por tener en consideración el precio del inmueble, el porcentaje del depósito, la duración del préstamo y la tasa de interés.</string>

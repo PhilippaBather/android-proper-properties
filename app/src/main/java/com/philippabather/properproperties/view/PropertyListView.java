@@ -19,6 +19,7 @@ import com.philippabather.properproperties.adapter.SalePropertyAdapter;
 import com.philippabather.properproperties.contract.PropertyListContract;
 import com.philippabather.properproperties.domain.RentalFavourite;
 import com.philippabather.properproperties.domain.RentalProperty;
+import com.philippabather.properproperties.domain.Role;
 import com.philippabather.properproperties.domain.SaleFavourite;
 import com.philippabather.properproperties.domain.SaleProperty;
 import com.philippabather.properproperties.presenter.PropertyListPresenter;
@@ -74,8 +75,8 @@ public class PropertyListView extends AppCompatActivity implements PropertyListC
         recyclerViewRental.setLayoutManager(linearLayoutManager);
 
         // create adapters
-        rentalPropertyAdapter = new RentalPropertyAdapter(rentalPropertyList, rentalFavourites);
-        salePropertyAdapter = new SalePropertyAdapter(salePropertyList, saleFavourites);
+        rentalPropertyAdapter = new RentalPropertyAdapter(rentalPropertyList, rentalFavourites, Role.CLIENT, 0);
+        salePropertyAdapter = new SalePropertyAdapter(salePropertyList, saleFavourites, Role.CLIENT, 0);
         recyclerViewRental.setAdapter(rentalPropertyAdapter);
         recyclerViewSale.setAdapter(salePropertyAdapter);
 

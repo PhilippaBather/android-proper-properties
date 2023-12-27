@@ -8,9 +8,11 @@ import java.util.Set;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface PropertyApiInterface {
@@ -41,4 +43,26 @@ public interface PropertyApiInterface {
     @Headers({"Accept: application/json"})
     @POST("/properties/sale/{proprietorId}")
     Call<SaleProperty> saveSaleProperty(@Path(value = "proprietorId") long proprietorId, @Body SaleProperty saleProperty);
+
+    @Headers({"Accept: application/json"})
+    @DELETE("/properties/rental/{propertyId}")
+    Call<Void> deleteRentalPropertyById(@Path(value = "propertyId") long propertyId);
+
+    @Headers({"Accept: application/json"})
+    @DELETE("properties/sale/{propertyId}")
+    Call<Void> deleteSalePropertyById(@Path(value = "propertyId") long propertyId);
+
+    @Headers({"Accept: application/json"})
+    @PUT("/properties/rental/{propertyId}")
+    Call<RentalProperty> updateRentalPropertyById(@Path(value = "propertyId") long propertyId, @Body RentalProperty rentalProperty);
+
+    @Headers({"Accept: application/json"})
+    @PUT("/properties/sale/{propertyId}")
+    Call<SaleProperty> updateSalePropertyById(@Path(value = "propertyId") long propertyId, @Body SaleProperty saleProperty);
+
+    @Headers({"Accept: application/json"})
+    @GET("/users/proprietors/{username}/{password}")
+    Call<Proprietor> getProprietorByUsernameAndPassword(@Path(value = "username") String username, @Path(value = "password") String password);
+
+
 }

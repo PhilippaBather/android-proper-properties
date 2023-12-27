@@ -5,7 +5,7 @@ import com.philippabather.properproperties.domain.Proprietor;
 import com.philippabather.properproperties.model.OwnerModel;
 import com.philippabather.properproperties.view.OwnerPropertyView;
 
-public class OwnerPresenter implements OwnerContract.Presenter, OwnerContract.Model.OnLoadPropertiesListener {
+public class OwnerPresenter implements OwnerContract.Presenter, OwnerContract.Model.OnLoadProprietorListener {
 
     private final OwnerModel model;
 
@@ -22,7 +22,7 @@ public class OwnerPresenter implements OwnerContract.Presenter, OwnerContract.Mo
     }
 
     @Override
-    public void loadProprietor(long proprietorId) {
+    public void loadProprietorById(long proprietorId) {
             model.loadProprietor(this, proprietorId);
     }
 

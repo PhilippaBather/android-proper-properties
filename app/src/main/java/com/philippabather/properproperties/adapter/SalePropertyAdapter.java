@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.philippabather.properproperties.R;
+import com.philippabather.properproperties.domain.Role;
 import com.philippabather.properproperties.domain.SaleFavourite;
 import com.philippabather.properproperties.domain.SaleProperty;
 
@@ -19,19 +20,23 @@ import java.util.List;
 
 public class SalePropertyAdapter extends RecyclerView.Adapter<SalePropertyHolder> {
 
-    private List<SaleProperty> properties;
-    private List<SaleFavourite> favourites;
+    private final List<SaleProperty> properties;
+    private final List<SaleFavourite> favourites;
+    private final Role role;
+    private long proprietorId;
 
-    public SalePropertyAdapter(List<SaleProperty> properties, List<SaleFavourite> favourites) {
+    public SalePropertyAdapter(List<SaleProperty> properties, List<SaleFavourite> favourites, Role role, long proprietorId) {
         this.properties = properties;
         this.favourites = favourites;
+        this.role = role;
+        this.proprietorId = proprietorId;
     }
 
     @NonNull
     @Override
     public SalePropertyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_property_item, parent, false);
-        return new SalePropertyHolder(view, properties, favourites);
+        return new SalePropertyHolder(view, properties, favourites, role, proprietorId);
     }
 
     @Override

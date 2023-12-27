@@ -1,5 +1,9 @@
 package com.philippabather.properproperties.view;
 
+import static com.philippabather.properproperties.constants.Constants.BUNDLE_ARGUMENT_PARCELABLE_LIST_RENTALS;
+import static com.philippabather.properproperties.constants.Constants.BUNDLE_ARGUMENT_PARCELABLE_LIST_SALES;
+import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_PROPRIETOR_ID;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.philippabather.properproperties.R;
 import com.philippabather.properproperties.contract.OwnerContract;
+import com.philippabather.properproperties.domain.PropertyStatus;
 import com.philippabather.properproperties.domain.Proprietor;
 import com.philippabather.properproperties.domain.RentalProperty;
 import com.philippabather.properproperties.domain.SaleProperty;
@@ -22,6 +27,7 @@ import com.philippabather.properproperties.presenter.OwnerPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class OwnerPropertyView extends AppCompatActivity implements OwnerContract.View {
     private RadioButton rbtnBuy;
@@ -30,6 +36,7 @@ public class OwnerPropertyView extends AppCompatActivity implements OwnerContrac
     private FloatingActionButton flBtnAddProperty;
 
     private Proprietor proprietor;
+    private long proprietorId;
     private List<RentalProperty> rentalPropertyList;
     private List<SaleProperty> salePropertyList;
 
@@ -54,11 +61,12 @@ public class OwnerPropertyView extends AppCompatActivity implements OwnerContrac
         rentalFragment = new RentalFragment();
         saleFragment = new SaleFragment();
 
-        presenter = new OwnerPresenter(this);
+        Intent intent = getIntent();
+        proprietorId = Long.parseLong(Objects.requireNonNull(intent.getStringExtra(INTENT_EXTRA_PROPRIETOR_ID)));
 
-        // TODO - quita hardcoding en la segunda entrega (por la implementación de login)
-        long userId = 1;
-        presenter.loadProprietor(userId);
+        presenter = new OwnerPresenter(this);
+        presenter.loadProprietorById(proprietorId);
+
     }
 
     private void findViews() {
@@ -71,12 +79,12 @@ public class OwnerPropertyView extends AppCompatActivity implements OwnerContrac
     private void handleSearchType(RadioGroup grp, int id) {
         if (rbtnRent.isChecked()) {
             rentalPropertyList.clear();
-
             // crea un bundle para enviar datos al Fragment
             rentalPropertyList = proprietor.getRentalPropertyList();
             ArrayList<RentalProperty> rentals = new ArrayList<RentalProperty>(rentalPropertyList);
             Bundle bundle = new Bundle();
-            bundle.putParcelableArrayList("rentals", rentals);
+            bundle.putLong(INTENT_EXTRA_PROPRIETOR_ID, proprietorId);
+            bundle.putParcelableArrayList(BUNDLE_ARGUMENT_PARCELABLE_LIST_RENTALS, rentals);
             rentalFragment.setArguments(bundle);
             // infla el Fragment, remplazando el otro fragment si existe
             getSupportFragmentManager().beginTransaction().replace(R.id.fl_frag_management, rentalFragment).commit();
@@ -86,9 +94,9 @@ public class OwnerPropertyView extends AppCompatActivity implements OwnerContrac
             salePropertyList = proprietor.getSalePropertyList();
             ArrayList<SaleProperty> sales = new ArrayList<>(salePropertyList);
             Bundle bundle = new Bundle();
-            bundle.putParcelableArrayList("sales", sales);
+            bundle.putLong(INTENT_EXTRA_PROPRIETOR_ID, proprietorId);
+            bundle.putParcelableArrayList(BUNDLE_ARGUMENT_PARCELABLE_LIST_SALES, sales);
             saleFragment.setArguments(bundle);
-
             // infla el Fragment, remplazando el otro fragment si existe
             getSupportFragmentManager().beginTransaction().replace(R.id.fl_frag_management, saleFragment).commit();
         }
@@ -129,6 +137,7 @@ public class OwnerPropertyView extends AppCompatActivity implements OwnerContrac
 
     private void addProperty() {
         Intent intent = new Intent(this, PropertyRegistrationView.class);
+        intent.putExtra(INTENT_EXTRA_PROPRIETOR_ID, String.valueOf(proprietor.getId()));
         startActivity(intent);
     }
 }
