@@ -13,19 +13,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProperProperties"
-        tools:targetApi="31"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
         <activity
             android:name=".view.MortgageCheckerView"
             android:exported="false" />
         <activity
             android:name=".view.PropertyListView"
             android:exported="false" />
-        <activity android:name=".view.PropertyDetailView"
+        <activity
+            android:name=".view.PropertyDetailView"
             android:exported="false" />
-        <activity android:name=".view.OwnerPropertyView"
+        <activity
+            android:name=".view.OwnerPropertyView"
             android:exported="false" />
-        <activity android:name=".view.PropertyRegistrationView"
+        <activity
+            android:name=".view.PropertyRegistrationView"
+            android:exported="false" />
+        <activity
+            android:name=".view.PropertyUpdateView"
             android:exported="false" />
         <activity
             android:name=".view.HomeView"
