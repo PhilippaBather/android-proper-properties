@@ -11,13 +11,16 @@ public interface LoginContract {
             void onLoadProprietorError(String msg);
 
         }
+
+        void loadProprietorByUsernameAndPassword(OnLoadProprietorListener listener, String username, String password);
     }
 
     interface View {
-
+        void getProprietor(Proprietor proprietor);
+        void showMessage(String msg);
     }
 
     interface Presenter {
-
+        void loadProprietorByUsernameAndPassword(String username, String password);
     }
 }
