@@ -60,4 +60,9 @@ public interface PropertyApiInterface {
     @PUT("/properties/sale/{propertyId}")
     Call<SaleProperty> updateSalePropertyById(@Path(value = "propertyId") long propertyId, @Body SaleProperty saleProperty);
 
+    @Headers({"Accept: application/json"})
+    @GET("/users/proprietors/{username}/{password}")
+    Call<Proprietor> getProprietorByUsernameAndPassword(@Path(value = "username") String username, @Path(value = "password") String password);
+
+
 }
