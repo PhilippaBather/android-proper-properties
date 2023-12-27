@@ -1,6 +1,5 @@
 package com.philippabather.properproperties.domain;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class Proprietor {
@@ -8,8 +7,6 @@ public class Proprietor {
     private String name;
     private String surname;
     private String email;
-//    private String accountCreated; // fecha de la creacíón de la cuenta
-//    private LocalDateTime accountCreatedLD;
     private long id;
     private int numProperties;
     private boolean isAgency;
@@ -23,7 +20,6 @@ public class Proprietor {
         this.name = name;
         this.surname = surname;
         this.email = email;
-//        this.accountCreatedLD = accountCreated;
         this.id = id;
         this.numProperties = numProperties;
         this.isAgency = isAgency;
@@ -46,10 +42,6 @@ public class Proprietor {
     public String getEmail() {
         return email;
     }
-
-//    public LocalDateTime getAccountCreated() {
-//        return accountCreated;
-//    }
 
     public long getId() {
         return id;
