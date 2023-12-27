@@ -6,9 +6,19 @@ public class Constants {
     public static final char cross = '\u274C';
     public static final char euro = '\u20AC';
 
+    // bundle arguments
+    public static final String BUNDLE_ARGUMENT_PARCELABLE_LIST_RENTALS = "rentals";
+    public static final String BUNDLE_ARGUMENT_PARCELABLE_LIST_SALES = "sales";
+    public static final String BUNDLE_ARGUMENT_SALE = "sale";
+    public static final String BUNDLE_ARGUMENT_RENTAL = "rental";
+
     // intent extras
-    public static final String INTENT_EXTRA_RENTAL_ID = "rental_property_id";
-    public static final String INTENT_EXTRA_SALE_ID = "sale_property_id";
+    public static final String INTENT_EXTRA_PROPERTY = "property";
+    public static final String INTENT_EXTRA_PROPRIETOR_ID = "proprietorId";
+    public static final String INTENT_EXTRA_PROPERTY_STATUS = "propertyStatus";
+    public static final String INTENT_EXTRA_RENTAL_ID = "rentalPropertyId";
+    public static final String INTENT_EXTRA_SALE_ID = "salePropertyId";
+
 
     // PropertyType Strings: inglés y español
     public static final String PROPERTY_TYPE_COMMERICAL_EN = "COMMERCIAL";
@@ -17,4 +27,7 @@ public class Constants {
     public static final String PROPERTY_TYPE_FLAT_ES = "PISO";
     public static final String PROPERTY_TYPE_HOUSE_EN = "HOUSE";
     public static final String PROPERTY_TYPE_HOUSE_ES = "CASA";
+
+    // información para el usuario
+    public static final String LOGIN_ERROR = "ERROR LOGGING IN";
 }
