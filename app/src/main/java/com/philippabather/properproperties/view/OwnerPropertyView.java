@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.philippabather.properproperties.R;
 import com.philippabather.properproperties.contract.OwnerContract;
 import com.philippabather.properproperties.domain.Proprietor;
@@ -26,6 +27,7 @@ public class OwnerPropertyView extends AppCompatActivity implements OwnerContrac
     private RadioButton rbtnBuy;
     private RadioButton rbtnRent;
     private RadioGroup radioGroup;
+    private FloatingActionButton flBtnAddProperty;
 
     private Proprietor proprietor;
     private List<RentalProperty> rentalPropertyList;
@@ -43,6 +45,7 @@ public class OwnerPropertyView extends AppCompatActivity implements OwnerContrac
         setContentView(R.layout.activity_property_management);
         findViews();
         radioGroup.setOnCheckedChangeListener(this::handleSearchType);
+        flBtnAddProperty.setOnClickListener(v -> addProperty());
 
         rentalPropertyList = new ArrayList<>();
         salePropertyList = new ArrayList<>();
@@ -62,6 +65,7 @@ public class OwnerPropertyView extends AppCompatActivity implements OwnerContrac
         rbtnBuy = findViewById(R.id.rbtn_search_map_buy);
         rbtnRent = findViewById(R.id.rbtn_search_map_rent);
         radioGroup = findViewById(R.id.rg_search_map_search_type);
+        flBtnAddProperty = findViewById(R.id.fl_btn_add_property);
     }
 
     private void handleSearchType(RadioGroup grp, int id) {
@@ -121,5 +125,10 @@ public class OwnerPropertyView extends AppCompatActivity implements OwnerContrac
     @Override
     public void showMessage(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+    }
+
+    private void addProperty() {
+        Intent intent = new Intent(this, PropertyRegistrationView.class);
+        startActivity(intent);
     }
 }

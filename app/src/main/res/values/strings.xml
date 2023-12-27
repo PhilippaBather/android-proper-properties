@@ -1,31 +1,55 @@
 <resources>
     <string name="app_name">ProperProperties</string>
-    <string name="img_landing_page_primary_image">A luxury, contemporary villa with pool</string>
-    <string name="tv_landing_page_description_search_properties"><b>Buscar inmuebles y locales</b> de un amplio abanico en venta y alquiler</string>
-    <string name="tv_landing_page_description_publish_property"><b>Publicar tu inmueble</b> sin complicaciones y gratis</string>
-    <string name="tv_landing_page_description_mortgage_checker"><b>Comprobar hipotecas</b> con nuestro Mortgage Adviser.</string>
-    <string name="menu_item_mortgage_adviser">Hipoteca Adviser</string>
-    <string name="menu_item_home" translatable="false">Home</string>
-    <string name="tv_mortgage_adviser_title">Hipoteca Checker</string>
-    <string name="txt_fld_mortgage_adviser_house_price">Precio del Inmueble</string>
-    <string name="txt_fld_mortgage_adviser_deposit">Depósito</string>
-    <string name="txt_fld_mortgage_adviser_deposit_percent" translatable="false">%</string>
-    <string name="txt_fld_mortgage_adviser_loan_term">Plazo del Préstamo</string>
-    <string name="txt_fld_mortgage_adviser_interest_rate">Tasa de Interés</string>
-    <string name="txt_fld_mortgage_adviser_postcode">Código Postal</string>
-    <string name="btn_submit" translatable="false">Submit</string>
-    <string name="tv_mortgage_adviser_calculation_guidance">La Hipoteca Checker calcula la hipoteca mensual por tener en consideración el precio del inmueble, el porcentaje del depósito, la duración del préstamo y la tasa de interés.</string>
-    <string name="tv_mortgage_adviser_result">cada mes</string>
+    <string name="api_msg_post">Inmueble Añadido</string>
+    <string name="btn_add">Añadir</string>
+    <string name="btn_add_property">Añade un inmueble</string>
+    <string name="btn_back">Volver</string>
     <string name="btn_calculate">Calcula</string>
+    <string name="btn_submit" translatable="false">Submit</string>
+    <string name="cb_add_property_furniture">Muebles</string>
+    <string name="cb_add_property_leasehold">Arrendado</string>
+    <string name="cb_add_property_lift">Acensor</string>
+    <string name="cb_add_property_parking">Parking</string>
+    <string name="cb_add_property_pets">Mascotas</string>
+    <string name="et_add_property_hint_bathrooms">Número de baños</string>
+    <string name="et_add_property_hint_bedrooms">Número de habitaciones</string>
+    <string name="et_add_property_hint_deposit">Depósito</string>
+    <string name="et_add_property_hint_description">Descripción del inmueble</string>
+    <string name="et_add_property_hint_min_ten">Mínima duración del alquiler</string>
+    <string name="et_add_property_hint_price">Precio</string>
+    <string name="et_add_property_hint_size">Tamaño en metros cuadrados</string>
+    <string name="img_btn_map_search_view_item_favourite">Favorito</string>
+    <string name="img_btn_map_search_item_contact">Contacto</string>
+    <string name="img_landing_page_primary_image">A luxury, contemporary villa with pool</string>
+    <string name="img_search_map_item_view">Imagen del inmueble</string>
+    <string name="menu_item_home" translatable="false">Home</string>
+    <string name="menu_item_mortgage_adviser">Hipoteca Adviser</string>
     <string name="menu_item_search_properties">Busca Inmuebles</string>
-    <string name="tv_search_map_title">Busca Inmuebles</string>
     <string name="rbtn_search_map_rent">Alquiler</string>
     <string name="rbtn_search_map_buy">Comprar</string>
-    <string name="img_search_map_item_view">Imagen del inmueble</string>
-    <string name="img_btn_map_search_item_contact">Contacto</string>
-    <string name="img_btn_map_search_view_item_favourite">Favorito</string>
-    <string name="tv_management_title">Panel de Administración de Propietarios</string>
+    <string name="tv_add_property_deposit">Depósito</string>
+    <string name="tv_add_property_description">Descripción</string>
+    <string name="tv_add_property_min_tenancy">Mín. alquiler</string>
+    <string name="tv_add_property_num_bathrooms">Núm. baños</string>
+    <string name="tv_add_property_num_bedrooms">Núm hab.</string>
+    <string name="tv_add_property_price_pm">Precio p/mes</string>
+    <string name="tv_add_property_sale_price">Precio</string>
+    <string name="tv_add_property_size">Tamaño (m2)</string>
+    <string name="tv_add_property_title">Añadir un Inmueble</string>
+    <string name="tv_add_property_type">Tipo</string>
+    <string name="tv_landing_page_description_mortgage_checker"><b>Comprobar hipotecas</b> con nuestro Mortgage Adviser.</string>
+    <string name="tv_landing_page_description_publish_property"><b>Publicar tu inmueble</b> sin complicaciones y gratis</string>
+    <string name="tv_landing_page_description_search_properties"><b>Buscar inmuebles y locales</b> de un amplio abanico en venta y alquiler</string>
     <string name="tv_management_description">Aquí se puede mirar una lista de tus inmuebles anunciados y manejar actualizaciónes y eliminar inmuebles.</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="fa_btn_add_property">Añade un inmueble</string>
+    <string name="tv_management_title">Panel de Administración de Propietarios</string>
+    <string name="tv_mortgage_adviser_calculation_guidance">La Hipoteca Checker calcula la hipoteca mensual por tener en consideración el precio del inmueble, el porcentaje del depósito, la duración del préstamo y la tasa de interés.</string>
+    <string name="tv_mortgage_adviser_result">cada mes</string>
+    <string name="tv_mortgage_adviser_title">Hipoteca Checker</string>
+    <string name="tv_search_map_title">Busca Inmuebles</string>
+    <string name="txt_fld_mortgage_adviser_deposit">Depósito</string>
+    <string name="txt_fld_mortgage_adviser_deposit_percent" translatable="false">%</string>
+    <string name="txt_fld_mortgage_adviser_house_price">Precio del Inmueble</string>
+    <string name="txt_fld_mortgage_adviser_interest_rate">Tasa de Interés</string>
+    <string name="txt_fld_mortgage_adviser_loan_term">Plazo del Préstamo</string>
+    <string name="txt_fld_mortgage_adviser_postcode">Código Postal</string>
 </resources>

@@ -78,13 +78,13 @@
         tools:layout_editor_absoluteX="-24dp"></FrameLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton4"
+        android:id="@+id/fl_btn_add_property"
         android:layout_width="wrap_content"
         android:layout_height="416dp"
         android:layout_margin="20dp"
         android:layout_weight="1"
         android:clickable="true"
-        android:contentDescription="@string/fa_btn_add_property"
+        android:contentDescription="@string/btn_add_property"
         android:src="@android:drawable/ic_input_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />

@@ -6,7 +6,6 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 public class SaleProperty implements Parcelable {
 
@@ -15,51 +14,44 @@ public class SaleProperty implements Parcelable {
     private PropertyStatus propertyStatus;
 
     private PropertyType propertyType;
-
     private double latitude;
-
     private double longitude;
-
     private int metresSqr;
-
     private String description;
-
-    private String availableFrom; // disponibleDesde
-    private LocalDate availableFromLD;
     private int numBedrooms;
-
     private int numBathrooms;
     private boolean isParking;
     private boolean isLift;
     private BigDecimal price;
     private boolean isLeasehold;
-    private String constructionDate;
-    private LocalDate constructionDateLD;
     private boolean isFavourite;
 
-    public SaleProperty(long id, PropertyStatus propertyStatus, PropertyType propertyType,
+    public SaleProperty(PropertyStatus propertyStatus, PropertyType propertyType,
                         double latitude, double longitude, int metresSqr, String description,
-                        String availableFrom, LocalDate availableFromLD, int numBedrooms,
-                        int numBathrooms, boolean isParking, boolean isLift, BigDecimal price,
-                        boolean isLeasehold, String constructionDate, LocalDate constructionDateLD) {
-        this.id = id;
+                        int numBedrooms, int numBathrooms, boolean isParking, boolean isLift,
+                        BigDecimal price, boolean isLeasehold) {
         this.propertyStatus = propertyStatus;
         this.propertyType = propertyType;
         this.latitude = latitude;
         this.longitude = longitude;
         this.metresSqr = metresSqr;
         this.description = description;
-        this.availableFrom = availableFrom;
-        this.availableFromLD = availableFromLD;
         this.numBedrooms = numBedrooms;
         this.numBathrooms = numBathrooms;
         this.isParking = isParking;
         this.isLift = isLift;
         this.price = price;
         this.isLeasehold = isLeasehold;
-        this.constructionDate = constructionDate;
-        this.constructionDateLD = constructionDateLD;
         this.isFavourite = false;
+    }
+
+    public SaleProperty(long id, PropertyStatus propertyStatus, PropertyType propertyType,
+                        double latitude, double longitude, int metresSqr, String description,
+                        int numBedrooms, int numBathrooms, boolean isParking, boolean isLift,
+                        BigDecimal price, boolean isLeasehold) {
+        this(propertyStatus, propertyType, latitude, longitude, metresSqr, description, numBedrooms,
+                numBathrooms, isParking, isLift, price, isLeasehold);
+        this.id = id;
     }
 
     protected SaleProperty(Parcel in) {
@@ -68,13 +60,11 @@ public class SaleProperty implements Parcelable {
         longitude = in.readDouble();
         metresSqr = in.readInt();
         description = in.readString();
-        availableFrom = in.readString();
         numBedrooms = in.readInt();
         numBathrooms = in.readInt();
         isParking = in.readByte() != 0;
         isLift = in.readByte() != 0;
         isLeasehold = in.readByte() != 0;
-        constructionDate = in.readString();
         isFavourite = in.readByte() != 0;
     }
 
@@ -102,13 +92,11 @@ public class SaleProperty implements Parcelable {
         parcel.writeDouble(longitude);
         parcel.writeInt(metresSqr);
         parcel.writeString(description);
-        parcel.writeString(availableFrom);
         parcel.writeInt(numBedrooms);
         parcel.writeInt(numBathrooms);
         parcel.writeByte((byte) (isParking ? 1 : 0));
         parcel.writeByte((byte) (isLift ? 1 : 0));
         parcel.writeByte((byte) (isLeasehold ? 1 : 0));
-        parcel.writeString(constructionDate);
         parcel.writeByte((byte) (isFavourite ? 1 : 0));
     }
 
