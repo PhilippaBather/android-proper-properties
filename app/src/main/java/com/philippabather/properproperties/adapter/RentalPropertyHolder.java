@@ -89,7 +89,7 @@ public class RentalPropertyHolder extends RecyclerView.ViewHolder {
     }
 
     private void contactProprietor(List<RentalProperty> properties) {
-        Toast.makeText(parentView.getContext(), "Contacted owner", Toast.LENGTH_LONG).show();
+        Toast.makeText(parentView.getContext(), R.string.toast_contacted_owner, Toast.LENGTH_LONG).show();
     }
 
     private void addToFavourites(List<RentalProperty> properties) {
