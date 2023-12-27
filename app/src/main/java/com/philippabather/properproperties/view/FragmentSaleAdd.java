@@ -1,21 +1,12 @@
 package com.philippabather.properproperties.view;
 
-import static com.philippabather.properproperties.constants.Constants.PROPERTY_TYPE_COMMERICAL_EN;
-import static com.philippabather.properproperties.constants.Constants.PROPERTY_TYPE_COMMERICAL_ES;
-import static com.philippabather.properproperties.constants.Constants.PROPERTY_TYPE_FLAT_EN;
-import static com.philippabather.properproperties.constants.Constants.PROPERTY_TYPE_FLAT_ES;
-import static com.philippabather.properproperties.constants.Constants.PROPERTY_TYPE_HOUSE_EN;
-import static com.philippabather.properproperties.constants.Constants.PROPERTY_TYPE_HOUSE_ES;
 import static com.philippabather.properproperties.map.MapUtils.initializePointAnnotationManager;
 import static com.philippabather.properproperties.map.MapUtils.setCameraPositionAndZoom;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,11 +17,13 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
 import com.mapbox.geojson.Point;
 import com.mapbox.maps.MapView;
 import com.mapbox.maps.Style;
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManager;
-import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions;
 import com.mapbox.maps.plugin.gestures.GesturesPlugin;
 import com.mapbox.maps.plugin.gestures.GesturesUtils;
 import com.mapbox.maps.plugin.gestures.OnMapClickListener;
@@ -38,7 +31,9 @@ import com.philippabather.properproperties.R;
 import com.philippabather.properproperties.domain.PropertyStatus;
 import com.philippabather.properproperties.domain.PropertyType;
 import com.philippabather.properproperties.domain.SaleProperty;
+import com.philippabather.properproperties.map.MapUtils;
 import com.philippabather.properproperties.presenter.PropertyRegistrationPresenter;
+import com.philippabather.properproperties.utils.SpinnerUtils;
 
 import java.math.BigDecimal;
 
@@ -66,24 +61,30 @@ public class FragmentSaleAdd extends Fragment implements AdapterView.OnItemSelec
     private MapView mapView;
     private PointAnnotationManager pointAnnotationManager; // MapBox libraries
     private GesturesPlugin gesturesPlugin;
+    private Bitmap bitmap;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sale_add, container, false);
         findViews(view);
+
+        bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.blue_marker_view);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(view.getContext(),
+                R.array.property_type, android.R.layout.simple_spinner_item);
+        SpinnerUtils.setUpSpinner(adapter, spPropertyType, this);
+        setUpMap();
         addOnClickListeners();
-
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(view.getContext(), R.array.property_type, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spPropertyType.setAdapter(adapter);
-        spPropertyType.setOnItemSelectedListener(this);
-
-        mapView.getMapboxMap().loadStyleUri(Style.MAPBOX_STREETS, this);
-        pointAnnotationManager = initializePointAnnotationManager(mapView);
-
-        gesturesPlugin = GesturesUtils.getGestures(mapView);
-        gesturesPlugin.addOnMapClickListener(this);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spPropertyType.setAdapter(adapter);
+//        spPropertyType.setOnItemSelectedListener(this);
+//
+//        mapView.getMapboxMap().loadStyleUri(Style.MAPBOX_STREETS, this);
+//        pointAnnotationManager = initializePointAnnotationManager(mapView);
+//
+//        gesturesPlugin = GesturesUtils.getGestures(mapView);
+//        gesturesPlugin.addOnMapClickListener(this);
 
         presenter = new PropertyRegistrationPresenter((PropertyRegistrationView) view.getContext());
 
@@ -138,17 +139,17 @@ public class FragmentSaleAdd extends Fragment implements AdapterView.OnItemSelec
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         Object itemAtPosition = adapterView.getItemAtPosition(i);
         String type = (String) itemAtPosition;
-        propertyType = setPropertyType(type);
+        propertyType = SpinnerUtils.setPropertyType(type);
     }
 
-    private PropertyType setPropertyType(String type) {
-        return switch(type.toUpperCase()) {
-            case PROPERTY_TYPE_COMMERICAL_EN, PROPERTY_TYPE_COMMERICAL_ES -> PropertyType.COMMERCIAL;
-            case PROPERTY_TYPE_FLAT_EN, PROPERTY_TYPE_FLAT_ES -> PropertyType.FLAT;
-            case PROPERTY_TYPE_HOUSE_EN, PROPERTY_TYPE_HOUSE_ES -> PropertyType.HOUSE;
-            default -> null;
-        };
-    }
+//    private PropertyType setPropertyType(String type) {
+//        return switch(type.toUpperCase()) {
+//            case PROPERTY_TYPE_COMMERICAL_EN, PROPERTY_TYPE_COMMERICAL_ES -> PropertyType.COMMERCIAL;
+//            case PROPERTY_TYPE_FLAT_EN, PROPERTY_TYPE_FLAT_ES -> PropertyType.FLAT;
+//            case PROPERTY_TYPE_HOUSE_EN, PROPERTY_TYPE_HOUSE_ES -> PropertyType.HOUSE;
+//            default -> null;
+//        };
+//    }
 
     public void onNothingSelected(AdapterView<?> parent) {
         propertyType = PropertyType.HOUSE;
@@ -166,6 +167,14 @@ public class FragmentSaleAdd extends Fragment implements AdapterView.OnItemSelec
         pointAnnotationManager.deleteAll();
     }
 
+    private void setUpMap() {
+        mapView.getMapboxMap().loadStyleUri(Style.MAPBOX_STREETS, this);
+        pointAnnotationManager = initializePointAnnotationManager(mapView);
+
+        gesturesPlugin = GesturesUtils.getGestures(mapView);
+        gesturesPlugin.addOnMapClickListener(this);
+    }
+
     @Override
     public void onStyleLoaded(@NonNull Style style) {
         setCameraPositionAndZoom(mapView);
@@ -175,15 +184,15 @@ public class FragmentSaleAdd extends Fragment implements AdapterView.OnItemSelec
         pointAnnotationManager.deleteAll();
         latitude = point.latitude();
         longitude = point.longitude();
-        addMarker(latitude, longitude);
+        MapUtils.addMarker(pointAnnotationManager, bitmap, latitude, longitude);
         return false;
     }
 
-    private void addMarker(double latitude, double longitude) {
-        PointAnnotationOptions pointAnnotationOptions = new PointAnnotationOptions()
-                .withPoint(Point.fromLngLat(longitude, latitude))
-                .withIconImage(BitmapFactory.decodeResource(getResources(), R.mipmap.blue_marker_view));
-        pointAnnotationManager.create(pointAnnotationOptions);
-    }
+//    private void addMarker(double latitude, double longitude) {
+//        PointAnnotationOptions pointAnnotationOptions = new PointAnnotationOptions()
+//                .withPoint(Point.fromLngLat(longitude, latitude))
+//                .withIconImage(BitmapFactory.decodeResource(getResources(), R.mipmap.blue_marker_view));
+//        pointAnnotationManager.create(pointAnnotationOptions);
+//    }
 
 }
