@@ -33,10 +33,9 @@ public class SaleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_sale, container, false);
+        View view = inflater.inflate(R.layout.fragment_recycler_view_sale, container, false);
 
         // recibe datos desde los argumentos pasados
-//        Bundle bundle = getArguments();
         assert getArguments() != null;
         salePropertyList = new ArrayList<>();
         salePropertyList = getArguments().getParcelableArrayList(BUNDLE_ARGUMENT_PARCELABLE_LIST_SALES);
