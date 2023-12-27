@@ -1,6 +1,6 @@
 package com.philippabather.properproperties.domain;
 
-public enum Roles {
+public enum Role {
 
     CLIENT,
     PROPRIETOR
