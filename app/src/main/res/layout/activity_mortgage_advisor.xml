@@ -1,0 +1,132 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_mortgage_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/tv_mortgage_adviser_title"
+        android:textColor="@color/barbie_pink"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/lin_lay_txt_input_lay_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/lin_lay_txt_input_lay_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_mortgage_title">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txt_input_lay_price_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="12dp"
+            android:textColorHint="@color/barbie_pink"
+            app:boxBackgroundColor="@color/mint">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txt_fld_mortgage_adviser_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/txt_fld_mortgage_adviser_house_price"
+                android:inputType="numberDecimal" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="12dp"
+            android:textColorHint="@color/barbie_pink"
+            app:boxBackgroundColor="@color/mint">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txt_fld_mortgage_adviser_deposit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/txt_fld_mortgage_adviser_deposit"
+                android:inputType="numberDecimal" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="12dp"
+            android:textColorHint="@color/barbie_pink"
+            app:boxBackgroundColor="@color/mint">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txt_fld_mortgage_adviser_loan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/txt_fld_mortgage_adviser_loan_term"
+                android:inputType="number" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="12dp"
+            android:textColorHint="@color/barbie_pink"
+            app:boxBackgroundColor="@color/mint">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txt_fld_mortgage_adviser_interest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/txt_fld_mortgage_adviser_interest_rate"
+                android:inputType="numberDecimal" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btn_mortgage_adviser_calculate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/btn_calculate" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_mortgage_adviser_quote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:textColor="@color/barbie_pink"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toTopOf="@id/tv_mortgage_adviser_guidance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lin_lay_txt_input_lay_container" />
+
+    <TextView
+        android:id="@+id/tv_mortgage_adviser_guidance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:text="@string/tv_mortgage_adviser_calculation_guidance"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_mortgage_adviser_quote" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
