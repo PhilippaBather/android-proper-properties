@@ -19,7 +19,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.philippabather.properproperties.R;
 import com.philippabather.properproperties.contract.OwnerContract;
-import com.philippabather.properproperties.domain.PropertyStatus;
 import com.philippabather.properproperties.domain.Proprietor;
 import com.philippabather.properproperties.domain.RentalProperty;
 import com.philippabather.properproperties.domain.SaleProperty;
@@ -51,7 +50,7 @@ public class OwnerPropertyView extends AppCompatActivity implements OwnerContrac
 
         setContentView(R.layout.activity_property_management);
         findViews();
-        radioGroup.setOnCheckedChangeListener(this::handleSearchType);
+        radioGroup.setOnCheckedChangeListener(this::handlePropertySelection);
         flBtnAddProperty.setOnClickListener(v -> addProperty());
 
         rentalPropertyList = new ArrayList<>();
@@ -76,7 +75,7 @@ public class OwnerPropertyView extends AppCompatActivity implements OwnerContrac
         flBtnAddProperty = findViewById(R.id.fl_btn_add_property);
     }
 
-    private void handleSearchType(RadioGroup grp, int id) {
+    private void handlePropertySelection(RadioGroup grp, int id) {
         if (rbtnRent.isChecked()) {
             rentalPropertyList.clear();
             // crea un bundle para enviar datos al Fragment

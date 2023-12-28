@@ -31,10 +31,9 @@ public class RentalFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_rental, container, false);
+        View view = inflater.inflate(R.layout.fragment_recycler_view_rental, container, false);
 
         // recibe datos desde los argumentos pasados
-//        Bundle bundle = getArguments();
         rentalPropertyList = new ArrayList<>();
         assert getArguments() != null;
         rentalPropertyList = getArguments().getParcelableArrayList(BUNDLE_ARGUMENT_PARCELABLE_LIST_RENTALS);
