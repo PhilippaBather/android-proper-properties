@@ -18,6 +18,11 @@ import com.philippabather.properproperties.domain.SaleProperty;
 
 import java.util.List;
 
+/**
+ * SalePropertyAdapter - adaptador para manejar el RecyclerView para inmuebles vendidos.
+ *
+ * @author Philippa Bather
+ */
 public class SalePropertyAdapter extends RecyclerView.Adapter<SalePropertyHolder> {
 
     private final List<SaleProperty> properties;
@@ -45,11 +50,11 @@ public class SalePropertyAdapter extends RecyclerView.Adapter<SalePropertyHolder
         salePropertyHolder.ivPropertyImage.setBackgroundResource(R.drawable.house_placeholder_img);
         salePropertyHolder.tvPropertyTitle.setText(String.format("%s", saleProperty.getPropertyType()));
         salePropertyHolder.tvPropertyPrice.setText(String.format("%.2f %c", saleProperty.getPrice(), euro));
-        int numBedrooms = saleProperty.getNumBedrooms();
-        int metresSqr = saleProperty.getMetresSqr();
         boolean isLift = saleProperty.isLift();
+        int numBathrooms = saleProperty.getNumBathrooms();
+        int numBedrooms = saleProperty.getNumBedrooms();
         salePropertyHolder.tvPropertyDescription.setText(saleProperty.getDescription());
-        String overview = String.format("Bedrooms: %d\tm2: %d\tlift: %c", numBedrooms, metresSqr, (isLift ?  tick : cross));
+        String overview = String.format("Bedrooms: %d\tBathrooms: %d\tlift: %c", numBedrooms, numBathrooms, (isLift ?  tick : cross));
         salePropertyHolder.tvPropertyOverview.setText(overview);
 
         if (favourites != null) {
@@ -57,6 +62,11 @@ public class SalePropertyAdapter extends RecyclerView.Adapter<SalePropertyHolder
         }
     }
 
+    /**
+     * Estable los favoritos.
+     * @param rentalPropertyHolder - holder
+     * @param sale - inmueble para vender
+     */
     private void setFavourites(SalePropertyHolder rentalPropertyHolder, SaleProperty sale) {
         long rentalId = sale.getId();
         for (SaleFavourite favourite:

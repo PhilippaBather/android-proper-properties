@@ -18,6 +18,11 @@ import com.philippabather.properproperties.domain.Role;
 
 import java.util.List;
 
+/**
+ * RentalPropertyAdapter - adaptador para manejar el RecyclerView para inmuebles de alquiler.
+ *
+ * @author Philippa Bather
+ */
 public class RentalPropertyAdapter extends RecyclerView.Adapter<RentalPropertyHolder> {
 
     private final List<RentalProperty> properties;
@@ -41,15 +46,16 @@ public class RentalPropertyAdapter extends RecyclerView.Adapter<RentalPropertyHo
 
     @Override
     public void onBindViewHolder(@NonNull RentalPropertyHolder rentalPropertyHolder, int position) {
+        // establecer el texto para cada ítem
         RentalProperty rentalProperty = properties.get(position);
         rentalPropertyHolder.ivPropertyImage.setBackgroundResource(R.drawable.house_placeholder_img);
         rentalPropertyHolder.tvPropertyTitle.setText(String.format("%s : %s", rentalProperty.getPropertyStatus(), rentalProperty.getPropertyType()));
         rentalPropertyHolder.tvPropertyPrice.setText(String.format("%.2f %c p/m", rentalProperty.getRentPerMonth(), euro));
-        int numBedrooms = rentalProperty.getNumBedrooms();
-        int metresSqr = rentalProperty.getMetresSqr();
         boolean isLift = rentalProperty.isLift();
+        int numBathrooms = rentalProperty.getNumBathrooms();
+        int numBedrooms = rentalProperty.getNumBedrooms();
         rentalPropertyHolder.tvPropertyDescription.setText(rentalProperty.getDescription());
-        String overview = String.format("Bedrooms: %d\tm2: %d\tlift: %c", numBedrooms, metresSqr, (isLift ?  tick : cross));
+        String overview = String.format("Bedrooms: %d\tBathrooms: %d\tlift: %c", numBedrooms, numBathrooms, (isLift ?  tick : cross));
         rentalPropertyHolder.tvPropertyOverview.setText(overview);
 
         if (favourites != null) {
@@ -58,6 +64,11 @@ public class RentalPropertyAdapter extends RecyclerView.Adapter<RentalPropertyHo
 
     }
 
+    /**
+     * Establece los favoritos.
+     * @param rentalPropertyHolder - holder
+     * @param rental - inmueble de alquiler
+     */
     private void setFavourites(RentalPropertyHolder rentalPropertyHolder, RentalProperty rental) {
         long rentalId = rental.getId();
         for (RentalFavourite favourite:
