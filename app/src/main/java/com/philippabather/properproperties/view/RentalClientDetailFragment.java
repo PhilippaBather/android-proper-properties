@@ -23,6 +23,12 @@ import com.philippabather.properproperties.R;
 import com.philippabather.properproperties.domain.RentalProperty;
 import com.philippabather.properproperties.map.MapUtils;
 
+/**
+ * RentalClientDetailFragment - el fragmento para mostrar las detalles de un inmueble de alquiler
+ * seleccionado por el usuario.
+ *
+ * @author Philippa Bather
+ */
 public class RentalClientDetailFragment extends Fragment implements Style.OnStyleLoaded {
     private Button btnBack;
     private CheckBox cbPropertyFurnished;

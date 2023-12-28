@@ -15,6 +15,11 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
+/**
+ * PropertyApiInterface - contiene los mappings para GET, POST, PUT y DELETE requests.
+ *
+ * @author Philippa Bather
+ */
 public interface PropertyApiInterface {
 
     @Headers({"Accept: application/json"})

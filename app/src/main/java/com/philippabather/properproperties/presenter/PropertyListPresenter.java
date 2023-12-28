@@ -10,6 +10,11 @@ import com.philippabather.properproperties.view.PropertyListView;
 
 import java.util.List;
 
+/**
+ * PropertyListPresenter - presenter para listas de inmuebles.
+ *
+ * @author Philippa Bather
+ */
 public class PropertyListPresenter implements PropertyListContract.Presenter,
         PropertyListContract.Model.OnLoadPropertiesListener,
         PropertyListContract.Model.OnLoadFavouritesListener {

@@ -1,8 +1,13 @@
 package com.philippabather.properproperties.domain;
 
+/**
+ * PropertyType - tipo de inmueble
+ *
+ * @author Philippa Bather
+ */
 public enum PropertyType {
 
-    COMMERCIAL,
-    FLAT,
-    HOUSE,
+    COMMERCIAL, // local
+    FLAT, // piso
+    HOUSE, // casa
 }

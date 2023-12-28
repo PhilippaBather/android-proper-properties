@@ -7,6 +7,11 @@ import androidx.annotation.NonNull;
 
 import java.math.BigDecimal;
 
+/**
+ * Rental Property - la clase define un inmueble de alquiler; implementa Parcelable.
+ *
+ * @author Philippa Bather
+ */
 public class RentalProperty implements Parcelable {
 
     private long id;

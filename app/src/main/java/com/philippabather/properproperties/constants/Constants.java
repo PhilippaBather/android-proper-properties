@@ -1,5 +1,10 @@
 package com.philippabather.properproperties.constants;
 
+/**
+ * Constants - constantes para Strings y carácteres.
+ *
+ * @author Philippa Bather
+ */
 public class Constants {
 
     public static final char tick = '\u2713';
@@ -30,4 +35,8 @@ public class Constants {
 
     // información para el usuario
     public static final String LOGIN_ERROR = "ERROR LOGGING IN";
+
+    // log
+    public static final String LOG_PROPERTY_STATUS_ERROR = "Property Status not recognised.";
+    public static final String LOG_TAG_FRAGMENT_ERROR = "fragmentError";
 }

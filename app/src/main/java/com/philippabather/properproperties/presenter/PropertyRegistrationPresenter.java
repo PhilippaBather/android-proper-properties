@@ -6,6 +6,11 @@ import com.philippabather.properproperties.domain.SaleProperty;
 import com.philippabather.properproperties.model.PropertyRegistrationModel;
 import com.philippabather.properproperties.view.PropertyRegistrationView;
 
+/**
+ * PropertyRegistrationPresenter - presenter para la registración de inmuebles.
+ *
+ * @author Philippa Bather
+ */
 public class PropertyRegistrationPresenter implements PropertyRegistrationContract.Presenter,
         PropertyRegistrationContract.Model.OnRegisterPropertyListener {
 

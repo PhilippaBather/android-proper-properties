@@ -6,6 +6,11 @@ import androidx.room.RoomDatabase;
 import com.philippabather.properproperties.domain.RentalFavourite;
 import com.philippabather.properproperties.domain.SaleFavourite;
 
+/**
+ * AppLocalDB - clase abstracta contiendeo las definiciones de métodos para el base de datos local (Rooms).
+ *
+ * @author Philippa Bather
+ */
 @Database(entities = {RentalFavourite.class, SaleFavourite.class}, version = 3)
 public abstract class AppLocalDB extends RoomDatabase {
         public abstract RentalPropertyDao rentalPropertyDao();

@@ -23,7 +23,12 @@ import com.philippabather.properproperties.R;
 import com.philippabather.properproperties.domain.SaleProperty;
 import com.philippabather.properproperties.map.MapUtils;
 
-
+/**
+ * SaleClientDetailFragment - el fragmento para mostrar las detalles de un inmueble para vender
+ * seleccionado por el usuario.
+ *
+ * @author Philippa Bather
+ */
 public class SaleClientDetailFragment extends Fragment implements Style.OnStyleLoaded {
 
     private Button btnBack;

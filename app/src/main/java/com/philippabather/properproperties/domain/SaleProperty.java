@@ -7,6 +7,11 @@ import androidx.annotation.NonNull;
 
 import java.math.BigDecimal;
 
+/**
+ * Sale Property - la clase define un inmueble para vender; implementa Parcelable.
+ *
+ * @author Philippa Bather
+ */
 public class SaleProperty implements Parcelable {
 
     private long id;

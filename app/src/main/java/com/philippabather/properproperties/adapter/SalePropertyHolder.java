@@ -29,6 +29,11 @@ import com.philippabather.properproperties.view.PropertyUpdateView;
 
 import java.util.List;
 
+/**
+ * SalePropertyHolder - holder para manejar los ítemes de inmuebles para vender.
+ *
+ * @author Philippa Bather
+ */
 public class SalePropertyHolder extends RecyclerView.ViewHolder {
 
     private final View parentView;

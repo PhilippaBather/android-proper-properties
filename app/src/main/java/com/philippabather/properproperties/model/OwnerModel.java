@@ -16,6 +16,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * OwnerModel - model para manejar comunicación con el base de datos para conseguir datos de un usuario.
+ *
+ * @author Philippa Bather
+ */
 public class OwnerModel implements OwnerContract.Model {
 
     private final PropertyApiInterface api;

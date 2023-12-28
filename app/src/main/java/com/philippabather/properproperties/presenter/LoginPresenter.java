@@ -5,6 +5,11 @@ import com.philippabather.properproperties.domain.Proprietor;
 import com.philippabather.properproperties.model.LoginModel;
 import com.philippabather.properproperties.view.LoginView;
 
+/**
+ * LoginPresenter - presenter temporal para manejar el login.
+ *
+ * @author Philippa Bather
+ */
 public class LoginPresenter implements LoginContract.Presenter, LoginContract.Model.OnLoadProprietorListener {
 
     private final LoginModel model;

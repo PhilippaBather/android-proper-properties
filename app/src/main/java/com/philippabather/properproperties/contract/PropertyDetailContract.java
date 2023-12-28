@@ -3,6 +3,12 @@ package com.philippabather.properproperties.contract;
 import com.philippabather.properproperties.domain.RentalProperty;
 import com.philippabather.properproperties.domain.SaleProperty;
 
+/**
+ * PropertyDetailContract - el contrato para manejar comunicación con el DB para cojer datos de
+ * inmuebles de alquiler.
+ *
+ * @author Philippa Bather
+ */
 public interface PropertyDetailContract {
 
     public interface Model {

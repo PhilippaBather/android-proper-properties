@@ -3,6 +3,12 @@ package com.philippabather.properproperties.contract;
 import com.philippabather.properproperties.domain.RentalProperty;
 import com.philippabather.properproperties.domain.SaleProperty;
 
+/**
+ * PropertyRegistrationContract - el contrato para manejar comunicación con el DB para registrar datos
+ * de inmuebles de alquiler ('rental') y para vender ('sale').
+ *
+ * @author Philippa Bather
+ */
 public interface PropertyRegistrationContract {
 
     interface Model {

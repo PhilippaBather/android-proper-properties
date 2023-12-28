@@ -31,34 +31,38 @@ import com.mapbox.maps.plugin.gestures.OnMapClickListener;
 import com.philippabather.properproperties.R;
 import com.philippabather.properproperties.domain.PropertyStatus;
 import com.philippabather.properproperties.domain.PropertyType;
-import com.philippabather.properproperties.domain.RentalProperty;
+import com.philippabather.properproperties.domain.SaleProperty;
 import com.philippabather.properproperties.map.MapUtils;
 import com.philippabather.properproperties.presenter.PropertyRegistrationPresenter;
 import com.philippabather.properproperties.utils.SpinnerUtils;
 
 import java.math.BigDecimal;
 
-public class FragmentRentalAdd extends Fragment implements AdapterView.OnItemSelectedListener,
+/**
+ * SaleAddFragment - el fragmento para manejar la presentación para añadir un inmueble para vender.
+ *
+ * @author Philippa Bather
+ */
+public class SaleAddFragment extends Fragment implements AdapterView.OnItemSelectedListener,
         Style.OnStyleLoaded, OnMapClickListener {
 
     private Button btnAdd;
     private Button btnBack;
-    private CheckBox cbFurniture;
-    private CheckBox cbLift;
-    private CheckBox cbParking;
-    private CheckBox cbPets;
-    private EditText etDeposit;
+    private CheckBox cbHasLift;
+    private CheckBox cbIsLeasehold;
+    private CheckBox cbHasParking;
     private EditText etDescription;
-    private EditText etMinTenancy;
-    private EditText etNumBedrooms;
     private EditText etNumBathrooms;
+    private EditText etNumBedrooms;
     private EditText etPrice;
     private EditText etSize;
     private Spinner spPropertyType;
+
     private PropertyType propertyType;
     private double latitude;
     private double longitude;
     private long proprietorId;
+
     private PropertyRegistrationPresenter presenter;
 
     private MapView mapView;
@@ -69,10 +73,9 @@ public class FragmentRentalAdd extends Fragment implements AdapterView.OnItemSel
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_sale_add, container, false);
 
-
-        View view = inflater.inflate(R.layout.fragment_rental_add, container, false);
-
+        assert getArguments() != null;
         proprietorId = getArguments().getLong(INTENT_EXTRA_PROPRIETOR_ID);
 
         findViews(view);
@@ -80,24 +83,20 @@ public class FragmentRentalAdd extends Fragment implements AdapterView.OnItemSel
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(view.getContext(),
                 R.array.property_type, android.R.layout.simple_spinner_item);
         SpinnerUtils.setUpSpinner(adapter, spPropertyType, this);
-        addOnClickListeners();
         setUpMap();
-
+        addOnClickListeners();
         presenter = new PropertyRegistrationPresenter((PropertyRegistrationView) view.getContext());
 
         return view;
     }
 
-    private void findViews(View view) {
+    private void findViews(View view){
         btnAdd = view.findViewById(R.id.btn_add);
         btnBack = view.findViewById(R.id.btn_cancel);
-        cbFurniture = view.findViewById(R.id.cb_property_leasehold);
-        cbLift = view.findViewById(R.id.cb_property_lift);
-        cbParking = view.findViewById(R.id.cb_property_parking);
-        cbPets = view.findViewById(R.id.cb_property_pets);
-        etDeposit = view.findViewById(R.id.et_property_deposit);
+        cbHasLift = view.findViewById(R.id.cb_property_lift);
+        cbIsLeasehold = view.findViewById(R.id.cb_property_leasehold);
+        cbHasParking = view.findViewById(R.id.cb_property_parking);
         etDescription = view.findViewById(R.id.et_ml_property_description);
-        etMinTenancy = view.findViewById(R.id.et_property_min_tenancy);
         etNumBathrooms = view.findViewById(R.id.et_property_num_bathrooms);
         etNumBedrooms = view.findViewById(R.id.et_property_num_bedrooms);
         etPrice = view.findViewById(R.id.et_property_price);
@@ -108,34 +107,30 @@ public class FragmentRentalAdd extends Fragment implements AdapterView.OnItemSel
 
     private void addOnClickListeners() {
         btnAdd.setOnClickListener(this::addProperty);
-        btnBack.setOnClickListener(this::cancel);
-    }
-
-    private void cancel(View view) {
-        Intent intent = new Intent(view.getContext(), OwnerPropertyView.class);
-        intent.putExtra(INTENT_EXTRA_PROPRIETOR_ID, String.valueOf(proprietorId));
-        startActivity(intent);
+        btnBack.setOnClickListener(this::goBackToOwnerPropertyView);
     }
 
     private void addProperty(View view) {
-        BigDecimal deposit = new BigDecimal(etDeposit.getText().toString());
         BigDecimal price = new BigDecimal(etPrice.getText().toString());
-        boolean hasFurniture = cbFurniture.isChecked();
-        boolean isLift = cbLift.isChecked();
-        boolean isParking = cbParking.isChecked();
-        boolean isPets = cbPets.isChecked();
-        int minTen = Integer.parseInt(etMinTenancy.getText().toString());
+        boolean hasLift = cbHasLift.isChecked();
+        boolean hasParking = cbHasParking.isChecked();
+        boolean leasehold = cbIsLeasehold.isChecked();
         int numBathrooms = Integer.parseInt(etNumBathrooms.getText().toString());
         int numBedrooms = Integer.parseInt(etNumBedrooms.getText().toString());
         int size = Integer.parseInt(etSize.getText().toString());
         String description = etDescription.getText().toString();
 
-        RentalProperty rental = new RentalProperty(PropertyStatus.RENTAL, propertyType, latitude, longitude,
-                size, description, numBedrooms, numBathrooms, isParking, isLift,
-                price, deposit, minTen, hasFurniture, isPets);
 
-        presenter.createNewRentalProperty(proprietorId, rental);
+        SaleProperty sale = new SaleProperty(PropertyStatus.SALE, propertyType, latitude, longitude,
+                size, description, numBedrooms, numBathrooms, hasParking, hasLift, price, leasehold);
+
+        presenter.createNewSaleProperty(proprietorId, sale);
         resetViews();
+    }
+    private void goBackToOwnerPropertyView(View view) {
+        Intent intent = new Intent(view.getContext(), OwnerPropertyView.class);
+        intent.putExtra(INTENT_EXTRA_PROPRIETOR_ID, String.valueOf(proprietorId));
+        startActivity(intent);
     }
 
     @Override
@@ -150,13 +145,10 @@ public class FragmentRentalAdd extends Fragment implements AdapterView.OnItemSel
     }
 
     private void resetViews() {
-        cbFurniture.setChecked(false);
-        cbLift.setChecked(false);
-        cbParking.setChecked(false);
-        cbPets.setChecked(false);
-        etDeposit.setText("");
+        cbHasLift.setChecked(false);
+        cbIsLeasehold.setChecked(false);
+        cbHasParking.setChecked(false);
         etDescription.setText("");
-        etMinTenancy.setText("");
         etNumBathrooms.setText("");
         etNumBedrooms.setText("");
         etPrice.setText("");
@@ -176,7 +168,6 @@ public class FragmentRentalAdd extends Fragment implements AdapterView.OnItemSel
     public void onStyleLoaded(@NonNull Style style) {
         setCameraPositionAndZoom(mapView);
     }
-
     @Override
     public boolean onMapClick(@NonNull Point point) {
         pointAnnotationManager.deleteAll();
@@ -185,5 +176,4 @@ public class FragmentRentalAdd extends Fragment implements AdapterView.OnItemSel
         MapUtils.addMarker(pointAnnotationManager, bitmap, latitude, longitude);
         return false;
     }
-
 }

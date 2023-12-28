@@ -16,6 +16,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * PropertyDetailModel - model para manejar comunicación con el base de datos para conseguir datos
+ * de un inmueble.
+ *
+ * @author Philippa Bather
+ */
 public class PropertyDetailModel implements PropertyDetailContract.Model {
 
     private final PropertyApiInterface api;

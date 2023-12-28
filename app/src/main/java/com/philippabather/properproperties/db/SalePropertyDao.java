@@ -9,6 +9,11 @@ import com.philippabather.properproperties.domain.SaleFavourite;
 
 import java.util.List;
 
+/**
+ * SalePropertyDao - DAO para el base de datos local (Rooms) para inmuebles para vender.
+ *
+ * @author Philippa Bather
+ */
 @Dao
 public interface SalePropertyDao {
 

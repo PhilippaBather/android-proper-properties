@@ -15,14 +15,20 @@ import com.philippabather.properproperties.contract.PropertyRegistrationContract
 
 import java.util.Objects;
 
+/**
+ * PropertyRegistrationView - la actividad maneja la vista para registración de un inmueble por un
+ * propeitario.
+ *
+ * @author Philippa Bather
+ */
 public class PropertyRegistrationView extends AppCompatActivity implements PropertyRegistrationContract.View{
 
     private RadioButton rbtnBuy;
     private RadioButton rbtnRent;
     private RadioGroup rgAddProperty;
 
-    private FragmentRentalAdd rentalFragment;
-    private FragmentSaleAdd saleFragment;
+    private RentalAddFragment rentalFragment;
+    private SaleAddFragment saleFragment;
     private long proprietorId;
 
     @Override
@@ -36,8 +42,8 @@ public class PropertyRegistrationView extends AppCompatActivity implements Prope
         findViews();
         rgAddProperty.setOnCheckedChangeListener(this::handlePropertyType);
 
-        rentalFragment = new FragmentRentalAdd();
-        saleFragment = new FragmentSaleAdd();
+        rentalFragment = new RentalAddFragment();
+        saleFragment = new SaleAddFragment();
     }
 
     private void findViews() {

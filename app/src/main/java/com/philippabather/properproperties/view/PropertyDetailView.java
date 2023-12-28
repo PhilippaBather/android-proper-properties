@@ -22,6 +22,11 @@ import com.philippabather.properproperties.domain.RentalProperty;
 import com.philippabather.properproperties.domain.SaleProperty;
 import com.philippabather.properproperties.presenter.PropertyDetailPresenter;
 
+/**
+ * PropertyDetailView - la actividad maneja las detalles de un inmueble para un usuario.
+ *
+ * @author Philippa Bather
+ */
 public class PropertyDetailView extends AppCompatActivity implements PropertyDetailContract.View {
 
     private RentalClientDetailFragment rentalFragment;

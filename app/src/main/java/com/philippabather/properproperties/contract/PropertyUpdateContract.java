@@ -1,9 +1,15 @@
 package com.philippabather.properproperties.contract;
 
 import com.philippabather.properproperties.domain.PropertyStatus;
-import com.philippabather.properproperties.domain.PropertyType;
 import com.philippabather.properproperties.domain.RentalProperty;
 import com.philippabather.properproperties.domain.SaleProperty;
+
+/**
+ * PropertyUpdateContract -  el contrato para manejar comunicación con el DB para actualizar y
+ * eliminar datos de inmuebles  de alquiler ('rental') y para vender ('sale').
+ *
+ * @author Philippa
+ */
 
 public interface PropertyUpdateContract {
 

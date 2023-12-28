@@ -15,6 +15,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * LoginModel - model para el login temporal.
+ *
+ * @author Philippa Bather
+ */
 public class LoginModel implements LoginContract.Model {
 
     private final PropertyApiInterface api;

@@ -1,10 +1,12 @@
 package com.philippabather.properproperties.view;
 
-import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_PROPERTY;
 import static com.philippabather.properproperties.constants.Constants.BUNDLE_ARGUMENT_RENTAL;
 import static com.philippabather.properproperties.constants.Constants.BUNDLE_ARGUMENT_SALE;
+import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_PROPERTY;
 import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_PROPERTY_STATUS;
 import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_PROPRIETOR_ID;
+import static com.philippabather.properproperties.constants.Constants.LOG_PROPERTY_STATUS_ERROR;
+import static com.philippabather.properproperties.constants.Constants.LOG_TAG_FRAGMENT_ERROR;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,10 +24,15 @@ import com.philippabather.properproperties.domain.SaleProperty;
 
 import java.util.Objects;
 
+/**
+ * PropertyUpdateView - la actividad para maneja la vista de actualización de inmuebles.
+ *
+ * @author Philippa Bather
+ */
 public class PropertyUpdateView extends AppCompatActivity implements PropertyUpdateContract.View {
-    private FragmentRentalUpdate rentalUpdateFragment;
+    private RentalUpdateFragment rentalUpdateFragment;
 
-    private FragmentSaleUpdate saleUpdateFragment;
+    private SaleUpdateFragment saleUpdateFragment;
     private RentalProperty rental;
     private SaleProperty sale;
     private PropertyStatus propertyStatus;
@@ -46,7 +53,7 @@ public class PropertyUpdateView extends AppCompatActivity implements PropertyUpd
     private void goToFragment(Intent intent, PropertyStatus status) {
         if(PropertyStatus.RENTAL.equals(status)) {
             rental = intent.getParcelableExtra(INTENT_EXTRA_PROPERTY);
-            rentalUpdateFragment = new FragmentRentalUpdate();
+            rentalUpdateFragment = new RentalUpdateFragment();
             Bundle bundle = new Bundle();
             bundle.putLong(INTENT_EXTRA_PROPRIETOR_ID, proprietorId);
             bundle.putParcelable(BUNDLE_ARGUMENT_RENTAL, rental);
@@ -54,14 +61,14 @@ public class PropertyUpdateView extends AppCompatActivity implements PropertyUpd
             getSupportFragmentManager().beginTransaction().replace(R.id.fl_frag_management, rentalUpdateFragment).commit();
         } else if (PropertyStatus.SALE.equals(status)) {
             sale = intent.getParcelableExtra(INTENT_EXTRA_PROPERTY);
-            saleUpdateFragment = new FragmentSaleUpdate();
+            saleUpdateFragment = new SaleUpdateFragment();
             Bundle bundle = new Bundle();
             bundle.putLong(INTENT_EXTRA_PROPRIETOR_ID, proprietorId);
             bundle.putParcelable(BUNDLE_ARGUMENT_SALE, sale);
             saleUpdateFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.fl_frag_management, saleUpdateFragment).commit();
         } else {
-            Log.e("fragmentError", "Property Status not recognised.");
+            Log.e(LOG_TAG_FRAGMENT_ERROR, LOG_PROPERTY_STATUS_ERROR);
         }
     }
 

@@ -7,6 +7,11 @@ import com.philippabather.properproperties.domain.SaleProperty;
 import com.philippabather.properproperties.model.PropertyUpdateModel;
 import com.philippabather.properproperties.view.PropertyUpdateView;
 
+/**
+ * PropertyUpdatePresenter - presenter para las actualizaciones de inmuebles.
+ *
+ * @author Philippa Bather
+ */
 public class PropertyUpdatePresenter implements PropertyUpdateContract.Presenter,
         PropertyUpdateContract.Model.OnDeletePropertyListener,
         PropertyUpdateContract.Model.OnUpdatePropertyListener {

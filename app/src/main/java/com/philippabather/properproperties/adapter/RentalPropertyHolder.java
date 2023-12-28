@@ -29,6 +29,11 @@ import com.philippabather.properproperties.view.PropertyUpdateView;
 
 import java.util.List;
 
+/**
+ * RentalPropertyHolder - holder para manejar los ítemes de inmuebles para alquiler.
+ *
+ * @author Philippa Bather
+ */
 public class RentalPropertyHolder extends RecyclerView.ViewHolder {
 
     private final View parentView;
