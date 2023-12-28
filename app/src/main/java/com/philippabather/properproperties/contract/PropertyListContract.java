@@ -7,6 +7,12 @@ import com.philippabather.properproperties.domain.SaleProperty;
 
 import java.util.List;
 
+/**
+ * PropertyListContract - el contrato para manejar comunicación con el DB para cojer las listas
+ * de inmuebles de alquiler ('rental') y para vender ('sale')
+ *
+ * @Philippa Bather
+ */
 public interface PropertyListContract {
 
     interface Model {

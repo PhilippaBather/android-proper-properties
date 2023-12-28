@@ -2,6 +2,12 @@ package com.philippabather.properproperties.contract;
 
 import com.philippabather.properproperties.domain.Proprietor;
 
+/**
+ * OwnerContract - el contrato para manejar comunicación con el DB para cojer datos de un
+ * propietario ('owner').
+ *
+ * @Philippa Bather
+ */
 public interface OwnerContract {
 
     public interface Model {
