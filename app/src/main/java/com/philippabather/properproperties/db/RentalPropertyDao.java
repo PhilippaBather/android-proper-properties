@@ -9,6 +9,11 @@ import com.philippabather.properproperties.domain.RentalFavourite;
 
 import java.util.List;
 
+/**
+ * RentalPropertyDao - DAO para el base de datos local (Rooms) para inmuebles de alquiler.
+ *
+ * @author Philippa Bather
+ */
 @Dao
 public interface RentalPropertyDao {
 
