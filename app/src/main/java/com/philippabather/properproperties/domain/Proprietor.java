@@ -2,6 +2,11 @@ package com.philippabather.properproperties.domain;
 
 import java.util.List;
 
+/**
+ * Proprietor - clase define un propietario; implementa Parcelable.
+ *
+ * @author Philippa Bather
+ */
 public class Proprietor {
     private String username;
     private String name;

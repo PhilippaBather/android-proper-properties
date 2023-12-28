@@ -5,6 +5,12 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+/**
+ * SaleFavourite - clase define un favorito inmueble para vender; usado para guardar información
+ * en el base de datos local (Rooms) de favoritos.
+ *
+ * @author Philippa Bather
+ */
 @Entity
 public class SaleFavourite {
     @PrimaryKey

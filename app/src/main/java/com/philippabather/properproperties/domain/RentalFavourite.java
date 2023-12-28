@@ -5,6 +5,12 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+/**
+ * RentalFavourite - clase define un favorito inmueble de alquiler; usado para guardar información
+ * en el base de datos local (Rooms) de favoritos.
+ *
+ * @author Philippa Bather
+ */
 @Entity
 public class RentalFavourite {
 
