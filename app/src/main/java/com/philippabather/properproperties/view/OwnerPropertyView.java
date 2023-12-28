@@ -28,6 +28,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * OwnerPropertyView - la actividad maneja la página principal para un propietario.
+ *
+ * @author Philippa Bather
+ */
 public class OwnerPropertyView extends AppCompatActivity implements OwnerContract.View {
     private RadioButton rbtnBuy;
     private RadioButton rbtnRent;
@@ -39,8 +44,8 @@ public class OwnerPropertyView extends AppCompatActivity implements OwnerContrac
     private List<RentalProperty> rentalPropertyList;
     private List<SaleProperty> salePropertyList;
 
-    private RentalFragment rentalFragment;
-    private SaleFragment saleFragment;
+    private RecyclerViewRentalFragment recyclerViewRentalFragment;
+    private RecyclerViewSaleFragment recyclerViewSaleFragment;
 
     private OwnerPresenter presenter;
 
@@ -57,8 +62,8 @@ public class OwnerPropertyView extends AppCompatActivity implements OwnerContrac
         salePropertyList = new ArrayList<>();
 
         // create instances of fragments
-        rentalFragment = new RentalFragment();
-        saleFragment = new SaleFragment();
+        recyclerViewRentalFragment = new RecyclerViewRentalFragment();
+        recyclerViewSaleFragment = new RecyclerViewSaleFragment();
 
         Intent intent = getIntent();
         proprietorId = Long.parseLong(Objects.requireNonNull(intent.getStringExtra(INTENT_EXTRA_PROPRIETOR_ID)));
@@ -84,9 +89,9 @@ public class OwnerPropertyView extends AppCompatActivity implements OwnerContrac
             Bundle bundle = new Bundle();
             bundle.putLong(INTENT_EXTRA_PROPRIETOR_ID, proprietorId);
             bundle.putParcelableArrayList(BUNDLE_ARGUMENT_PARCELABLE_LIST_RENTALS, rentals);
-            rentalFragment.setArguments(bundle);
+            recyclerViewRentalFragment.setArguments(bundle);
             // infla el Fragment, remplazando el otro fragment si existe
-            getSupportFragmentManager().beginTransaction().replace(R.id.fl_frag_management, rentalFragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fl_frag_management, recyclerViewRentalFragment).commit();
         } else {
             salePropertyList.clear();
             // crea un bundle para enviar datos al Fragment
@@ -95,9 +100,9 @@ public class OwnerPropertyView extends AppCompatActivity implements OwnerContrac
             Bundle bundle = new Bundle();
             bundle.putLong(INTENT_EXTRA_PROPRIETOR_ID, proprietorId);
             bundle.putParcelableArrayList(BUNDLE_ARGUMENT_PARCELABLE_LIST_SALES, sales);
-            saleFragment.setArguments(bundle);
+            recyclerViewSaleFragment.setArguments(bundle);
             // infla el Fragment, remplazando el otro fragment si existe
-            getSupportFragmentManager().beginTransaction().replace(R.id.fl_frag_management, saleFragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fl_frag_management, recyclerViewSaleFragment).commit();
         }
     }
 

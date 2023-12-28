@@ -17,8 +17,13 @@ import com.philippabather.properproperties.contract.LoginContract;
 import com.philippabather.properproperties.domain.Proprietor;
 import com.philippabather.properproperties.presenter.LoginPresenter;
 
+/**
+ * LoginView - la actividad que maneja la vista de un login temporal.
+ *
+ * @author Philppa Bather
+ */
 public class LoginView extends AppCompatActivity implements LoginContract.View {
-
+    // TODO - 2 entrega: implementa funcionalidad de un login seguro
     private Button btnBack;
     private Button btnLogin;
     private EditText etPassword;

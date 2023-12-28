@@ -39,8 +39,14 @@ import com.philippabather.properproperties.utils.SpinnerUtils;
 
 import java.math.BigDecimal;
 
+/**
+ * RentalUpdateFragment - el fragmento para manejar la presentación de una vista para actualizar un
+ * inmueble de alquiler.
+ *
+ * @author Philippa Bather
+ */
 
-public class FragmentRentalUpdate extends Fragment implements AdapterView.OnItemSelectedListener,
+public class RentalUpdateFragment extends Fragment implements AdapterView.OnItemSelectedListener,
         Style.OnStyleLoaded, OnMapClickListener {
 
     private Button btnBack;

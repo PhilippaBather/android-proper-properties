@@ -28,8 +28,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * SearchMapView - la actividad para buscar inmuebles disponsibles presentados en una mapa y ver
- * dichos muebles en una lista
+ * PropertyListView - la actividad para buscar inmuebles disponsibles presentados en una lista según
+ * de estado: 'rent' (de alquiler) o 'sale' (para vender).
  *
  * @author Philippa Bather
  */
