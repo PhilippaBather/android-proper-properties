@@ -57,6 +57,8 @@ public class RentalProperty implements Parcelable {
 
     protected RentalProperty(Parcel in) {
         id = in.readLong();
+        propertyStatus = PropertyStatus.valueOf(in.readString());
+        propertyType = PropertyType.valueOf(in.readString());
         latitude = in.readDouble();
         longitude = in.readDouble();
         metresSqr = in.readInt();
@@ -226,6 +228,8 @@ public class RentalProperty implements Parcelable {
     @Override
     public void writeToParcel(@NonNull Parcel parcel, int i) {
         parcel.writeLong(id);
+        parcel.writeString(this.propertyStatus.name());
+        parcel.writeString(this.propertyType.name());
         parcel.writeDouble(latitude);
         parcel.writeDouble(longitude);
         parcel.writeInt(metresSqr);
