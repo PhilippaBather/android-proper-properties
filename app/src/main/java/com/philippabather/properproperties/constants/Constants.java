@@ -1,5 +1,10 @@
 package com.philippabather.properproperties.constants;
 
+/**
+ * Constants - constantes para Strings y carácteres.
+ *
+ * @author Philippa Bather
+ */
 public class Constants {
 
     public static final char tick = '\u2713';
