@@ -6,6 +6,11 @@ import com.philippabather.properproperties.domain.SaleProperty;
 import com.philippabather.properproperties.model.PropertyDetailModel;
 import com.philippabather.properproperties.view.PropertyDetailView;
 
+/**
+ * PropertyDetailPresenter - presenter para las detalles de un inmueble.
+ *
+ * @author Philippa Bather
+ */
 public class PropertyDetailPresenter implements PropertyDetailContract.Presenter,
         PropertyDetailContract.Model.OnLoadRentalPropertyListener,
         PropertyDetailContract.Model.OnLoadSalePropertyListener {
