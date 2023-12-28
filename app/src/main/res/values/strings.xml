@@ -30,6 +30,7 @@
     <string name="menu_item_search_properties">Busca Inmuebles</string>
     <string name="rbtn_search_map_rent">Alquiler</string>
     <string name="rbtn_search_map_buy">Comprar</string>
+    <string name="sv_content_description" translatable="false">Scrollable</string>
     <string name="toast_contacted_owner">Propietario Contactado</string>
     <string name="tv_add_property_deposit">Depósito</string>
     <string name="tv_add_property_description">Descripción</string>
