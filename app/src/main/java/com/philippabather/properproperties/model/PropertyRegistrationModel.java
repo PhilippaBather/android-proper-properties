@@ -16,6 +16,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * PropertyRegistrationModel - model para manejar comunicación con el base de datos para registrar
+ * objetos de inmuebles.
+ *
+ * @author Philippa Bather
+ */
 public class PropertyRegistrationModel implements PropertyRegistrationContract.Model {
 
     private final PropertyApiInterface api;

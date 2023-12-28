@@ -24,6 +24,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * PropertyListModel - model para manejar comunicación con el base de datos para conseguir datos de
+ * listas de inmuebles de alquiler ('rental') o para vender ('sale').
+ *
+ * @author Philippa Bather
+ */
 public class PropertyListModel implements PropertyListContract.Model {
 
     private final PropertyApiInterface api;
