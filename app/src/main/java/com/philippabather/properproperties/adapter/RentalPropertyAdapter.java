@@ -55,7 +55,7 @@ public class RentalPropertyAdapter extends RecyclerView.Adapter<RentalPropertyHo
         int numBathrooms = rentalProperty.getNumBathrooms();
         int numBedrooms = rentalProperty.getNumBedrooms();
         rentalPropertyHolder.tvPropertyDescription.setText(rentalProperty.getDescription());
-        String overview = String.format("Bedrooms: %d\tBathrooms: %d\tlift: %c", numBedrooms, numBathrooms, (isLift ?  tick : cross));
+        String overview = String.format("Bedrooms: %d\t  Bathrooms: %d\t  Lift: %c", numBedrooms, numBathrooms, (isLift ?  tick : cross));
         rentalPropertyHolder.tvPropertyOverview.setText(overview);
 
         if (favourites != null) {
