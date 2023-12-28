@@ -44,14 +44,14 @@ public class RentalPropertyHolder extends RecyclerView.ViewHolder {
     private final long proprietorId;
 
     public RentalPropertyHolder(@NonNull View view, List<RentalProperty> properties,
-                                List<RentalFavourite> favourites, Role role, long proprietorId) {
+                                Role role, long proprietorId) {
         super(view);
         this.parentView = view;
         this.proprietorId = proprietorId;
 
         findViews();
         cvPropertyItem.setOnClickListener(v -> goToPropertyDetailsActivity(properties, role));
-        ibPropertyContact.setOnClickListener(v -> contactProprietor(properties));
+        ibPropertyContact.setOnClickListener(v -> contactProprietor());
         ibPropertyFavourite.setOnClickListener(v -> addToFavourites(properties));
         localDB = DBHelperMethods.getConnection(view.getContext());
     }
@@ -88,7 +88,7 @@ public class RentalPropertyHolder extends RecyclerView.ViewHolder {
         return properties.get(currPosition);
     }
 
-    private void contactProprietor(List<RentalProperty> properties) {
+    private void contactProprietor() {
         Toast.makeText(parentView.getContext(), R.string.toast_contacted_owner, Toast.LENGTH_LONG).show();
     }
 
