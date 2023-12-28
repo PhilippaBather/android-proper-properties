@@ -13,6 +13,11 @@ import android.widget.Spinner;
 
 import com.philippabather.properproperties.domain.PropertyType;
 
+/**
+ * SpinnerUtils - métodos auxiliares para establecer y manejar el 'drop down' menú.
+ *
+ * @author Philippa Bather
+ */
 public class SpinnerUtils {
     public static void setUpSpinner(ArrayAdapter<CharSequence> adapter, Spinner spPropertyType,
                                     AdapterView.OnItemSelectedListener listener) {
