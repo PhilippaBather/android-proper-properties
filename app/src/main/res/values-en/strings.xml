@@ -46,7 +46,7 @@
     <string name="img_btn_map_search_item_contact">Contact</string>
     <string name="img_btn_map_search_view_item_favourite">Favourite</string>
     <string name="tv_management_title">Property Owner Management Panel</string>
-    <string name="tv_management_description">View a list of your properties and manage listed proeprty updates and deletions</string>
+    <string name="tv_management_description">View a list of your properties and manage listed property updates and deletions</string>
     <string name="btn_add_property">Add a property</string>
     <string name="tv_add_property_title">Add a Property</string>
     <string name="api_msg_post">Property Added</string>
