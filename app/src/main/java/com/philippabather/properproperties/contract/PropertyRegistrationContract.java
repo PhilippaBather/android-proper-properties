@@ -18,8 +18,8 @@ public interface PropertyRegistrationContract {
             void onRegisterPropertyError(String msg);
         }
 
-        void createNewRentalProperty(OnRegisterPropertyListener listener, long proprietorId, RentalProperty rental);
-        void createNewSaleProperty(OnRegisterPropertyListener listener, long proprietorId, SaleProperty sale);
+        void createNewRentalProperty(OnRegisterPropertyListener listener, String token, long proprietorId, RentalProperty rental);
+        void createNewSaleProperty(OnRegisterPropertyListener listener, String token, long proprietorId, SaleProperty sale);
     }
 
     interface View {
@@ -27,7 +27,7 @@ public interface PropertyRegistrationContract {
     }
 
     interface Presenter {
-        void createNewRentalProperty(long proprietorId, RentalProperty rental);
-        void createNewSaleProperty(long proprietorId, SaleProperty sale);
+        void createNewRentalProperty(String token, long proprietorId, RentalProperty rental);
+        void createNewSaleProperty(String token, long proprietorId, SaleProperty sale);
     }
 }

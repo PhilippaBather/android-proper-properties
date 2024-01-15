@@ -27,10 +27,10 @@ public interface PropertyUpdateContract {
             void onUpdatePropertyError(String msg);
         }
 
-        void deleteRentalProperty(OnDeletePropertyListener listener, long propertyId);
-        void deleteSaleProperty(OnDeletePropertyListener listener, long propertyId);
-        void updateRentalProperty(OnUpdatePropertyListener listener, long propertyId, RentalProperty rentalProperty);
-        void updateSaleProperty(OnUpdatePropertyListener listener, long propertyId, SaleProperty saleProperty);
+        void deleteRentalProperty(OnDeletePropertyListener listener, String token, long propertyId);
+        void deleteSaleProperty(OnDeletePropertyListener listener, String token, long propertyId);
+        void updateRentalProperty(OnUpdatePropertyListener listener, String token, long propertyId, RentalProperty rentalProperty);
+        void updateSaleProperty(OnUpdatePropertyListener listener, String token, long propertyId, SaleProperty saleProperty);
 
     }
 
@@ -40,10 +40,9 @@ public interface PropertyUpdateContract {
     }
 
     interface Presenter {
-        void deleteSelectedProperty(long propertyId, PropertyStatus type); // to do an if_else of switch according to request
-
-        void updateRentalProperty(long propertyId, RentalProperty rentalProperty);
-        void updateSaleProperty(long propertyId, SaleProperty saleProperty);
+        void deleteSelectedProperty(String token, long propertyId, PropertyStatus type);
+        void updateRentalProperty(String token, long propertyId, RentalProperty rentalProperty);
+        void updateSaleProperty(String token, long propertyId, SaleProperty saleProperty);
     }
 
 }
