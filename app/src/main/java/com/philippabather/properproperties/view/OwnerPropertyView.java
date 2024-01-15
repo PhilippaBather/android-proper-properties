@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -18,36 +20,36 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.philippabather.properproperties.R;
-import com.philippabather.properproperties.contract.OwnerContract;
+import com.philippabather.properproperties.contract.ProprietorContract;
 import com.philippabather.properproperties.domain.Proprietor;
 import com.philippabather.properproperties.domain.RentalProperty;
 import com.philippabather.properproperties.domain.SaleProperty;
-import com.philippabather.properproperties.presenter.OwnerPresenter;
+import com.philippabather.properproperties.domain.SessionManager;
+import com.philippabather.properproperties.presenter.ProprietorPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * OwnerPropertyView - la actividad maneja la página principal para un propietario.
  *
  * @author Philippa Bather
  */
-public class OwnerPropertyView extends AppCompatActivity implements OwnerContract.View {
+public class OwnerPropertyView extends AppCompatActivity implements ProprietorContract.View {
+    private Button btnLogout;
     private RadioButton rbtnBuy;
     private RadioButton rbtnRent;
     private RadioGroup radioGroup;
     private FloatingActionButton flBtnAddProperty;
 
     private Proprietor proprietor;
-    private long proprietorId;
     private List<RentalProperty> rentalPropertyList;
     private List<SaleProperty> salePropertyList;
 
-    private RecyclerViewRentalFragment recyclerViewRentalFragment;
-    private RecyclerViewSaleFragment recyclerViewSaleFragment;
-
-    private OwnerPresenter presenter;
+    private RecyclerViewOwnerRentalFragment recyclerViewOwnerRentalFragment;
+    private RecyclerViewOwnerSaleFragment recyclerViewOwnerSaleFragment;
+    private ProprietorPresenter presenter;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,6 +57,7 @@ public class OwnerPropertyView extends AppCompatActivity implements OwnerContrac
 
         setContentView(R.layout.activity_property_management);
         findViews();
+        btnLogout.setOnClickListener(this::handleLogout);
         radioGroup.setOnCheckedChangeListener(this::handlePropertySelection);
         flBtnAddProperty.setOnClickListener(v -> addProperty());
 
@@ -62,25 +65,38 @@ public class OwnerPropertyView extends AppCompatActivity implements OwnerContrac
         salePropertyList = new ArrayList<>();
 
         // create instances of fragments
-        recyclerViewRentalFragment = new RecyclerViewRentalFragment();
-        recyclerViewSaleFragment = new RecyclerViewSaleFragment();
+        recyclerViewOwnerRentalFragment = new RecyclerViewOwnerRentalFragment();
+        recyclerViewOwnerSaleFragment = new RecyclerViewOwnerSaleFragment();
 
-        Intent intent = getIntent();
-        proprietorId = Long.parseLong(Objects.requireNonNull(intent.getStringExtra(INTENT_EXTRA_PROPRIETOR_ID)));
+        // get session
+        sessionManager = new SessionManager(OwnerPropertyView.this);
+        String token = sessionManager.getToken();
+        String username = sessionManager.getUsername();
 
-        presenter = new OwnerPresenter(this);
-        presenter.loadProprietorById(proprietorId);
-
+        // fetch property details
+        presenter = new ProprietorPresenter(this);
+        if (token != null && username != null) {
+            presenter.loadProprietor(token, username);
+        }
     }
 
     private void findViews() {
+        btnLogout = findViewById(R.id.btn_logout);
         rbtnBuy = findViewById(R.id.rbtn_search_map_buy);
         rbtnRent = findViewById(R.id.rbtn_search_map_rent);
         radioGroup = findViewById(R.id.rg_search_map_search_type);
         flBtnAddProperty = findViewById(R.id.fl_btn_add_property);
     }
 
+    private void handleLogout(View view) {
+        sessionManager.deleteSession();
+        Intent intent = new Intent(this, LoginView.class);
+        startActivity(intent);
+    }
+
+
     private void handlePropertySelection(RadioGroup grp, int id) {
+        long proprietorId = 1; // TODO update
         if (rbtnRent.isChecked()) {
             rentalPropertyList.clear();
             // crea un bundle para enviar datos al Fragment
@@ -89,9 +105,9 @@ public class OwnerPropertyView extends AppCompatActivity implements OwnerContrac
             Bundle bundle = new Bundle();
             bundle.putLong(INTENT_EXTRA_PROPRIETOR_ID, proprietorId);
             bundle.putParcelableArrayList(BUNDLE_ARGUMENT_PARCELABLE_LIST_RENTALS, rentals);
-            recyclerViewRentalFragment.setArguments(bundle);
+            recyclerViewOwnerRentalFragment.setArguments(bundle);
             // infla el Fragment, remplazando el otro fragment si existe
-            getSupportFragmentManager().beginTransaction().replace(R.id.fl_frag_management, recyclerViewRentalFragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fl_frag_management, recyclerViewOwnerRentalFragment).commit();
         } else {
             salePropertyList.clear();
             // crea un bundle para enviar datos al Fragment
@@ -100,9 +116,9 @@ public class OwnerPropertyView extends AppCompatActivity implements OwnerContrac
             Bundle bundle = new Bundle();
             bundle.putLong(INTENT_EXTRA_PROPRIETOR_ID, proprietorId);
             bundle.putParcelableArrayList(BUNDLE_ARGUMENT_PARCELABLE_LIST_SALES, sales);
-            recyclerViewSaleFragment.setArguments(bundle);
+            recyclerViewOwnerSaleFragment.setArguments(bundle);
             // infla el Fragment, remplazando el otro fragment si existe
-            getSupportFragmentManager().beginTransaction().replace(R.id.fl_frag_management, recyclerViewSaleFragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fl_frag_management, recyclerViewOwnerSaleFragment).commit();
         }
     }
 
@@ -132,6 +148,7 @@ public class OwnerPropertyView extends AppCompatActivity implements OwnerContrac
     @Override
     public void getProprietor(Proprietor proprietor) {
         this.proprietor = proprietor;
+        sessionManager.setUserId(proprietor.getId());
     }
 
     @Override
@@ -141,7 +158,6 @@ public class OwnerPropertyView extends AppCompatActivity implements OwnerContrac
 
     private void addProperty() {
         Intent intent = new Intent(this, PropertyRegistrationView.class);
-        intent.putExtra(INTENT_EXTRA_PROPRIETOR_ID, String.valueOf(proprietor.getId()));
         startActivity(intent);
     }
 }

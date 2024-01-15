@@ -26,7 +26,7 @@ import java.util.List;
  *
  * @author Philippa Bather
  */
-public class RecyclerViewRentalFragment extends Fragment {
+public class RecyclerViewOwnerRentalFragment extends Fragment {
     private List<RentalProperty> rentalPropertyList;
     private RentalPropertyAdapter adapter;
     private LinearLayoutManager linearLayoutManager;

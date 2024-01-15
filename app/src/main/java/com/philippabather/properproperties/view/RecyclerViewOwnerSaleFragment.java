@@ -26,7 +26,7 @@ import java.util.List;
  *
  * @author Philippa Bather
  */
-public class RecyclerViewSaleFragment extends Fragment {
+public class RecyclerViewOwnerSaleFragment extends Fragment {
 
     private List<SaleProperty> salePropertyList;
     private SalePropertyAdapter adapter;
