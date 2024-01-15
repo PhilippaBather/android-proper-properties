@@ -35,8 +35,10 @@ public class Constants {
 
     // información para el usuario
     public static final String LOGIN_ERROR = "ERROR LOGGING IN";
+    public static final String SERVER_ERROR = "Se ha producido un error al connectar con el servidor.";
 
     // log
+    public static final String LOG_CREDENTIALS_INVALID = "Credentials invalid";
     public static final String LOG_PROPERTY_STATUS_ERROR = "Property Status not recognised.";
     public static final String LOG_TAG_FRAGMENT_ERROR = "fragmentError";
 }
