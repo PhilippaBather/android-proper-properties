@@ -81,7 +81,6 @@ public class RentalPropertyHolder extends RecyclerView.ViewHolder {
             parentView.getContext().startActivity(intent);
         } else if (role.equals(Role.PROPRIETOR)) {
             Intent intent = new Intent(parentView.getContext(), PropertyUpdateView.class);
-            intent.putExtra(INTENT_EXTRA_PROPRIETOR_ID, String.valueOf(proprietorId));
             intent.putExtra(INTENT_EXTRA_PROPERTY_STATUS, currRentalProperty.getPropertyStatus().toString());
             intent.putExtra(INTENT_EXTRA_PROPERTY, currRentalProperty);
             parentView.getContext().startActivity(intent);
