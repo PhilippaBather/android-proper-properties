@@ -60,4 +60,6 @@
     <string name="txt_fld_mortgage_adviser_interest_rate">Tasa de Interés</string>
     <string name="txt_fld_mortgage_adviser_loan_term">Plazo del Préstamo</string>
     <string name="txt_fld_mortgage_adviser_postcode">Código Postal</string>
+    <string name="ui_login">Entrada inválida. Reintroduzca el usuario y la contraseña.</string>
+    <string name="logout" translatable="false">Logout</string>
 </resources>
