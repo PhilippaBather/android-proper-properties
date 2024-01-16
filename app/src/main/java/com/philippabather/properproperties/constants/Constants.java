@@ -14,8 +14,10 @@ public class Constants {
     // bundle arguments
     public static final String BUNDLE_ARGUMENT_PARCELABLE_LIST_RENTALS = "rentals";
     public static final String BUNDLE_ARGUMENT_PARCELABLE_LIST_SALES = "sales";
-    public static final String BUNDLE_ARGUMENT_SALE = "sale";
     public static final String BUNDLE_ARGUMENT_RENTAL = "rental";
+    public static final String BUNDLE_ARGUMENT_SALE = "sale";
+    public static final String BUNDLE_ARGUMENT_RENTAL_ID = "rentalId";
+    public static final String BUNDLE_ARGUMENT_SALE_ID = "saleId";
 
     // intent extras
     public static final String INTENT_EXTRA_PROPERTY = "property";
