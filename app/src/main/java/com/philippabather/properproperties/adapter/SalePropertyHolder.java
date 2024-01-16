@@ -84,7 +84,6 @@ public class SalePropertyHolder extends RecyclerView.ViewHolder {
             Intent intent = new Intent(parentView.getContext(), PropertyUpdateView.class);
             intent.putExtra(INTENT_EXTRA_PROPERTY_STATUS, currSaleProperty.getPropertyStatus().toString());
             intent.putExtra(INTENT_EXTRA_PROPERTY, currSaleProperty);
-            intent.putExtra(INTENT_EXTRA_PROPRIETOR_ID, String.valueOf(proprietorId));
             parentView.getContext().startActivity(intent);
         }
     }

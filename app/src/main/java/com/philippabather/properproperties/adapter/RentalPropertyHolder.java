@@ -4,7 +4,6 @@ import static com.philippabather.properproperties.R.color.barbie_pink;
 import static com.philippabather.properproperties.R.color.mint;
 import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_PROPERTY;
 import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_PROPERTY_STATUS;
-import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_PROPRIETOR_ID;
 import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_RENTAL_ID;
 
 import android.content.Intent;
@@ -46,13 +45,13 @@ public class RentalPropertyHolder extends RecyclerView.ViewHolder {
     protected TextView tvPropertyOverview; // detalles principales
     protected TextView tvPropertyDescription;
     private final AppLocalDB localDB;
-    private final long proprietorId;
+//    private final long proprietorId;
 
     public RentalPropertyHolder(@NonNull View view, List<RentalProperty> properties,
                                 Role role, long proprietorId) {
         super(view);
         this.parentView = view;
-        this.proprietorId = proprietorId;
+//        this.proprietorId = proprietorId;
 
         findViews();
         cvPropertyItem.setOnClickListener(v -> goToPropertyDetailsActivity(properties, role));
@@ -81,7 +80,6 @@ public class RentalPropertyHolder extends RecyclerView.ViewHolder {
             parentView.getContext().startActivity(intent);
         } else if (role.equals(Role.PROPRIETOR)) {
             Intent intent = new Intent(parentView.getContext(), PropertyUpdateView.class);
-            intent.putExtra(INTENT_EXTRA_PROPRIETOR_ID, String.valueOf(proprietorId));
             intent.putExtra(INTENT_EXTRA_PROPERTY_STATUS, currRentalProperty.getPropertyStatus().toString());
             intent.putExtra(INTENT_EXTRA_PROPERTY, currRentalProperty);
             parentView.getContext().startActivity(intent);
@@ -99,23 +97,27 @@ public class RentalPropertyHolder extends RecyclerView.ViewHolder {
 
     private void addToFavourites(List<RentalProperty> properties) {
         RentalProperty rental = getCurrentProperty(properties);
-        rental.setFavourite(!rental.isFavourite());
-        updateLocalDB(rental);
-        updateImageButtonTint(rental);
+        updateRentalFavouriteTint(rental);
     }
 
-    private void updateLocalDB(RentalProperty rental) {
-        if (!rental.isFavourite()) {
-            RentalFavourite favourite = localDB.rentalPropertyDao().getFavouriteByRentalPropertyId(rental.getId());
-            localDB.rentalPropertyDao().delete(favourite);
+    private void updateRentalFavouriteTint(RentalProperty rental) {
+        RentalFavourite favourite = localDB.rentalPropertyDao().getFavouriteByRentalPropertyId(rental.getId());
+        if (favourite != null) {
+            // 2.1 si existe en local DB, quítalo (delete)
+            localDB.rentalPropertyDao().deleteFavouriteByFavouriteId(favourite.getId());
+            // 2.2 pinta la estrella
+            ibPropertyFavourite.setColorFilter(parentView.getContext().getColor(mint));
         } else {
-            RentalFavourite favourite = new RentalFavourite(rental.getId());
-            localDB.rentalPropertyDao().insert(favourite);
+            // 3.1 isi no existe, añadelo al local DB (post)
+            localDB.rentalPropertyDao().insert(new RentalFavourite(rental.getId()));
+            // 3.2 pinta la estrella
+            ibPropertyFavourite.setColorFilter(parentView.getContext().getColor(barbie_pink));
         }
     }
 
-    protected void updateImageButtonTint(RentalProperty rentalProperty) {
-        if(rentalProperty.isFavourite()){
+    protected void addFavourites(RentalProperty rental) {
+        RentalFavourite favourite = localDB.rentalPropertyDao().getFavouriteByRentalPropertyId(rental.getId());
+        if (favourite != null) {
             ibPropertyFavourite.setColorFilter(parentView.getContext().getColor(barbie_pink));
         } else {
             ibPropertyFavourite.setColorFilter(parentView.getContext().getColor(mint));

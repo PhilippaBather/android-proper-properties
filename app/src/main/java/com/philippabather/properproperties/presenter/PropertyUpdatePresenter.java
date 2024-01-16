@@ -57,20 +57,20 @@ public class PropertyUpdatePresenter implements PropertyUpdateContract.Presenter
     }
 
     @Override
-    public void deleteSelectedProperty(long propertyId, PropertyStatus status) {
+    public void deleteSelectedProperty(String token, long propertyId, PropertyStatus status) {
         switch (status) {
-            case RENTAL -> model.deleteRentalProperty(this, propertyId);
-            case SALE -> model.deleteSaleProperty(this, propertyId);
+            case RENTAL -> model.deleteRentalProperty(this, token, propertyId);
+            case SALE -> model.deleteSaleProperty(this, token, propertyId);
         }
     }
 
     @Override
-    public void updateRentalProperty(long propertyId, RentalProperty rentalProperty) {
-        model.updateRentalProperty(this, propertyId, rentalProperty);
+    public void updateRentalProperty(String token, long propertyId, RentalProperty rentalProperty) {
+        model.updateRentalProperty(this, token, propertyId, rentalProperty);
     }
 
     @Override
-    public void updateSaleProperty(long propertyId, SaleProperty saleProperty) {
-        model.updateSaleProperty(this, propertyId, saleProperty);
+    public void updateSaleProperty(String token, long propertyId, SaleProperty saleProperty) {
+        model.updateSaleProperty(this, token, propertyId, saleProperty);
     }
 }

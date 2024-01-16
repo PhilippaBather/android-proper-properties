@@ -33,6 +33,7 @@ import com.philippabather.properproperties.R;
 import com.philippabather.properproperties.domain.PropertyStatus;
 import com.philippabather.properproperties.domain.PropertyType;
 import com.philippabather.properproperties.domain.RentalProperty;
+import com.philippabather.properproperties.domain.SessionManager;
 import com.philippabather.properproperties.map.MapUtils;
 import com.philippabather.properproperties.presenter.PropertyUpdatePresenter;
 import com.philippabather.properproperties.utils.SpinnerUtils;
@@ -75,7 +76,8 @@ public class RentalUpdateFragment extends Fragment implements AdapterView.OnItem
 
     private PropertyUpdatePresenter presenter;
     private RentalProperty rentalProperty;
-    private long proprietorId;
+//    private long proprietorId;
+    private SessionManager sessionManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -85,7 +87,7 @@ public class RentalUpdateFragment extends Fragment implements AdapterView.OnItem
 
         assert getArguments() != null;
         rentalProperty = getArguments().getParcelable(BUNDLE_ARGUMENT_RENTAL);
-        proprietorId = getArguments().getLong(INTENT_EXTRA_PROPRIETOR_ID);
+//        proprietorId = getArguments().getLong(INTENT_EXTRA_PROPRIETOR_ID);
 
         bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.blue_marker_view);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(view.getContext(),
@@ -95,6 +97,7 @@ public class RentalUpdateFragment extends Fragment implements AdapterView.OnItem
         setUpMap();
         setFields();
 
+        sessionManager = new SessionManager(view.getContext());
         presenter = new PropertyUpdatePresenter((PropertyUpdateView) view.getContext());
 
         return view;
@@ -178,12 +181,11 @@ public class RentalUpdateFragment extends Fragment implements AdapterView.OnItem
 
     private void goToOwnerPropertyView(View view) {
         Intent intent = new Intent(view.getContext(), OwnerPropertyView.class);
-        intent.putExtra(INTENT_EXTRA_PROPRIETOR_ID, String.valueOf(proprietorId));
         startActivity(intent);
     }
 
     private void handleDeleteProperty(View view) {
-        presenter.deleteSelectedProperty(rentalProperty.getId(), PropertyStatus.RENTAL);
+        presenter.deleteSelectedProperty(sessionManager.getToken(), rentalProperty.getId(), PropertyStatus.RENTAL);
         goToOwnerPropertyView(view);
     }
 
@@ -204,7 +206,7 @@ public class RentalUpdateFragment extends Fragment implements AdapterView.OnItem
                 size, description, numBedrooms, numBathrooms, isParking, isLift,
                 price, deposit, minTen, hasFurniture, isPets);
 
-        presenter.updateRentalProperty(rentalProperty.getId(), rental);
+        presenter.updateRentalProperty(sessionManager.getToken(), rentalProperty.getId(), rental);
     }
 
 }

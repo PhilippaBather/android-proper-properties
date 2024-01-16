@@ -1,6 +1,6 @@
 package com.philippabather.properproperties.view;
 
-import static com.philippabather.properproperties.constants.Constants.BUNDLE_ARGUMENT_PARCELABLE_LIST_SALES;
+import static com.philippabather.properproperties.constants.Constants.BUNDLE_ARGUMENT_PARCELABLE_LIST_RENTALS;
 import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_PROPRIETOR_ID;
 
 import android.os.Bundle;
@@ -13,23 +13,22 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.philippabather.properproperties.R;
-import com.philippabather.properproperties.adapter.SalePropertyAdapter;
+import com.philippabather.properproperties.adapter.RentalPropertyAdapter;
+import com.philippabather.properproperties.domain.RentalProperty;
 import com.philippabather.properproperties.domain.Role;
-import com.philippabather.properproperties.domain.SaleProperty;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * RecyclerViewSaleFragment - el fragmento que maneja la presentación de imuebles para vender en un
+ * RecyclerViewRentalFragment - el fragmento que maneja la presentación de imuebles de alquiler en un
  * RecyclerView.
  *
  * @author Philippa Bather
  */
-public class RecyclerViewSaleFragment extends Fragment {
-
-    private List<SaleProperty> salePropertyList;
-    private SalePropertyAdapter adapter;
+public class RecyclerViewOwnerRentalFragment extends Fragment {
+    private List<RentalProperty> rentalPropertyList;
+    private RentalPropertyAdapter adapter;
     private LinearLayoutManager linearLayoutManager;
     private RecyclerView recyclerView;
     private long proprietorId;
@@ -37,17 +36,17 @@ public class RecyclerViewSaleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_recycler_view_sale, container, false);
+        View view = inflater.inflate(R.layout.fragment_recycler_view_rental, container, false);
 
         // recibe datos desde los argumentos pasados
+        rentalPropertyList = new ArrayList<>();
         assert getArguments() != null;
-        salePropertyList = new ArrayList<>();
-        salePropertyList = getArguments().getParcelableArrayList(BUNDLE_ARGUMENT_PARCELABLE_LIST_SALES);
+        rentalPropertyList = getArguments().getParcelableArrayList(BUNDLE_ARGUMENT_PARCELABLE_LIST_RENTALS);
         proprietorId = getArguments().getLong(INTENT_EXTRA_PROPRIETOR_ID);
 
+
         // crea el RecyclerView
-        recyclerView = view.findViewById(R.id.recyclerview_sale_property_list);
+        recyclerView = view.findViewById(R.id.recyclerview_rental_property_list);
         recyclerView.setHasFixedSize(true);
 
         // establece el LinearLayoutManager
@@ -55,7 +54,7 @@ public class RecyclerViewSaleFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         // establece el Adapter y bindea al RecyclerView
-        adapter = new SalePropertyAdapter(salePropertyList, null, Role.PROPRIETOR, proprietorId);
+        adapter = new RentalPropertyAdapter(rentalPropertyList, null, Role.PROPRIETOR, proprietorId);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 

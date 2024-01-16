@@ -32,6 +32,7 @@ import com.philippabather.properproperties.R;
 import com.philippabather.properproperties.domain.PropertyStatus;
 import com.philippabather.properproperties.domain.PropertyType;
 import com.philippabather.properproperties.domain.SaleProperty;
+import com.philippabather.properproperties.domain.SessionManager;
 import com.philippabather.properproperties.map.MapUtils;
 import com.philippabather.properproperties.presenter.PropertyRegistrationPresenter;
 import com.philippabather.properproperties.utils.SpinnerUtils;
@@ -69,14 +70,15 @@ public class SaleAddFragment extends Fragment implements AdapterView.OnItemSelec
     private PointAnnotationManager pointAnnotationManager; // MapBox libraries
     private GesturesPlugin gesturesPlugin;
     private Bitmap bitmap;
+    private SessionManager sessionManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sale_add, container, false);
 
-        assert getArguments() != null;
-        proprietorId = getArguments().getLong(INTENT_EXTRA_PROPRIETOR_ID);
+//        assert getArguments() != null;
+//        proprietorId = getArguments().getLong(INTENT_EXTRA_PROPRIETOR_ID);
 
         findViews(view);
         bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.blue_marker_view);
@@ -85,6 +87,8 @@ public class SaleAddFragment extends Fragment implements AdapterView.OnItemSelec
         SpinnerUtils.setUpSpinner(adapter, spPropertyType, this);
         setUpMap();
         addOnClickListeners();
+
+        sessionManager = new SessionManager(view.getContext());
         presenter = new PropertyRegistrationPresenter((PropertyRegistrationView) view.getContext());
 
         return view;
@@ -124,7 +128,7 @@ public class SaleAddFragment extends Fragment implements AdapterView.OnItemSelec
         SaleProperty sale = new SaleProperty(PropertyStatus.SALE, propertyType, latitude, longitude,
                 size, description, numBedrooms, numBathrooms, hasParking, hasLift, price, leasehold);
 
-        presenter.createNewSaleProperty(proprietorId, sale);
+        presenter.createNewSaleProperty(sessionManager.getToken(), sessionManager.getUserId(), sale);
         resetViews();
     }
     private void goBackToOwnerPropertyView(View view) {

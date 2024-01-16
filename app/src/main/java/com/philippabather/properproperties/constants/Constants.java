@@ -14,8 +14,10 @@ public class Constants {
     // bundle arguments
     public static final String BUNDLE_ARGUMENT_PARCELABLE_LIST_RENTALS = "rentals";
     public static final String BUNDLE_ARGUMENT_PARCELABLE_LIST_SALES = "sales";
-    public static final String BUNDLE_ARGUMENT_SALE = "sale";
     public static final String BUNDLE_ARGUMENT_RENTAL = "rental";
+    public static final String BUNDLE_ARGUMENT_SALE = "sale";
+    public static final String BUNDLE_ARGUMENT_RENTAL_ID = "rentalId";
+    public static final String BUNDLE_ARGUMENT_SALE_ID = "saleId";
 
     // intent extras
     public static final String INTENT_EXTRA_PROPERTY = "property";
@@ -35,8 +37,10 @@ public class Constants {
 
     // información para el usuario
     public static final String LOGIN_ERROR = "ERROR LOGGING IN";
+    public static final String SERVER_ERROR = "Se ha producido un error al connectar con el servidor.";
 
     // log
+    public static final String LOG_CREDENTIALS_INVALID = "Credentials invalid";
     public static final String LOG_PROPERTY_STATUS_ERROR = "Property Status not recognised.";
     public static final String LOG_TAG_FRAGMENT_ERROR = "fragmentError";
 }

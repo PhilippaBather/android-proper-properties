@@ -1,10 +1,11 @@
 package com.philippabather.properproperties.view;
 
-import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_PROPRIETOR_ID;
 import static com.philippabather.properproperties.constants.Constants.LOGIN_ERROR;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,7 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.philippabather.properproperties.R;
 import com.philippabather.properproperties.contract.LoginContract;
-import com.philippabather.properproperties.domain.Proprietor;
+import com.philippabather.properproperties.domain.LoginRequest;
+import com.philippabather.properproperties.domain.LoginResponse;
+import com.philippabather.properproperties.domain.SessionManager;
 import com.philippabather.properproperties.presenter.LoginPresenter;
 
 /**
@@ -23,15 +26,12 @@ import com.philippabather.properproperties.presenter.LoginPresenter;
  * @author Philppa Bather
  */
 public class LoginView extends AppCompatActivity implements LoginContract.View {
-    // TODO - 2 entrega: implementa funcionalidad de un login seguro
     private Button btnBack;
     private Button btnLogin;
     private EditText etPassword;
     private EditText etUsername;
-    private String password;
-    private String username;
     private LoginPresenter presenter;
-    private Proprietor proprietor;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +40,9 @@ public class LoginView extends AppCompatActivity implements LoginContract.View {
         findViews();
         setOnClickListeners();
         presenter = new LoginPresenter(this);
+        sessionManager = new SessionManager(LoginView.this);
+
+        checkSession();
     }
 
     private void findViews() {
@@ -59,29 +62,37 @@ public class LoginView extends AppCompatActivity implements LoginContract.View {
         startActivity(intent);
     }
 
+    private void checkSession() {
+        if (sessionManager.getUsername() != null && sessionManager.isLoggedIn()) {
+            goToOwnerPropertyView();
+        }
+    }
+
     private void handleLogin(View view) {
-        password = etPassword.getText().toString();
-        username = etUsername.getText().toString();
+        String password = etPassword.getText().toString();
+        String username = etUsername.getText().toString();
 
         if (password.trim() == "" && username.trim() == "") {
             showMessage(LOGIN_ERROR);
         }
-        presenter.loadProprietorByUsernameAndPassword(username, password);
+        LoginRequest loginRequest = new LoginRequest(username, password);
+        presenter.authenticateUser(loginRequest);
     }
 
-
-
-
     @Override
-    public void getProprietor(Proprietor proprietor) {
-        this.proprietor = proprietor;
-        if (proprietor != null) {
-            Intent intent = new Intent(this, OwnerPropertyView.class);
-            intent.putExtra(INTENT_EXTRA_PROPRIETOR_ID, String.valueOf(proprietor.getId()));
-            startActivity(intent);
+    public void getUserSession(LoginResponse loginResponse) {
+        if (loginResponse == null) {
+            Toast.makeText(this, "Credentials invalid", Toast.LENGTH_SHORT).show();
         } else {
-            showMessage(LOGIN_ERROR);
+            loginResponse.setLoggedIn(true);
+            sessionManager.saveSession(loginResponse);
+            goToOwnerPropertyView();
         }
+    }
+
+    private void goToOwnerPropertyView() {
+        Intent intent = new Intent(this, OwnerPropertyView.class);
+        startActivity(intent);
     }
 
     @Override

@@ -31,8 +31,8 @@ public class PropertyUpdateModel implements PropertyUpdateContract.Model {
     }
 
     @Override
-    public void deleteRentalProperty(OnDeletePropertyListener listener, long propertyId) {
-        Call<Void> call = api.deleteRentalPropertyById(propertyId);
+    public void deleteRentalProperty(OnDeletePropertyListener listener, String token, long propertyId) {
+        Call<Void> call = api.deleteRentalPropertyById(token, propertyId);
 
         call.enqueue(new Callback<Void>() {
             @Override
@@ -50,8 +50,8 @@ public class PropertyUpdateModel implements PropertyUpdateContract.Model {
     }
 
     @Override
-    public void deleteSaleProperty(OnDeletePropertyListener listener, long propertyId) {
-        Call<Void> call = api.deleteSalePropertyById(propertyId);
+    public void deleteSaleProperty(OnDeletePropertyListener listener, String token, long propertyId) {
+        Call<Void> call = api.deleteSalePropertyById(token, propertyId);
 
         call.enqueue(new Callback<Void>() {
             @Override
@@ -69,8 +69,8 @@ public class PropertyUpdateModel implements PropertyUpdateContract.Model {
     }
 
     @Override
-    public void updateRentalProperty(OnUpdatePropertyListener listener, long propertyId, RentalProperty rentalProperty) {
-        Call<RentalProperty> callRental = api.updateRentalPropertyById(propertyId, rentalProperty);
+    public void updateRentalProperty(OnUpdatePropertyListener listener, String token, long propertyId, RentalProperty rentalProperty) {
+        Call<RentalProperty> callRental = api.updateRentalPropertyById(token, propertyId, rentalProperty);
 
         callRental.enqueue(new Callback<RentalProperty>() {
             @Override
@@ -89,8 +89,8 @@ public class PropertyUpdateModel implements PropertyUpdateContract.Model {
     }
 
     @Override
-    public void updateSaleProperty(OnUpdatePropertyListener listener, long propertyId, SaleProperty saleProperty) {
-        Call<SaleProperty> callSale = api.updateSalePropertyById(propertyId, saleProperty);
+    public void updateSaleProperty(OnUpdatePropertyListener listener, String token, long propertyId, SaleProperty saleProperty) {
+        Call<SaleProperty> callSale = api.updateSalePropertyById(token, propertyId, saleProperty);
 
         callSale.enqueue(new Callback<SaleProperty>() {
             @Override

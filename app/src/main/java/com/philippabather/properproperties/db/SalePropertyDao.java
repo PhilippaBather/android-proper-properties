@@ -28,4 +28,7 @@ public interface SalePropertyDao {
 
     @Delete
     void delete(SaleFavourite favourite);
+
+    @Query("UPDATE SaleFavourite SET comment = :comment WHERE salePropertyId = :salePropertyId")
+    void updateFavouriteByRentalPropertyId(long salePropertyId, String comment);
 }

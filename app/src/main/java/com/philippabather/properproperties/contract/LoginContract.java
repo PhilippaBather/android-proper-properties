@@ -1,6 +1,8 @@
 package com.philippabather.properproperties.contract;
 
-import com.philippabather.properproperties.domain.Proprietor;
+import com.philippabather.properproperties.domain.LoginRequest;
+import com.philippabather.properproperties.domain.LoginResponse;
+import com.philippabather.properproperties.domain.SessionManager;
 
 /**
  * LoginContract - contrato temporal para manejar el login de usuario.
@@ -8,25 +10,24 @@ import com.philippabather.properproperties.domain.Proprietor;
  * @author Philippa Bather
  */
 public interface LoginContract {
-    // TODO - 2 entrega: actualiza el login para implementar funcionalidad segura
 
     interface Model {
-        interface OnLoadProprietorListener {
-
-            void onLoadProprietorSuccess(Proprietor proprietor);
-            void onLoadProprietorError(String msg);
-
+        interface OnLoadAuthenticationListener {
+            void onLoadAuthenticationSuccess(LoginResponse loginResponse);
+            void onAuthenticationError(String msg);
         }
 
-        void loadProprietorByUsernameAndPassword(OnLoadProprietorListener listener, String username, String password);
+        void authenticateUserByUsernameAndPassword(OnLoadAuthenticationListener listener, LoginRequest loginRequest);
+
     }
 
     interface View {
-        void getProprietor(Proprietor proprietor);
+        void getUserSession(LoginResponse loginResponse);
+
         void showMessage(String msg);
     }
 
     interface Presenter {
-        void loadProprietorByUsernameAndPassword(String username, String password);
+        void authenticateUser(LoginRequest loginRequest);
     }
 }

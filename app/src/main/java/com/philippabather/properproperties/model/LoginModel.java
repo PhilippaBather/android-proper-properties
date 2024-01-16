@@ -1,5 +1,8 @@
 package com.philippabather.properproperties.model;
 
+import static com.philippabather.properproperties.constants.Constants.LOG_CREDENTIALS_INVALID;
+import static com.philippabather.properproperties.constants.Constants.SERVER_ERROR;
+
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -7,7 +10,8 @@ import androidx.annotation.NonNull;
 import com.philippabather.properproperties.api.PropertyApi;
 import com.philippabather.properproperties.api.PropertyApiInterface;
 import com.philippabather.properproperties.contract.LoginContract;
-import com.philippabather.properproperties.domain.Proprietor;
+import com.philippabather.properproperties.domain.LoginRequest;
+import com.philippabather.properproperties.domain.LoginResponse;
 
 import java.util.Objects;
 
@@ -29,20 +33,25 @@ public class LoginModel implements LoginContract.Model {
     }
 
     @Override
-    public void loadProprietorByUsernameAndPassword(OnLoadProprietorListener listener, String username, String password) {
-        Call<Proprietor> callProprietor = api.getProprietorByUsernameAndPassword(username, password);
+    public void authenticateUserByUsernameAndPassword(OnLoadAuthenticationListener listener, LoginRequest loginRequest) {
+        Call<LoginResponse> callLogin = api.authenticateUser(loginRequest);
 
-        callProprietor.enqueue(new Callback<Proprietor>() {
+        callLogin.enqueue(new Callback<LoginResponse>() {
             @Override
-            public void onResponse(@NonNull Call<Proprietor> call, @NonNull Response<Proprietor> response) {
-                Proprietor proprietor = response.body();
-                listener.onLoadProprietorSuccess(proprietor);
+            public void onResponse(@NonNull Call<LoginResponse> call, @NonNull Response<LoginResponse> response) {
+                LoginResponse loginResponse = response.body();
+
+                if (loginResponse != null && loginResponse.getUsername() != null && loginResponse.getToken() != null) {
+                } else {
+                    Log.e("authenticateUser", LOG_CREDENTIALS_INVALID);
+                }
+                listener.onLoadAuthenticationSuccess(loginResponse);
             }
 
             @Override
-            public void onFailure(@NonNull Call<Proprietor> call, @NonNull Throwable t) {
-                Log.e("getProprietor", Objects.requireNonNull(t.getMessage()));
-                listener.onLoadProprietorError("Se ha producido un error al connectar con el servidor.");
+            public void onFailure(@NonNull Call<LoginResponse> call, @NonNull Throwable t) {
+                Log.e("authenticateUser", Objects.requireNonNull(t.getMessage()));
+                listener.onAuthenticationError(SERVER_ERROR);
             }
         });
     }

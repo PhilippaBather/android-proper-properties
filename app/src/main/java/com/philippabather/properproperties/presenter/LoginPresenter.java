@@ -1,7 +1,9 @@
 package com.philippabather.properproperties.presenter;
 
 import com.philippabather.properproperties.contract.LoginContract;
-import com.philippabather.properproperties.domain.Proprietor;
+import com.philippabather.properproperties.domain.LoginRequest;
+import com.philippabather.properproperties.domain.LoginResponse;
+import com.philippabather.properproperties.domain.SessionManager;
 import com.philippabather.properproperties.model.LoginModel;
 import com.philippabather.properproperties.view.LoginView;
 
@@ -10,7 +12,7 @@ import com.philippabather.properproperties.view.LoginView;
  *
  * @author Philippa Bather
  */
-public class LoginPresenter implements LoginContract.Presenter, LoginContract.Model.OnLoadProprietorListener {
+public class LoginPresenter implements LoginContract.Presenter, LoginContract.Model.OnLoadAuthenticationListener {
 
     private final LoginModel model;
     private final LoginView view;
@@ -21,17 +23,19 @@ public class LoginPresenter implements LoginContract.Presenter, LoginContract.Mo
     }
 
     @Override
-    public void loadProprietorByUsernameAndPassword(String username, String password) {
-        model.loadProprietorByUsernameAndPassword(this, username, password);
+    public void onLoadAuthenticationSuccess(LoginResponse loginResponse) {
+        view.getUserSession(loginResponse);
+
     }
 
     @Override
-    public void onLoadProprietorSuccess(Proprietor proprietor) {
-        view.getProprietor(proprietor);
-    }
-
-    @Override
-    public void onLoadProprietorError(String msg) {
+    public void onAuthenticationError(String msg) {
         view.showMessage(msg);
     }
+
+    @Override
+    public void authenticateUser(LoginRequest loginRequest) {
+        model.authenticateUserByUsernameAndPassword(this, loginRequest);
+    }
+
 }

@@ -23,13 +23,13 @@ public class PropertyRegistrationPresenter implements PropertyRegistrationContra
     }
 
     @Override
-    public void createNewRentalProperty(long proprietorId, RentalProperty rental) {
-        model.createNewRentalProperty(this, proprietorId, rental);
+    public void createNewRentalProperty(String token, long proprietorId, RentalProperty rental) {
+        model.createNewRentalProperty(this, token, proprietorId, rental);
     }
 
     @Override
-    public void createNewSaleProperty(long proprietorId, SaleProperty sale) {
-        model.createNewSaleProperty(this, proprietorId, sale);
+    public void createNewSaleProperty(String token, long proprietorId, SaleProperty sale) {
+        model.createNewSaleProperty(this, token, proprietorId, sale);
     }
 
     @Override

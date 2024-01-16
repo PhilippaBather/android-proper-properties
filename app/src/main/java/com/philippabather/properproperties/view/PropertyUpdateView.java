@@ -45,7 +45,6 @@ public class PropertyUpdateView extends AppCompatActivity implements PropertyUpd
         setContentView(R.layout.activity_update_property);
 
         Intent intent = getIntent();
-        proprietorId = Long.parseLong(Objects.requireNonNull(intent.getStringExtra(INTENT_EXTRA_PROPRIETOR_ID)));
         propertyStatus = PropertyStatus.valueOf(intent.getStringExtra(INTENT_EXTRA_PROPERTY_STATUS));
 
         goToFragment(intent, propertyStatus);
@@ -55,7 +54,6 @@ public class PropertyUpdateView extends AppCompatActivity implements PropertyUpd
             rental = intent.getParcelableExtra(INTENT_EXTRA_PROPERTY);
             rentalUpdateFragment = new RentalUpdateFragment();
             Bundle bundle = new Bundle();
-            bundle.putLong(INTENT_EXTRA_PROPRIETOR_ID, proprietorId);
             bundle.putParcelable(BUNDLE_ARGUMENT_RENTAL, rental);
             rentalUpdateFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.fl_frag_management, rentalUpdateFragment).commit();
