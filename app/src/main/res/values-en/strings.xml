@@ -21,6 +21,7 @@
     <string name="et_add_property_hint_bathrooms">Number of bathrooms</string>
     <string name="tv_add_property_description">Description</string>
     <string name="et_add_property_hint_description">Property description</string>
+    <string name="et_client_comment_observations">Add notes</string>
     <string name="app_name">ProperProperties</string>
     <string name="btn_back">Back</string>
     <string name="btn_add">Add</string>
@@ -57,4 +58,5 @@
     <string name="tv_login_title">Owner Login</string>
     <string name="toast_contacted_owner">Owner Contact</string>
     <string name="ui_login">Login details incorrect.  Please try again.</string>
+    <string name="btn_save_comment">Save Note</string>
 </resources>
