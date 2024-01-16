@@ -22,6 +22,9 @@ public class RentalFavourite {
     @ColumnInfo
     private Long rentalPropertyId;
 
+    @ColumnInfo
+    private String comment;
+
     public RentalFavourite() {
     }
 
@@ -47,11 +50,20 @@ public class RentalFavourite {
         this.rentalPropertyId = rentalPropertyId;
     }
 
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
     @Override
     public String toString() {
         return "RentalFavourite{" +
                 "id=" + id +
                 ", rentalPropertyId=" + rentalPropertyId +
+                ", comment='" + comment + '\'' +
                 '}';
     }
 }

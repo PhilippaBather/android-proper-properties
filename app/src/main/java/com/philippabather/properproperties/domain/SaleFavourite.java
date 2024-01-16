@@ -21,6 +21,9 @@ public class SaleFavourite {
     @ColumnInfo
     private Long salePropertyId;
 
+    @ColumnInfo
+    private String comment;
+
     public SaleFavourite(@NonNull Long salePropertyId) {
         this.salePropertyId = salePropertyId;
     }
@@ -43,11 +46,20 @@ public class SaleFavourite {
         this.salePropertyId = salePropertyId;
     }
 
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
     @Override
     public String toString() {
         return "SaleFavourite{" +
                 "id=" + id +
                 ", salePropertyId=" + salePropertyId +
+                ", comment='" + comment + '\'' +
                 '}';
     }
 }
