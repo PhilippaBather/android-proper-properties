@@ -1,7 +1,9 @@
 package com.philippabather.properproperties.view;
 
 import static com.philippabather.properproperties.constants.Constants.BUNDLE_ARGUMENT_RENTAL;
+import static com.philippabather.properproperties.constants.Constants.BUNDLE_ARGUMENT_RENTAL_ID;
 import static com.philippabather.properproperties.constants.Constants.BUNDLE_ARGUMENT_SALE;
+import static com.philippabather.properproperties.constants.Constants.BUNDLE_ARGUMENT_SALE_ID;
 import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_RENTAL_ID;
 import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_SALE_ID;
 import static java.lang.Long.parseLong;
@@ -34,6 +36,8 @@ public class PropertyDetailView extends AppCompatActivity implements PropertyDet
 
     private PropertyDetailPresenter presenter;
 
+    private long rentalId;
+    private long saleId;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,8 +53,10 @@ public class PropertyDetailView extends AppCompatActivity implements PropertyDet
         String saleIdStr = intent.getStringExtra(INTENT_EXTRA_SALE_ID);
 
         if (rentalIdStr != null) {
+            rentalId = Long.parseLong(rentalIdStr);
             presenter.loadSelectedRentalProperty(parseLong(rentalIdStr));
         } else if (saleIdStr != null) {
+            saleId = Long.parseLong(saleIdStr);
             presenter.loadSelectedSaleProperty(parseLong(saleIdStr));
         }
     }
@@ -84,6 +90,7 @@ public class PropertyDetailView extends AppCompatActivity implements PropertyDet
         rentalFragment = new RentalClientDetailFragment();
         Bundle bundle = new Bundle();
         bundle.putParcelable(BUNDLE_ARGUMENT_RENTAL, loadedRental);
+        bundle.putLong(BUNDLE_ARGUMENT_RENTAL_ID, rentalId);
         rentalFragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.fl_frag_management, rentalFragment).commit();
     }
@@ -93,6 +100,7 @@ public class PropertyDetailView extends AppCompatActivity implements PropertyDet
         saleFragment = new SaleClientDetailFragment();
         Bundle bundle = new Bundle();
         bundle.putParcelable(BUNDLE_ARGUMENT_SALE, loadedSale);
+        bundle.putLong(BUNDLE_ARGUMENT_SALE_ID, saleId);
         saleFragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.fl_frag_management, saleFragment).commit();
     }
