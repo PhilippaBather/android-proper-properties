@@ -108,7 +108,7 @@ public class RentalPropertyHolder extends RecyclerView.ViewHolder {
             // 2.2 pinta la estrella
             ibPropertyFavourite.setColorFilter(parentView.getContext().getColor(mint));
         } else {
-            // 3.1 isi no existe, añadelo al local DB (post)
+            // 3.1 si no existe, añadelo al local DB (post)
             localDB.rentalPropertyDao().insert(new RentalFavourite(rental.getId()));
             // 3.2 pinta la estrella
             ibPropertyFavourite.setColorFilter(parentView.getContext().getColor(barbie_pink));
