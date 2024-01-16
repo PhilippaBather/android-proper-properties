@@ -1,7 +1,6 @@
 package com.philippabather.properproperties.view;
 
 import static com.philippabather.properproperties.constants.Constants.BUNDLE_ARGUMENT_SALE;
-import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_PROPRIETOR_ID;
 import static com.philippabather.properproperties.map.MapUtils.initializePointAnnotationManager;
 import static com.philippabather.properproperties.map.MapUtils.setCameraPositionAndZoom;
 
@@ -33,6 +32,7 @@ import com.philippabather.properproperties.R;
 import com.philippabather.properproperties.domain.PropertyStatus;
 import com.philippabather.properproperties.domain.PropertyType;
 import com.philippabather.properproperties.domain.SaleProperty;
+import com.philippabather.properproperties.domain.SessionManager;
 import com.philippabather.properproperties.map.MapUtils;
 import com.philippabather.properproperties.presenter.PropertyUpdatePresenter;
 import com.philippabather.properproperties.utils.SpinnerUtils;
@@ -72,7 +72,7 @@ public class SaleUpdateFragment extends Fragment implements AdapterView.OnItemSe
 
     private PropertyUpdatePresenter presenter;
     private SaleProperty saleProperty;
-    private long proprietorId;
+    private SessionManager sessionManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -82,7 +82,6 @@ public class SaleUpdateFragment extends Fragment implements AdapterView.OnItemSe
 
         assert getArguments() != null;
         saleProperty = getArguments().getParcelable(BUNDLE_ARGUMENT_SALE);
-        proprietorId = getArguments().getLong(INTENT_EXTRA_PROPRIETOR_ID);
 
         bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.blue_marker_view);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(view.getContext(),
@@ -92,6 +91,7 @@ public class SaleUpdateFragment extends Fragment implements AdapterView.OnItemSe
         setUpMap();
         setFields();
 
+        sessionManager = new SessionManager(view.getContext());
         presenter = new PropertyUpdatePresenter((PropertyUpdateView) view.getContext());
 
         return view;
@@ -170,12 +170,11 @@ public class SaleUpdateFragment extends Fragment implements AdapterView.OnItemSe
 
     private void goToOwnerPropertyView(View view) {
         Intent intent = new Intent(view.getContext(), OwnerPropertyView.class);
-        intent.putExtra(INTENT_EXTRA_PROPRIETOR_ID, String.valueOf(proprietorId));
         startActivity(intent);
     }
 
     private void handleDeleteProperty(View view) {
-        presenter.deleteSelectedProperty(saleProperty.getId(), PropertyStatus.SALE);
+        presenter.deleteSelectedProperty(sessionManager.getToken(), saleProperty.getId(), PropertyStatus.SALE);
         goToOwnerPropertyView(view);
     }
 
@@ -192,6 +191,6 @@ public class SaleUpdateFragment extends Fragment implements AdapterView.OnItemSe
         SaleProperty sale = new SaleProperty(PropertyStatus.SALE, propertyType, latitude, longitude,
                 size, description, numBedrooms, numBathrooms, hasParking, hasLift, price, leasehold);
 
-        presenter.updateSaleProperty(saleProperty.getId(), sale);
+        presenter.updateSaleProperty(sessionManager.getToken(), saleProperty.getId(), sale);
     }
 }

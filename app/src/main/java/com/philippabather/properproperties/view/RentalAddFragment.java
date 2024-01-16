@@ -32,6 +32,7 @@ import com.philippabather.properproperties.R;
 import com.philippabather.properproperties.domain.PropertyStatus;
 import com.philippabather.properproperties.domain.PropertyType;
 import com.philippabather.properproperties.domain.RentalProperty;
+import com.philippabather.properproperties.domain.SessionManager;
 import com.philippabather.properproperties.map.MapUtils;
 import com.philippabather.properproperties.presenter.PropertyRegistrationPresenter;
 import com.philippabather.properproperties.utils.SpinnerUtils;
@@ -70,6 +71,7 @@ public class RentalAddFragment extends Fragment implements AdapterView.OnItemSel
     private PointAnnotationManager pointAnnotationManager; // MapBox libraries
     private GesturesPlugin gesturesPlugin;
     private Bitmap bitmap;
+    private SessionManager sessionManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,7 +80,7 @@ public class RentalAddFragment extends Fragment implements AdapterView.OnItemSel
 
         View view = inflater.inflate(R.layout.fragment_rental_add, container, false);
 
-        proprietorId = getArguments().getLong(INTENT_EXTRA_PROPRIETOR_ID);
+//        proprietorId = getArguments().getLong(INTENT_EXTRA_PROPRIETOR_ID);
 
         findViews(view);
         bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.blue_marker_view);
@@ -88,6 +90,7 @@ public class RentalAddFragment extends Fragment implements AdapterView.OnItemSel
         addOnClickListeners();
         setUpMap();
 
+        sessionManager = new SessionManager(view.getContext());
         presenter = new PropertyRegistrationPresenter((PropertyRegistrationView) view.getContext());
 
         return view;
@@ -139,7 +142,7 @@ public class RentalAddFragment extends Fragment implements AdapterView.OnItemSel
                 size, description, numBedrooms, numBathrooms, isParking, isLift,
                 price, deposit, minTen, hasFurniture, isPets);
 
-        presenter.createNewRentalProperty(proprietorId, rental);
+        presenter.createNewRentalProperty(sessionManager.getToken(), sessionManager.getUserId(), rental);
         resetViews();
     }
 

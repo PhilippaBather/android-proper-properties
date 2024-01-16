@@ -7,6 +7,7 @@
     <string name="btn_calculate">Calcula</string>
     <string name="btn_delete">Eliminar</string>
     <string name="btn_login" translatable="false">Login</string>
+    <string name="btn_save_comment">Guardar observación</string>
     <string name="btn_submit" translatable="false">Submit</string>
     <string name="btn_update">Actualizar</string>
     <string name="cb_add_property_furniture">Muebles</string>
@@ -21,6 +22,7 @@
     <string name="et_add_property_hint_min_ten">Mínima duración del alquiler</string>
     <string name="et_add_property_hint_price">Precio</string>
     <string name="et_add_property_hint_size">Tamaño en metros cuadrados</string>
+    <string name="et_client_comment_observations">Añadir comentarios</string>
     <string name="img_btn_map_search_view_item_favourite">Favorito</string>
     <string name="img_btn_map_search_item_contact">Contacto</string>
     <string name="img_landing_page_primary_image">A luxury, contemporary villa with pool</string>
@@ -60,4 +62,6 @@
     <string name="txt_fld_mortgage_adviser_interest_rate">Tasa de Interés</string>
     <string name="txt_fld_mortgage_adviser_loan_term">Plazo del Préstamo</string>
     <string name="txt_fld_mortgage_adviser_postcode">Código Postal</string>
+    <string name="ui_login">Entrada inválida. Reintroduzca el usuario y la contraseña.</string>
+    <string name="logout" translatable="false">Logout</string>
 </resources>

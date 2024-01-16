@@ -55,28 +55,11 @@ public class RentalPropertyAdapter extends RecyclerView.Adapter<RentalPropertyHo
         int numBathrooms = rentalProperty.getNumBathrooms();
         int numBedrooms = rentalProperty.getNumBedrooms();
         rentalPropertyHolder.tvPropertyDescription.setText(rentalProperty.getDescription());
-        String overview = String.format("Bedrooms: %d\t  Bathrooms: %d\t  Lift: %c", numBedrooms, numBathrooms, (isLift ?  tick : cross));
+        String overview = String.format("Bedrooms: %d\t  Bathrooms: %d\t  Lift: %c", numBedrooms, numBathrooms, (isLift ? tick : cross));
         rentalPropertyHolder.tvPropertyOverview.setText(overview);
 
-        if (favourites != null) {
-            setFavourites(rentalPropertyHolder, rentalProperty);
-        }
-
-    }
-
-    /**
-     * Establece los favoritos.
-     * @param rentalPropertyHolder - holder
-     * @param rental - inmueble de alquiler
-     */
-    private void setFavourites(RentalPropertyHolder rentalPropertyHolder, RentalProperty rental) {
-        long rentalId = rental.getId();
-        for (RentalFavourite favourite:
-             favourites) {
-            boolean isFavourite = rentalId == favourite.getRentalPropertyId();
-            rental.setFavourite(isFavourite);
-            rentalPropertyHolder.updateImageButtonTint(rental);
-        }
+        // pinta la estrella si el mueble es un favorito
+        rentalPropertyHolder.addFavourites(rentalProperty);
     }
 
     @Override

@@ -31,13 +31,14 @@ public class PropertyRegistrationModel implements PropertyRegistrationContract.M
     }
 
     @Override
-    public void createNewRentalProperty(OnRegisterPropertyListener listener, long proprietorId, RentalProperty rental) {
-        Call<RentalProperty> newRental = api.saveRentalProperty(proprietorId, rental);
+    public void createNewRentalProperty(OnRegisterPropertyListener listener, String token, long proprietorId, RentalProperty rental) {
+        Call<RentalProperty> newRental = api.saveRentalProperty(token, proprietorId, rental);
 
         newRental.enqueue(new Callback<RentalProperty>() {
             @Override
             public void onResponse(@NonNull Call<RentalProperty> call, @NonNull Response<RentalProperty> response) {
                 RentalProperty rental = response.body();
+                Log.e("rental", rental.toString());
                 listener.onRegisterRentalPropertySuccess(rental);
             }
 
@@ -51,8 +52,8 @@ public class PropertyRegistrationModel implements PropertyRegistrationContract.M
     }
 
     @Override
-    public void createNewSaleProperty(OnRegisterPropertyListener listener, long proprietorId, SaleProperty sale) {
-        Call<SaleProperty> newSale = api.saveSaleProperty(proprietorId, sale);
+    public void createNewSaleProperty(OnRegisterPropertyListener listener, String token, long proprietorId, SaleProperty sale) {
+        Call<SaleProperty> newSale = api.saveSaleProperty(token, proprietorId, sale);
 
         newSale.enqueue(new Callback<SaleProperty>() {
             @Override

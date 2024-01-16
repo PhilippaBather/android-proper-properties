@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.philippabather.properproperties.R;
 import com.philippabather.properproperties.contract.PropertyRegistrationContract;
+import com.philippabather.properproperties.domain.SessionManager;
 
 import java.util.Objects;
 
@@ -30,14 +31,15 @@ public class PropertyRegistrationView extends AppCompatActivity implements Prope
     private RentalAddFragment rentalFragment;
     private SaleAddFragment saleFragment;
     private long proprietorId;
+//    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_property);
 
-        Intent intent = getIntent();
-        proprietorId = Long.parseLong(Objects.requireNonNull(intent.getStringExtra(INTENT_EXTRA_PROPRIETOR_ID)));
+//        Intent intent = getIntent();
+//        proprietorId = Long.parseLong(Objects.requireNonNull(intent.getStringExtra(INTENT_EXTRA_PROPRIETOR_ID)));
 
         findViews();
         rgAddProperty.setOnCheckedChangeListener(this::handlePropertyType);
@@ -55,15 +57,15 @@ public class PropertyRegistrationView extends AppCompatActivity implements Prope
     private void handlePropertyType(RadioGroup grp, int id) {
         if (rbtnRent.isChecked()) {
             // infla el Fragment, remplazando el otro fragment si existe
-            Bundle bundle = new Bundle();
-            bundle.putLong(INTENT_EXTRA_PROPRIETOR_ID, proprietorId);
-            rentalFragment.setArguments(bundle);
+//            Bundle bundle = new Bundle();
+//            bundle.putLong(INTENT_EXTRA_PROPRIETOR_ID, proprietorId);
+//            rentalFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.fl_frag_management, rentalFragment).commit();
         } else {
             // infla el Fragment, remplazando el otro fragment si existe
-            Bundle bundle = new Bundle();
-            bundle.putLong(INTENT_EXTRA_PROPRIETOR_ID, proprietorId);
-            saleFragment.setArguments(bundle);
+//            Bundle bundle = new Bundle();
+//            bundle.putLong(INTENT_EXTRA_PROPRIETOR_ID, proprietorId);
+//            saleFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.fl_frag_management, saleFragment).commit();
         }
     }
