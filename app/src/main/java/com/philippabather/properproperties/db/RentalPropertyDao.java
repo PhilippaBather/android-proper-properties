@@ -1,7 +1,6 @@
 package com.philippabather.properproperties.db;
 
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
@@ -20,12 +19,15 @@ public interface RentalPropertyDao {
     @Query("SELECT * FROM RentalFavourite")
     List<RentalFavourite> getAll();
 
-    @Query("SELECT * FROM RentalFavourite where rentalPropertyId = :rentalPropertyId")
+    @Query("SELECT * FROM RentalFavourite WHERE rentalPropertyId = :rentalPropertyId")
     RentalFavourite getFavouriteByRentalPropertyId(long rentalPropertyId);
 
     @Insert
     void insert(RentalFavourite favourite);
 
-    @Delete
-    void delete(RentalFavourite favourite);
+    @Query("DELETE FROM RentalFavourite WHERE id = :id")
+    void deleteFavouriteByFavouriteId(long id);
+
+    @Query("UPDATE RentalFavourite SET comment = :comment WHERE rentalPropertyId = :rentalPropertyId")
+    void updateFavouriteByRentalPropertyId(long rentalPropertyId, String comment);
 }
