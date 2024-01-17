@@ -59,4 +59,10 @@
     <string name="toast_contacted_owner">Owner Contact</string>
     <string name="ui_login">Login details incorrect.  Please try again.</string>
     <string name="btn_save_comment">Save Note</string>
+    <string name="ui_alert_dialog_delete_property_msg">Are you sure you want to delete the property?</string>
+    <string name="ui_alert_dialog_btn_delete">Delete</string>
+    <string name="ui_alert_dialog_btn_cancel">Cancel</string>
+    <string name="ui_alert_dialog_btn_update">Update</string>
+    <string name="ui_alert_dialog_update_msg">Are you sure you want to update the property details?</string>
+    <string name="ui_alert_dialog_logout_msg">Are you sure you want to logout?</string>
 </resources>

@@ -4,6 +4,7 @@ import static com.philippabather.properproperties.constants.Constants.INTENT_EXT
 import static com.philippabather.properproperties.map.MapUtils.initializePointAnnotationManager;
 import static com.philippabather.properproperties.map.MapUtils.setCameraPositionAndZoom;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,6 +20,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.mapbox.geojson.Point;
@@ -125,8 +127,22 @@ public class SaleAddFragment extends Fragment implements AdapterView.OnItemSelec
         SaleProperty sale = new SaleProperty(PropertyStatus.SALE, propertyType, latitude, longitude,
                 size, description, numBedrooms, numBathrooms, hasParking, hasLift, price, leasehold);
 
-        presenter.createNewSaleProperty(sessionManager.getToken(), sessionManager.getUserId(), sale);
-        resetViews();
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setMessage(getResources().getString(R.string.ui_alert_dialog_add_property_msg))
+                .setPositiveButton(getResources().getString(R.string.ui_alert_dialog_btn_add), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        presenter.createNewSaleProperty(sessionManager.getToken(), sessionManager.getUserId(), sale);
+                        resetViews();
+                    }
+                }).setNegativeButton(getResources().getString(R.string.ui_alert_dialog_btn_cancel), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        return;
+                    }
+                });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
     private void goBackToOwnerPropertyView(View view) {
         Intent intent = new Intent(view.getContext(), OwnerPropertyView.class);
