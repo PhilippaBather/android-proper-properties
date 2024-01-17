@@ -4,15 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.philippabather.properproperties.R;
 import com.philippabather.properproperties.adapter.RentalPropertyAdapter;
 import com.philippabather.properproperties.adapter.SalePropertyAdapter;
@@ -37,6 +38,7 @@ public class PropertyListView extends AppCompatActivity implements PropertyListC
 
     private RadioButton rbtnBuy;
     private RadioGroup radioGroup;
+    private View layoutPropertyList;
 
     private List<RentalProperty> rentalPropertyList;
     private List<SaleProperty> salePropertyList;
@@ -75,8 +77,8 @@ public class PropertyListView extends AppCompatActivity implements PropertyListC
         recyclerViewRental.setLayoutManager(linearLayoutManager);
 
         // create adapters
-        rentalPropertyAdapter = new RentalPropertyAdapter(rentalPropertyList, rentalFavourites, Role.CLIENT, 0);
-        salePropertyAdapter = new SalePropertyAdapter(salePropertyList, saleFavourites, Role.CLIENT, 0);
+        rentalPropertyAdapter = new RentalPropertyAdapter(rentalPropertyList, Role.CLIENT);
+        salePropertyAdapter = new SalePropertyAdapter(salePropertyList, Role.CLIENT);
         recyclerViewRental.setAdapter(rentalPropertyAdapter);
         recyclerViewSale.setAdapter(salePropertyAdapter);
 
@@ -92,29 +94,17 @@ public class PropertyListView extends AppCompatActivity implements PropertyListC
     }
 
     private void findViews() {
+        layoutPropertyList = findViewById(R.id.layout_activity_property_list);
         rbtnBuy = findViewById(R.id.rbtn_search_map_buy);
         radioGroup = findViewById(R.id.rg_search_map_search_type);
     }
 
-    /**
-     * Infla el menú de ítems en action_bar.xml
-     *
-     * @param menu - el menú en el 'action bar'
-     * @return boolean
-     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.action_bar, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
-    /**
-     * Maneja la seleción y la acción correspondiente de un ítem
-     * en el action bar
-     *
-     * @param item ítem de menú
-     * @return boolean
-     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         Intent intent = new Intent();
@@ -166,6 +156,7 @@ public class PropertyListView extends AppCompatActivity implements PropertyListC
         rentalFavourites.clear();
         rentalFavourites.addAll(properties);
         rentalPropertyAdapter.notifyDataSetChanged();
+        salePropertyAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -173,11 +164,12 @@ public class PropertyListView extends AppCompatActivity implements PropertyListC
         saleFavourites.clear();
         saleFavourites.addAll(properties);
         salePropertyAdapter.notifyDataSetChanged();
+        rentalPropertyAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void showMessage(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+        Snackbar.make(layoutPropertyList, msg, Snackbar.LENGTH_LONG).show();
     }
 
 }

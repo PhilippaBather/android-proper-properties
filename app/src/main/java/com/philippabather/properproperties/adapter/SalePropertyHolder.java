@@ -4,7 +4,6 @@ import static com.philippabather.properproperties.R.color.barbie_pink;
 import static com.philippabather.properproperties.R.color.mint;
 import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_PROPERTY;
 import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_PROPERTY_STATUS;
-import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_PROPRIETOR_ID;
 import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_SALE_ID;
 
 import android.content.Intent;
@@ -47,13 +46,10 @@ public class SalePropertyHolder extends RecyclerView.ViewHolder {
     protected TextView tvPropertyDescription;
 
     private final AppLocalDB localDB;
-    private long proprietorId;
 
-    public SalePropertyHolder(@NonNull View view, List<SaleProperty> properties,
-                              Role role, long proprietorId) {
+    public SalePropertyHolder(@NonNull View view, List<SaleProperty> properties, Role role) {
         super(view);
         this.parentView = view;
-        this.proprietorId = proprietorId;
 
         findViews();
         cvPropertyItem.setOnClickListener(v -> goToPropertyDetailsActivity(properties, role));
@@ -99,27 +95,30 @@ public class SalePropertyHolder extends RecyclerView.ViewHolder {
 
     private void addToFavourites(List<SaleProperty> properties) {
         SaleProperty sale = getCurrentProperty(properties);
-        sale.setFavourite(!sale.isFavourite());
-        updateLocalDB(sale);
-        updateItemBackgroundOnClick(sale);
+        updateSaleFavourite(sale);
     }
 
-    private void updateLocalDB(SaleProperty sale) {
-        if (!sale.isFavourite()) {
-            SaleFavourite favourite = localDB.salePropertyDao().getFavouriteBySalePropertyId(sale.getId());
-            localDB.salePropertyDao().delete(favourite);
+    private void updateSaleFavourite(SaleProperty sale) {
+        SaleFavourite favourite = localDB.salePropertyDao().getFavouriteBySalePropertyId(sale.getId());
+        if (favourite != null) {
+            // 2.1 si existe en local DB, quítalo (delete)
+            localDB.salePropertyDao().deleteFavouriteByFavouriteId(favourite.getId());
+            // 2.2 pinta la estrella
+            ibPropertyFavourite.setColorFilter(parentView.getContext().getColor(mint));
         } else {
-            SaleFavourite favourite = new SaleFavourite(sale.getId());
-            localDB.salePropertyDao().insert(favourite);
+            // 3.1 isi no existe, añadelo al local DB (post)
+            localDB.salePropertyDao().insert(new SaleFavourite(sale.getId()));
+            // 3.2 pinta la estrella
+            ibPropertyFavourite.setColorFilter(parentView.getContext().getColor(barbie_pink));
         }
     }
 
-    protected void updateItemBackgroundOnClick(SaleProperty saleProperty) {
-        if(saleProperty.isFavourite()){
+    protected void addFavourites(SaleProperty saleProperty) {
+        SaleFavourite favourite = localDB.salePropertyDao().getFavouriteBySalePropertyId(saleProperty.getId());
+        if (favourite != null) {
             ibPropertyFavourite.setColorFilter(parentView.getContext().getColor(barbie_pink));
         } else {
             ibPropertyFavourite.setColorFilter(parentView.getContext().getColor(mint));
         }
     }
-
 }

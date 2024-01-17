@@ -77,9 +77,6 @@ public class SaleAddFragment extends Fragment implements AdapterView.OnItemSelec
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sale_add, container, false);
 
-//        assert getArguments() != null;
-//        proprietorId = getArguments().getLong(INTENT_EXTRA_PROPRIETOR_ID);
-
         findViews(view);
         bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.blue_marker_view);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(view.getContext(),

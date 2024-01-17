@@ -1,7 +1,6 @@
 package com.philippabather.properproperties.db;
 
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
@@ -26,9 +25,9 @@ public interface SalePropertyDao {
     @Insert
     void insert(SaleFavourite favourite);
 
-    @Delete
-    void delete(SaleFavourite favourite);
+    @Query("DELETE FROM SaleFavourite WHERE id = :id")
+    void deleteFavouriteByFavouriteId(long id);
 
     @Query("UPDATE SaleFavourite SET comment = :comment WHERE salePropertyId = :salePropertyId")
-    void updateFavouriteByRentalPropertyId(long salePropertyId, String comment);
+    void updateFavouriteBySalePropertyId(long salePropertyId, String comment);
 }

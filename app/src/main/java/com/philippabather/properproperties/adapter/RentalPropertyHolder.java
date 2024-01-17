@@ -45,13 +45,10 @@ public class RentalPropertyHolder extends RecyclerView.ViewHolder {
     protected TextView tvPropertyOverview; // detalles principales
     protected TextView tvPropertyDescription;
     private final AppLocalDB localDB;
-//    private final long proprietorId;
 
-    public RentalPropertyHolder(@NonNull View view, List<RentalProperty> properties,
-                                Role role, long proprietorId) {
+    public RentalPropertyHolder(@NonNull View view, List<RentalProperty> properties, Role role) {
         super(view);
         this.parentView = view;
-//        this.proprietorId = proprietorId;
 
         findViews();
         cvPropertyItem.setOnClickListener(v -> goToPropertyDetailsActivity(properties, role));
@@ -108,7 +105,7 @@ public class RentalPropertyHolder extends RecyclerView.ViewHolder {
             // 2.2 pinta la estrella
             ibPropertyFavourite.setColorFilter(parentView.getContext().getColor(mint));
         } else {
-            // 3.1 isi no existe, añadelo al local DB (post)
+            // 3.1 si no existe, añadelo al local DB (post)
             localDB.rentalPropertyDao().insert(new RentalFavourite(rental.getId()));
             // 3.2 pinta la estrella
             ibPropertyFavourite.setColorFilter(parentView.getContext().getColor(barbie_pink));

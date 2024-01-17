@@ -12,12 +12,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.philippabather.properproperties.R;
 import com.philippabather.properproperties.contract.PropertyDetailContract;
 import com.philippabather.properproperties.domain.RentalProperty;
@@ -31,6 +33,7 @@ import com.philippabather.properproperties.presenter.PropertyDetailPresenter;
  */
 public class PropertyDetailView extends AppCompatActivity implements PropertyDetailContract.View {
 
+    private View layoutPropertyDetails;
     private RentalClientDetailFragment rentalFragment;
     private SaleClientDetailFragment saleFragment;
 
@@ -42,6 +45,7 @@ public class PropertyDetailView extends AppCompatActivity implements PropertyDet
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_property_details);
+        layoutPropertyDetails = findViewById(R.id.layout_property_details);
         presenter = new PropertyDetailPresenter(this);
         getDataFromIntent();
 
@@ -107,7 +111,7 @@ public class PropertyDetailView extends AppCompatActivity implements PropertyDet
 
     @Override
     public void showMessage(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+        Snackbar.make(layoutPropertyDetails, msg, Snackbar.LENGTH_LONG).show();
     }
 
 }

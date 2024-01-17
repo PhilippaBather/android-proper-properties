@@ -1,7 +1,6 @@
 package com.philippabather.properproperties.view;
 
 import static com.philippabather.properproperties.constants.Constants.BUNDLE_ARGUMENT_PARCELABLE_LIST_RENTALS;
-import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_PROPRIETOR_ID;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -31,8 +30,6 @@ public class RecyclerViewOwnerRentalFragment extends Fragment {
     private RentalPropertyAdapter adapter;
     private LinearLayoutManager linearLayoutManager;
     private RecyclerView recyclerView;
-    private long proprietorId;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -42,8 +39,6 @@ public class RecyclerViewOwnerRentalFragment extends Fragment {
         rentalPropertyList = new ArrayList<>();
         assert getArguments() != null;
         rentalPropertyList = getArguments().getParcelableArrayList(BUNDLE_ARGUMENT_PARCELABLE_LIST_RENTALS);
-        proprietorId = getArguments().getLong(INTENT_EXTRA_PROPRIETOR_ID);
-
 
         // crea el RecyclerView
         recyclerView = view.findViewById(R.id.recyclerview_rental_property_list);
@@ -54,7 +49,7 @@ public class RecyclerViewOwnerRentalFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         // establece el Adapter y bindea al RecyclerView
-        adapter = new RentalPropertyAdapter(rentalPropertyList, null, Role.PROPRIETOR, proprietorId);
+        adapter = new RentalPropertyAdapter(rentalPropertyList, Role.PROPRIETOR);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
