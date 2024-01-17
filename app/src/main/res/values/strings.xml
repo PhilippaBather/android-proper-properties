@@ -35,7 +35,9 @@
     <string name="rbtn_search_map_rent">Alquiler</string>
     <string name="rbtn_search_map_buy">Comprar</string>
     <string name="sv_content_description" translatable="false">Scrollable</string>
-    <string name="toast_contacted_owner">Propietario Contactado</string>
+    <string name="spinner_commercial">Local</string>
+    <string name="spinner_flat">Piso</string>
+    <string name="spinner_house">Casa</string>
     <string name="tv_add_property_deposit">Depósito</string>
     <string name="tv_add_property_description">Descripción</string>
     <string name="tv_add_property_min_tenancy">Mín. alquiler</string>
@@ -74,4 +76,5 @@
     <string name="ui_login">Entrada inválida. Reintroduzca el usuario y la contraseña.</string>
     <string name="ui_alert_dialog_add_property_msg">¿Estas seguro de que deseas añadir el inmueble?</string>
     <string name="ui_alert_dialog_btn_add">Añadir</string>
+    <string name="ui_snackbar_owner_contacted">Propietario Contactado</string>
 </resources>
