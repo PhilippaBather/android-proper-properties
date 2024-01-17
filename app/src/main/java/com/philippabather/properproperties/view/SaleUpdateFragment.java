@@ -4,6 +4,8 @@ import static com.philippabather.properproperties.constants.Constants.BUNDLE_ARG
 import static com.philippabather.properproperties.map.MapUtils.initializePointAnnotationManager;
 import static com.philippabather.properproperties.map.MapUtils.setCameraPositionAndZoom;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -174,8 +176,23 @@ public class SaleUpdateFragment extends Fragment implements AdapterView.OnItemSe
     }
 
     private void handleDeleteProperty(View view) {
-        presenter.deleteSelectedProperty(sessionManager.getToken(), saleProperty.getId(), PropertyStatus.SALE);
-        goToOwnerPropertyView(view);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setMessage(getResources().getString(R.string.ui_alert_dialog_delete_property_msg)).setPositiveButton(getResources().getString(R.string.btn_delete),
+                new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                presenter.deleteSelectedProperty(sessionManager.getToken(), saleProperty.getId(), PropertyStatus.SALE);
+                goToOwnerPropertyView(view);
+            }
+        }).setNegativeButton(getResources().getString(R.string.ui_alert_dialog_btn_cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                return;
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
     }
 
     private void handleUpdateProperty(View view) {
@@ -191,6 +208,20 @@ public class SaleUpdateFragment extends Fragment implements AdapterView.OnItemSe
         SaleProperty sale = new SaleProperty(PropertyStatus.SALE, propertyType, latitude, longitude,
                 size, description, numBedrooms, numBathrooms, hasParking, hasLift, price, leasehold);
 
-        presenter.updateSaleProperty(sessionManager.getToken(), saleProperty.getId(), sale);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setMessage(getResources().getString(R.string.ui_alert_dialog_update_msg))
+                .setPositiveButton(R.string.ui_alert_dialog_btn_update, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                presenter.updateSaleProperty(sessionManager.getToken(), saleProperty.getId(), sale);
+            }
+        }).setNegativeButton(getResources().getString(R.string.ui_alert_dialog_btn_cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                return;
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }

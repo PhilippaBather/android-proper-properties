@@ -3,16 +3,17 @@ package com.philippabather.properproperties.view;
 import static com.philippabather.properproperties.constants.Constants.LOGIN_ERROR;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.philippabather.properproperties.R;
 import com.philippabather.properproperties.contract.LoginContract;
 import com.philippabather.properproperties.domain.LoginRequest;
@@ -30,6 +31,7 @@ public class LoginView extends AppCompatActivity implements LoginContract.View {
     private Button btnLogin;
     private EditText etPassword;
     private EditText etUsername;
+    private View loginLayout;
     private LoginPresenter presenter;
     private SessionManager sessionManager;
 
@@ -45,9 +47,33 @@ public class LoginView extends AppCompatActivity implements LoginContract.View {
         checkSession();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.action_bar, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent intent = new Intent();
+
+        if (item.getItemId() == R.id.mi_action_home) {
+            intent = new Intent(this, HomeView.class);
+        } else if (item.getItemId() == R.id.mi_action_mortgage_checker) {
+            intent = new Intent(this, MortgageCheckerView.class);
+        } else if (item.getItemId() == R.id.mi_action_property_list) {
+            intent = new Intent(this, PropertyListView.class);
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+        startActivity(intent);
+        return true;
+    }
+
     private void findViews() {
         btnBack = findViewById(R.id.btn_back);
         btnLogin = findViewById(R.id.btn_login);
+        loginLayout = findViewById(R.id.layout_login);
         etPassword = findViewById(R.id.et_login_password);
         etUsername = findViewById(R.id.et_login_username);
     }
@@ -82,7 +108,7 @@ public class LoginView extends AppCompatActivity implements LoginContract.View {
     @Override
     public void getUserSession(LoginResponse loginResponse) {
         if (loginResponse == null) {
-            Toast.makeText(this, "Credentials invalid", Toast.LENGTH_SHORT).show();
+            Snackbar.make(loginLayout, "Credentials invalid", Snackbar.LENGTH_LONG).show();
         } else {
             loginResponse.setLoggedIn(true);
             sessionManager.saveSession(loginResponse);
@@ -97,6 +123,6 @@ public class LoginView extends AppCompatActivity implements LoginContract.View {
 
     @Override
     public void showMessage(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+        Snackbar.make(loginLayout, msg, Snackbar.LENGTH_LONG).show();
     }
 }

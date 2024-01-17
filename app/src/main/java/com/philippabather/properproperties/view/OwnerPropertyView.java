@@ -2,8 +2,8 @@ package com.philippabather.properproperties.view;
 
 import static com.philippabather.properproperties.constants.Constants.BUNDLE_ARGUMENT_PARCELABLE_LIST_RENTALS;
 import static com.philippabather.properproperties.constants.Constants.BUNDLE_ARGUMENT_PARCELABLE_LIST_SALES;
-import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_PROPRIETOR_ID;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -88,40 +89,6 @@ public class OwnerPropertyView extends AppCompatActivity implements ProprietorCo
         flBtnAddProperty = findViewById(R.id.fl_btn_add_property);
     }
 
-    private void handleLogout(View view) {
-        sessionManager.deleteSession();
-        Intent intent = new Intent(this, LoginView.class);
-        startActivity(intent);
-    }
-
-
-    private void handlePropertySelection(RadioGroup grp, int id) {
-        long proprietorId = 1; // TODO update
-        if (rbtnRent.isChecked()) {
-            rentalPropertyList.clear();
-            // crea un bundle para enviar datos al Fragment
-            rentalPropertyList = proprietor.getRentalPropertyList();
-            ArrayList<RentalProperty> rentals = new ArrayList<RentalProperty>(rentalPropertyList);
-            Bundle bundle = new Bundle();
-            bundle.putLong(INTENT_EXTRA_PROPRIETOR_ID, proprietorId);
-            bundle.putParcelableArrayList(BUNDLE_ARGUMENT_PARCELABLE_LIST_RENTALS, rentals);
-            recyclerViewOwnerRentalFragment.setArguments(bundle);
-            // infla el Fragment, remplazando el otro fragment si existe
-            getSupportFragmentManager().beginTransaction().replace(R.id.fl_frag_management, recyclerViewOwnerRentalFragment).commit();
-        } else {
-            salePropertyList.clear();
-            // crea un bundle para enviar datos al Fragment
-            salePropertyList = proprietor.getSalePropertyList();
-            ArrayList<SaleProperty> sales = new ArrayList<>(salePropertyList);
-            Bundle bundle = new Bundle();
-            bundle.putLong(INTENT_EXTRA_PROPRIETOR_ID, proprietorId);
-            bundle.putParcelableArrayList(BUNDLE_ARGUMENT_PARCELABLE_LIST_SALES, sales);
-            recyclerViewOwnerSaleFragment.setArguments(bundle);
-            // infla el Fragment, remplazando el otro fragment si existe
-            getSupportFragmentManager().beginTransaction().replace(R.id.fl_frag_management, recyclerViewOwnerSaleFragment).commit();
-        }
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.action_bar, menu);
@@ -136,13 +103,62 @@ public class OwnerPropertyView extends AppCompatActivity implements ProprietorCo
             intent = new Intent(this, HomeView.class);
         } else if (item.getItemId() == R.id.mi_action_mortgage_checker) {
             intent = new Intent(this, MortgageCheckerView.class);
-        } else if (item.getItemId() == R.id.mi_action_search_map) {
+        } else if (item.getItemId() == R.id.mi_action_property_list) {
             intent = new Intent(this, PropertyListView.class);
         } else {
             return super.onOptionsItemSelected(item);
         }
         startActivity(intent);
         return true;
+    }
+
+    private void handleLogout(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(OwnerPropertyView.this);
+        builder.setMessage(getResources().getString(R.string.ui_alert_dialog_logout_msg))
+                .setPositiveButton(getResources().getString(R.string.ui_alert_dialog_btn_logout), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                sessionManager.deleteSession();
+                goToLoginView();
+            }
+        }).setNegativeButton(getResources().getString(R.string.ui_alert_dialog_btn_cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                return;
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    private void goToLoginView() {
+        Intent intent = new Intent(this, LoginView.class);
+        startActivity(intent);
+    }
+
+
+    private void handlePropertySelection(RadioGroup grp, int id) {
+        if (rbtnRent.isChecked()) {
+            rentalPropertyList.clear();
+            // crea un bundle para enviar datos al Fragment
+            rentalPropertyList = proprietor.getRentalPropertyList();
+            ArrayList<RentalProperty> rentals = new ArrayList<RentalProperty>(rentalPropertyList);
+            Bundle bundle = new Bundle();
+            bundle.putParcelableArrayList(BUNDLE_ARGUMENT_PARCELABLE_LIST_RENTALS, rentals);
+            recyclerViewOwnerRentalFragment.setArguments(bundle);
+            // infla el Fragment, remplazando el otro fragment si existe
+            getSupportFragmentManager().beginTransaction().replace(R.id.fl_frag_management, recyclerViewOwnerRentalFragment).commit();
+        } else {
+            salePropertyList.clear();
+            // crea un bundle para enviar datos al Fragment
+            salePropertyList = proprietor.getSalePropertyList();
+            ArrayList<SaleProperty> sales = new ArrayList<>(salePropertyList);
+            Bundle bundle = new Bundle();
+            bundle.putParcelableArrayList(BUNDLE_ARGUMENT_PARCELABLE_LIST_SALES, sales);
+            recyclerViewOwnerSaleFragment.setArguments(bundle);
+            // infla el Fragment, remplazando el otro fragment si existe
+            getSupportFragmentManager().beginTransaction().replace(R.id.fl_frag_management, recyclerViewOwnerSaleFragment).commit();
+        }
     }
 
     @Override

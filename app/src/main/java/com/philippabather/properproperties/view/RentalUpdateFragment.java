@@ -1,10 +1,11 @@
 package com.philippabather.properproperties.view;
 
 import static com.philippabather.properproperties.constants.Constants.BUNDLE_ARGUMENT_RENTAL;
-import static com.philippabather.properproperties.constants.Constants.INTENT_EXTRA_PROPRIETOR_ID;
 import static com.philippabather.properproperties.map.MapUtils.initializePointAnnotationManager;
 import static com.philippabather.properproperties.map.MapUtils.setCameraPositionAndZoom;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -76,7 +77,7 @@ public class RentalUpdateFragment extends Fragment implements AdapterView.OnItem
 
     private PropertyUpdatePresenter presenter;
     private RentalProperty rentalProperty;
-//    private long proprietorId;
+    //    private long proprietorId;
     private SessionManager sessionManager;
 
     @Override
@@ -87,7 +88,6 @@ public class RentalUpdateFragment extends Fragment implements AdapterView.OnItem
 
         assert getArguments() != null;
         rentalProperty = getArguments().getParcelable(BUNDLE_ARGUMENT_RENTAL);
-//        proprietorId = getArguments().getLong(INTENT_EXTRA_PROPRIETOR_ID);
 
         bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.blue_marker_view);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(view.getContext(),
@@ -122,7 +122,7 @@ public class RentalUpdateFragment extends Fragment implements AdapterView.OnItem
         mapView = view.findViewById(R.id.mapView);
     }
 
-        @Override
+    @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         Object itemAtPosition = adapterView.getItemAtPosition(i);
         String type = (String) itemAtPosition;
@@ -173,7 +173,7 @@ public class RentalUpdateFragment extends Fragment implements AdapterView.OnItem
         longitude = rentalProperty.getLongitude();
     }
 
-    private void setUpClickListeners(){
+    private void setUpClickListeners() {
         btnBack.setOnClickListener(this::goToOwnerPropertyView);
         btnDelete.setOnClickListener(this::handleDeleteProperty);
         btnUpdate.setOnClickListener(this::handleUpdateProperty);
@@ -185,8 +185,22 @@ public class RentalUpdateFragment extends Fragment implements AdapterView.OnItem
     }
 
     private void handleDeleteProperty(View view) {
-        presenter.deleteSelectedProperty(sessionManager.getToken(), rentalProperty.getId(), PropertyStatus.RENTAL);
-        goToOwnerPropertyView(view);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setMessage(getResources().getString(R.string.ui_alert_dialog_delete_property_msg)).setPositiveButton(getResources().getString(R.string.btn_delete),
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        presenter.deleteSelectedProperty(sessionManager.getToken(), rentalProperty.getId(), PropertyStatus.RENTAL);
+                        goToOwnerPropertyView(view);
+                    }
+                }).setNegativeButton(getResources().getString(R.string.ui_alert_dialog_btn_cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                return;
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
     private void handleUpdateProperty(View view) {
@@ -206,7 +220,22 @@ public class RentalUpdateFragment extends Fragment implements AdapterView.OnItem
                 size, description, numBedrooms, numBathrooms, isParking, isLift,
                 price, deposit, minTen, hasFurniture, isPets);
 
-        presenter.updateRentalProperty(sessionManager.getToken(), rentalProperty.getId(), rental);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setMessage(getResources().getString(R.string.ui_alert_dialog_update_msg))
+                .setPositiveButton(R.string.ui_alert_dialog_btn_update, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        presenter.updateRentalProperty(sessionManager.getToken(), rentalProperty.getId(), rental);
+                    }
+                }).setNegativeButton(getResources().getString(R.string.ui_alert_dialog_btn_cancel), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        return;
+                    }
+                });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
 }

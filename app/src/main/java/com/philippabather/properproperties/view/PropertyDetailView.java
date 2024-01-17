@@ -12,12 +12,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.philippabather.properproperties.R;
 import com.philippabather.properproperties.contract.PropertyDetailContract;
 import com.philippabather.properproperties.domain.RentalProperty;
@@ -31,6 +32,7 @@ import com.philippabather.properproperties.presenter.PropertyDetailPresenter;
  */
 public class PropertyDetailView extends AppCompatActivity implements PropertyDetailContract.View {
 
+    private View layoutPropertyDetails;
     private RentalClientDetailFragment rentalFragment;
     private SaleClientDetailFragment saleFragment;
 
@@ -38,10 +40,12 @@ public class PropertyDetailView extends AppCompatActivity implements PropertyDet
 
     private long rentalId;
     private long saleId;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_property_details);
+        layoutPropertyDetails = findViewById(R.id.layout_property_details);
         presenter = new PropertyDetailPresenter(this);
         getDataFromIntent();
 
@@ -75,8 +79,10 @@ public class PropertyDetailView extends AppCompatActivity implements PropertyDet
             intent = new Intent(this, HomeView.class);
         } else if (item.getItemId() == R.id.mi_action_mortgage_checker) {
             intent = new Intent(this, MortgageCheckerView.class);
-        } else if (item.getItemId() == R.id.mi_action_search_map) {
+        } else if (item.getItemId() == R.id.mi_action_property_list) {
             intent = new Intent(this, PropertyListView.class);
+        } else if (item.getItemId() == R.id.mi_action_login) {
+            intent = new Intent(this, LoginView.class);
         } else {
             return super.onOptionsItemSelected(item);
         }
@@ -107,7 +113,7 @@ public class PropertyDetailView extends AppCompatActivity implements PropertyDet
 
     @Override
     public void showMessage(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+        Snackbar.make(layoutPropertyDetails, msg, Snackbar.LENGTH_LONG).show();
     }
 
 }

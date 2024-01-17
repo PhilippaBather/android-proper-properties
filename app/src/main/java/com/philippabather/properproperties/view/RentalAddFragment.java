@@ -4,6 +4,7 @@ import static com.philippabather.properproperties.constants.Constants.INTENT_EXT
 import static com.philippabather.properproperties.map.MapUtils.initializePointAnnotationManager;
 import static com.philippabather.properproperties.map.MapUtils.setCameraPositionAndZoom;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,6 +20,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.mapbox.geojson.Point;
@@ -38,6 +40,7 @@ import com.philippabather.properproperties.presenter.PropertyRegistrationPresent
 import com.philippabather.properproperties.utils.SpinnerUtils;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 /**
  * RentalAddFragment - el fragmento para añadir un inmueble de alquiler.
@@ -79,8 +82,6 @@ public class RentalAddFragment extends Fragment implements AdapterView.OnItemSel
 
 
         View view = inflater.inflate(R.layout.fragment_rental_add, container, false);
-
-//        proprietorId = getArguments().getLong(INTENT_EXTRA_PROPRIETOR_ID);
 
         findViews(view);
         bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.blue_marker_view);
@@ -142,8 +143,22 @@ public class RentalAddFragment extends Fragment implements AdapterView.OnItemSel
                 size, description, numBedrooms, numBathrooms, isParking, isLift,
                 price, deposit, minTen, hasFurniture, isPets);
 
-        presenter.createNewRentalProperty(sessionManager.getToken(), sessionManager.getUserId(), rental);
-        resetViews();
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setMessage(getResources().getString(R.string.ui_alert_dialog_add_property_msg))
+                .setPositiveButton(getResources().getString(R.string.ui_alert_dialog_btn_add), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                presenter.createNewRentalProperty(sessionManager.getToken(), sessionManager.getUserId(), rental);
+                resetViews();
+            }
+        }).setNegativeButton(getResources().getString(R.string.ui_alert_dialog_btn_cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                return;
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
     @Override
