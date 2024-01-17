@@ -45,13 +45,10 @@ public class RentalPropertyHolder extends RecyclerView.ViewHolder {
     protected TextView tvPropertyOverview; // detalles principales
     protected TextView tvPropertyDescription;
     private final AppLocalDB localDB;
-//    private final long proprietorId;
 
-    public RentalPropertyHolder(@NonNull View view, List<RentalProperty> properties,
-                                Role role, long proprietorId) {
+    public RentalPropertyHolder(@NonNull View view, List<RentalProperty> properties, Role role) {
         super(view);
         this.parentView = view;
-//        this.proprietorId = proprietorId;
 
         findViews();
         cvPropertyItem.setOnClickListener(v -> goToPropertyDetailsActivity(properties, role));
