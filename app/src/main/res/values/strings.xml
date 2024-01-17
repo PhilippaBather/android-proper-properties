@@ -28,6 +28,7 @@
     <string name="img_landing_page_primary_image">A luxury, contemporary villa with pool</string>
     <string name="img_search_map_item_view">Imagen del inmueble</string>
     <string name="menu_item_home" translatable="false">Home</string>
+    <string name="menu_item_login" translatable="false">Login</string>
     <string name="menu_item_mortgage_adviser">Hipoteca Adviser</string>
     <string name="menu_item_search_properties">Busca Inmuebles</string>
     <string name="rbtn_search_map_rent">Alquiler</string>

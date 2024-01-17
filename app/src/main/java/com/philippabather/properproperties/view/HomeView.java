@@ -70,10 +70,12 @@ public class HomeView extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         Intent intent = new Intent();
 
-        if (item.getItemId() == R.id.mi_action_search_map) {
+        if (item.getItemId() == R.id.mi_action_property_list) {
             intent = new Intent(this, PropertyListView.class);
         } else if (item.getItemId() == R.id.mi_action_mortgage_checker) {
             intent = new Intent(this, MortgageCheckerView.class);
+        } else if (item.getItemId() == R.id.mi_action_login) {
+            intent = new Intent(this, LoginView.class);
         } else {
             return super.onOptionsItemSelected(item);
         }

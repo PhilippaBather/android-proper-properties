@@ -4,10 +4,13 @@ import static com.philippabather.properproperties.constants.Constants.LOGIN_ERRO
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -42,6 +45,29 @@ public class LoginView extends AppCompatActivity implements LoginContract.View {
         sessionManager = new SessionManager(LoginView.this);
 
         checkSession();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.action_bar, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent intent = new Intent();
+
+        if (item.getItemId() == R.id.mi_action_home) {
+            intent = new Intent(this, HomeView.class);
+        } else if (item.getItemId() == R.id.mi_action_mortgage_checker) {
+            intent = new Intent(this, MortgageCheckerView.class);
+        } else if (item.getItemId() == R.id.mi_action_property_list) {
+            intent = new Intent(this, PropertyListView.class);
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+        startActivity(intent);
+        return true;
     }
 
     private void findViews() {

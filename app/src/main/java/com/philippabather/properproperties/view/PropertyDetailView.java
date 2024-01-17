@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,6 +40,7 @@ public class PropertyDetailView extends AppCompatActivity implements PropertyDet
 
     private long rentalId;
     private long saleId;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,8 +79,10 @@ public class PropertyDetailView extends AppCompatActivity implements PropertyDet
             intent = new Intent(this, HomeView.class);
         } else if (item.getItemId() == R.id.mi_action_mortgage_checker) {
             intent = new Intent(this, MortgageCheckerView.class);
-        } else if (item.getItemId() == R.id.mi_action_search_map) {
+        } else if (item.getItemId() == R.id.mi_action_property_list) {
             intent = new Intent(this, PropertyListView.class);
+        } else if (item.getItemId() == R.id.mi_action_login) {
+            intent = new Intent(this, LoginView.class);
         } else {
             return super.onOptionsItemSelected(item);
         }

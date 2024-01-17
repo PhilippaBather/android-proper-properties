@@ -9,7 +9,7 @@
         android:title="@string/menu_item_home" />
 
     <item
-        android:id="@+id/mi_action_search_map"
+        android:id="@+id/mi_action_property_list"
         android:tag="tag_action_mortgage_checker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,4 +21,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:title="@string/menu_item_mortgage_adviser" />
+    <item
+        android:id="@+id/mi_action_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="@string/menu_item_login" />
 </menu>
