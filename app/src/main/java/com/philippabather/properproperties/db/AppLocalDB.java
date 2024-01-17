@@ -11,7 +11,7 @@ import com.philippabather.properproperties.domain.SaleFavourite;
  *
  * @author Philippa Bather
  */
-@Database(entities = {RentalFavourite.class, SaleFavourite.class}, version = 4)
+@Database(entities = {RentalFavourite.class, SaleFavourite.class}, version = 5)
 public abstract class AppLocalDB extends RoomDatabase {
         public abstract RentalPropertyDao rentalPropertyDao();
         public abstract SalePropertyDao salePropertyDao();
