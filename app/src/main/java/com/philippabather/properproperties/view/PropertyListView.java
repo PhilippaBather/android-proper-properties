@@ -113,7 +113,9 @@ public class PropertyListView extends AppCompatActivity implements PropertyListC
             intent = new Intent(this, HomeView.class);
         } else if (item.getItemId() == R.id.mi_action_mortgage_checker) {
             intent = new Intent(this, MortgageCheckerView.class);
-        } else {
+        } else if (item.getItemId() == R.id.mi_action_login) {
+            intent = new Intent(this, LoginView.class);
+        }else {
             return super.onOptionsItemSelected(item);
         }
 

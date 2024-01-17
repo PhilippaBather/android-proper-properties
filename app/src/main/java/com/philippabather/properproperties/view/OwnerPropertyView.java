@@ -136,7 +136,7 @@ public class OwnerPropertyView extends AppCompatActivity implements ProprietorCo
             intent = new Intent(this, HomeView.class);
         } else if (item.getItemId() == R.id.mi_action_mortgage_checker) {
             intent = new Intent(this, MortgageCheckerView.class);
-        } else if (item.getItemId() == R.id.mi_action_search_map) {
+        } else if (item.getItemId() == R.id.mi_action_property_list) {
             intent = new Intent(this, PropertyListView.class);
         } else {
             return super.onOptionsItemSelected(item);
