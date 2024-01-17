@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="property_type">
-        <item>HOUSE</item>
-        <item>FLAT</item>
-        <item>COMMERCIAL</item>
+        <item>@string/spinner_house</item>
+        <item>@string/spinner_flat</item>
+        <item>@string/spinner_commercial</item>
     </string-array>
 </resources>
