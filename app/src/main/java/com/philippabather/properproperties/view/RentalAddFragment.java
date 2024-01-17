@@ -80,8 +80,6 @@ public class RentalAddFragment extends Fragment implements AdapterView.OnItemSel
 
         View view = inflater.inflate(R.layout.fragment_rental_add, container, false);
 
-//        proprietorId = getArguments().getLong(INTENT_EXTRA_PROPRIETOR_ID);
-
         findViews(view);
         bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.blue_marker_view);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(view.getContext(),

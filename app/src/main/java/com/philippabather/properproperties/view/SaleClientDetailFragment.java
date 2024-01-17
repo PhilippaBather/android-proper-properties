@@ -1,7 +1,7 @@
 package com.philippabather.properproperties.view;
 
-import static com.philippabather.properproperties.constants.Constants.BUNDLE_ARGUMENT_RENTAL_ID;
 import static com.philippabather.properproperties.constants.Constants.BUNDLE_ARGUMENT_SALE;
+import static com.philippabather.properproperties.constants.Constants.BUNDLE_ARGUMENT_SALE_ID;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -24,8 +24,6 @@ import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManager;
 import com.philippabather.properproperties.R;
 import com.philippabather.properproperties.db.AppLocalDB;
 import com.philippabather.properproperties.db.DBHelperMethods;
-import com.philippabather.properproperties.domain.RentalFavourite;
-import com.philippabather.properproperties.domain.RentalProperty;
 import com.philippabather.properproperties.domain.SaleFavourite;
 import com.philippabather.properproperties.domain.SaleProperty;
 import com.philippabather.properproperties.map.MapUtils;
@@ -66,7 +64,7 @@ public class SaleClientDetailFragment extends Fragment implements Style.OnStyleL
 
         assert getArguments() != null;
         sale = getArguments().getParcelable(BUNDLE_ARGUMENT_SALE);
-        saleId = getArguments().getLong(BUNDLE_ARGUMENT_RENTAL_ID);
+        saleId = getArguments().getLong(BUNDLE_ARGUMENT_SALE_ID);
 
         findViews(view);
         setViews();
@@ -131,10 +129,10 @@ public class SaleClientDetailFragment extends Fragment implements Style.OnStyleL
     private void handleSaveComment(View view) {
         String comment = etClientComments.getText().toString();
         // comprobar si es favorito
-        RentalFavourite favourite = localDB.rentalPropertyDao().getFavouriteByRentalPropertyId(saleId);
+        SaleFavourite favourite = localDB.salePropertyDao().getFavouriteBySalePropertyId(saleId);
         if (favourite != null) {
             // actualizar
-            localDB.salePropertyDao().updateFavouriteByRentalPropertyId(saleId, comment);
+            localDB.salePropertyDao().updateFavouriteBySalePropertyId(saleId, comment);
         } else {
             // añadir
             SaleFavourite newFavourite = new SaleFavourite(saleId);
@@ -145,6 +143,8 @@ public class SaleClientDetailFragment extends Fragment implements Style.OnStyleL
 
     private void handleCommentUpload() {
         SaleFavourite favourite = localDB.salePropertyDao().getFavouriteBySalePropertyId(saleId);
-        etClientComments.setText(favourite.getComment());
+        if (favourite != null) {
+            etClientComments.setText(favourite.getComment());
+        }
     }
 }
