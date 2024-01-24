@@ -17,6 +17,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * ProprietorModel - model para manejar comunicación con el base de datos para obtener datos de un
+ * proprietario
+ *
+ * @author Philippa Bather
+ */
 public class ProprietorModel implements ProprietorContract.Model {
 
     private final PropertyApiInterface api;
