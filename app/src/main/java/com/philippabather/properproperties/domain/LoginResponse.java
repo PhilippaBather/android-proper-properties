@@ -1,5 +1,8 @@
 package com.philippabather.properproperties.domain;
 
+/**
+ * LoginResponse - maneja la respuesta de un login.
+ */
 public class LoginResponse {
 
     private String username;

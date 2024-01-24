@@ -1,5 +1,8 @@
 package com.philippabather.properproperties.domain;
 
+/**
+ * LoginRequest - maneja un login request
+ */
 public class LoginRequest {
 
     private String username;
