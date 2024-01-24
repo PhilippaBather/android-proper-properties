@@ -65,7 +65,7 @@ public class MortgageCheckerView extends AppCompatActivity {
             intent = new Intent(this, HomeView.class);
         } else if (item.getItemId() == R.id.mi_action_property_list) {
             intent = new Intent(this, PropertyListView.class);
-        } else if (item.getItemId() == R.id.mi_action_login) {
+        } else if (item.getItemId() == R.id.mi_action_login || item.getItemId() == R.id.mi_action_owner_portal) {
             intent = new Intent(this, LoginView.class);
         } else {
             return super.onOptionsItemSelected(item);

@@ -87,6 +87,8 @@ public class PropertyUpdateView extends AppCompatActivity implements PropertyUpd
             intent = new Intent(this, MortgageCheckerView.class);
         } else if (item.getItemId() == R.id.mi_action_property_list) {
             intent = new Intent(this, PropertyListView.class);
+        } else if (item.getItemId() == R.id.mi_action_login || item.getItemId() == R.id.mi_action_owner_portal) {
+            intent = new Intent(this, LoginView.class);
         } else {
             return super.onOptionsItemSelected(item);
         }
