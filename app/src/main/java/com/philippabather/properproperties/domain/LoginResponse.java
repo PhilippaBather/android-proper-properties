@@ -2,6 +2,8 @@ package com.philippabather.properproperties.domain;
 
 /**
  * LoginResponse - maneja la respuesta de un login.
+ *
+ * @author Philippa Bather
  */
 public class LoginResponse {
 
