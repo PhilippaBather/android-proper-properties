@@ -35,6 +35,7 @@
     <string name="img_landing_page_primary_image">A luxury, contemporary villa with pool</string>
     <string name="img_search_map_item_view">Property Image</string>
     <string name="menu_item_mortgage_adviser">Mortgage Adviser</string>
+    <string name="menu_item_owner_portal">Proprietor Portal</string>
     <string name="menu_item_search_properties">Search Properties</string>
     <string name="rbtn_search_map_rent">Rent</string>
     <string name="rbtn_search_map_buy">Buy</string>
@@ -69,5 +70,5 @@
     <string name="ui_alert_dialog_logout_msg">Are you sure you want to logout?</string>
     <string name="ui_alert_dialog_update_msg">Are you sure you want to update the property details?</string>
     <string name="ui_login">Login details incorrect.  Please try again.</string>
-    <string name="ui_snackbar_owner_contacted">Owner Contact</string>
+    <string name="ui_snackbar_owner_contacted">Owner Contacted</string>
 </resources>
