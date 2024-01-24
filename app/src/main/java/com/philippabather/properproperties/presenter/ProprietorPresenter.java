@@ -5,6 +5,11 @@ import com.philippabather.properproperties.domain.Proprietor;
 import com.philippabather.properproperties.model.ProprietorModel;
 import com.philippabather.properproperties.view.OwnerPropertyView;
 
+/**
+ * ProprietorPresenter - presenter para los datos de un proprietario.
+ *
+ * @author Philippa Bather
+ */
 public class ProprietorPresenter implements ProprietorContract.Presenter, ProprietorContract.Model.OnLoadProprietorListener {
 
     private final ProprietorModel model;
