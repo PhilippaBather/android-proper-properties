@@ -77,7 +77,6 @@ public class RentalUpdateFragment extends Fragment implements AdapterView.OnItem
 
     private PropertyUpdatePresenter presenter;
     private RentalProperty rentalProperty;
-    //    private long proprietorId;
     private SessionManager sessionManager;
 
     @Override
