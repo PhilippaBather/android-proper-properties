@@ -3,7 +3,6 @@ package com.philippabather.properproperties.presenter;
 import com.philippabather.properproperties.contract.LoginContract;
 import com.philippabather.properproperties.domain.LoginRequest;
 import com.philippabather.properproperties.domain.LoginResponse;
-import com.philippabather.properproperties.domain.SessionManager;
 import com.philippabather.properproperties.model.LoginModel;
 import com.philippabather.properproperties.view.LoginView;
 
