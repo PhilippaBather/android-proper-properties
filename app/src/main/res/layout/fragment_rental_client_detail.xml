@@ -194,6 +194,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
+        android:clickable="false"
         android:text="@string/cb_add_property_parking"
         android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/cb_property_lift"
