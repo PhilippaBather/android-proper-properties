@@ -53,8 +53,6 @@ public interface PropertyApiInterface {
     @GET("/users/proprietors/secured/{username}")
     Call<Proprietor> getProprietorByUsername(@Header( "Authorization") String token, @Path(value = "username") String username);
 
-    // TODO - secured end points: handle token
-
     @Headers({"Accept: application/json"})
     @POST("/properties/rental/{proprietorId}")
     Call<RentalProperty> saveRentalProperty(@Header("Authorization") String token, @Path(value = "proprietorId") long proprietorId, @Body RentalProperty rentalProperty);
