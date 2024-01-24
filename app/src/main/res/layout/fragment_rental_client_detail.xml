@@ -206,6 +206,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
+        android:clickable="false"
         android:text="@string/cb_add_property_lift"
         android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/cb_property_leasehold"
@@ -218,6 +219,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
+        android:clickable="false"
         android:text="@string/cb_add_property_furniture"
         android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/cb_property_pets"
@@ -230,6 +232,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
+        android:clickable="false"
         android:text="@string/cb_add_property_pets"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -245,9 +248,9 @@
         android:text="@string/btn_save_comment"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_cancel"
         app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btn_cancel"
         app:layout_constraintTop_toBottomOf="@+id/tv_property_info_description"
         app:layout_constraintVertical_bias="0.37" />
 
@@ -279,11 +282,11 @@
         android:id="@+id/et_client_comments"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minHeight="48dp"
+        android:layout_marginStart="16dp"
         android:hint="@string/et_client_comment_observations"
+        android:minHeight="48dp"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/btn_cancel"
-        android:layout_marginStart="16dp"
         app:layout_constraintStart_toEndOf="@id/tv_client_comments"
         app:layout_constraintTop_toBottomOf="@+id/tv_property_description" />
 
