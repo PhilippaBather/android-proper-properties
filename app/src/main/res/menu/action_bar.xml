@@ -21,6 +21,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:title="@string/menu_item_mortgage_adviser" />
+
+    <item
+        android:id="@+id/mi_action_owner_portal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="@string/menu_item_owner_portal" />
+
     <item
         android:id="@+id/mi_action_login"
         android:layout_width="wrap_content"

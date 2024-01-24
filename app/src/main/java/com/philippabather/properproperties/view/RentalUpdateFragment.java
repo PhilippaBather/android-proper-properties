@@ -77,7 +77,6 @@ public class RentalUpdateFragment extends Fragment implements AdapterView.OnItem
 
     private PropertyUpdatePresenter presenter;
     private RentalProperty rentalProperty;
-    //    private long proprietorId;
     private SessionManager sessionManager;
 
     @Override
@@ -171,6 +170,7 @@ public class RentalUpdateFragment extends Fragment implements AdapterView.OnItem
         etSize.setText(String.valueOf(rentalProperty.getMetresSqr()));
         latitude = rentalProperty.getLatitude();
         longitude = rentalProperty.getLongitude();
+        spPropertyType.setSelection(SpinnerUtils.setSelection(rentalProperty.getPropertyType()));
     }
 
     private void setUpClickListeners() {

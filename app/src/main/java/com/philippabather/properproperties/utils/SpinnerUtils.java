@@ -35,4 +35,12 @@ public class SpinnerUtils {
         };
     }
 
+    public static int setSelection(PropertyType type) {
+        return switch(type) {
+            case COMMERCIAL -> 2;
+            case FLAT-> 1;
+            case HOUSE -> 0;
+        };
+    }
+
 }

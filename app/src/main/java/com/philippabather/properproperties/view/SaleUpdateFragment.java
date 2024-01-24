@@ -162,6 +162,7 @@ public class SaleUpdateFragment extends Fragment implements AdapterView.OnItemSe
         etSize.setText(String.valueOf(saleProperty.getMetresSqr()));
         latitude = saleProperty.getLatitude();
         longitude = saleProperty.getLongitude();
+        spPropertyType.setSelection(SpinnerUtils.setSelection(saleProperty.getPropertyType()));
     }
 
     private void setUpClickListeners(){

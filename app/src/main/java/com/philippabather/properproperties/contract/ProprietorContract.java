@@ -2,9 +2,9 @@ package com.philippabather.properproperties.contract;
 
 import com.philippabather.properproperties.domain.Proprietor;
 
-public class ProprietorContract {
+public interface ProprietorContract {
 
-    public interface Model {
+    interface Model {
         interface OnLoadProprietorListener {
             void onLoadProprietorSuccess(Proprietor proprietor);
 
@@ -15,15 +15,14 @@ public class ProprietorContract {
 
     }
 
-    public interface View {
+    interface View {
         void getProprietor(Proprietor proprietor);
 
         void showMessage(String msg);
     }
 
-    public interface Presenter {
+    interface Presenter {
         void loadProprietor(String token, String username);
     }
-
 
 }

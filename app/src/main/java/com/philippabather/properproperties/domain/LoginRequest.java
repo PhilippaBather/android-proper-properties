@@ -1,5 +1,10 @@
 package com.philippabather.properproperties.domain;
 
+/**
+ * LoginRequest - maneja un login request
+ *
+ * @author Philippa Bather
+ */
 public class LoginRequest {
 
     private String username;
