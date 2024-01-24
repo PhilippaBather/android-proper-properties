@@ -2,7 +2,6 @@ package com.philippabather.properproperties.contract;
 
 import com.philippabather.properproperties.domain.LoginRequest;
 import com.philippabather.properproperties.domain.LoginResponse;
-import com.philippabather.properproperties.domain.SessionManager;
 
 /**
  * LoginContract - contrato temporal para manejar el login de usuario.
